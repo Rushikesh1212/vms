@@ -1,0 +1,79 @@
+
+/*new css*/
+
+
+.my-custom-scrollbar {
+position: relative;
+height: 225px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+.scrolltbl{
+  overflow-y:auto;
+}
+/**/
+.iAssureITtable-bordered > thead > tr > th, .iAssureITtable-bordered > tbody > tr > th, .iAssureITtable-bordered > tfoot > tr > th, .iAssureITtable-bordered > thead > tr > td, .iAssureITtable-bordered > tbody > tr > td, .iAssureITtable-bordered > tfoot > tr > td {
+    border: 1px solid #676767;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #fff;
+}
+.iAssureITtable-bordered{
+  background: #7f7f7f !important;
+}
+.lefttxt{
+  float: left !important;
+}
+.pointer i{
+  cursor: pointer;
+}
+.paginationAdminWrap{
+  text-align: center !important;
+  /*margin-top: -15px;*/
+  width: 100%;
+/*  overflow-x: auto; 
+  white-space: nowrap;*/
+}
+.centerText{
+  text-align: center;
+}
+.textAlignLeft{
+
+  text-align: left !important;
+}
+.paginationAdminOES > li > a{
+  margin-right: 5px !important;
+  margin-bottom: 5px !important;
+}
+.paginationAdminOES > li{
+    display: inline-block;
+    margin-left: 0 !important;
+    font-size: 10px;
+    /*background: #333;*/
+}
+.queDataCircle p{
+  /*background: #456;*/
+  height: 100%;
+  width: 100%;
+}
+.activeQueDataCircle{
+  background: #7f7f7f !important;
+}
+.queDataCircle {
+  /* background: #fff; */
+  padding-top: 4px;
+  font-size: 12px;
+  border: 1px solid #e8e6e6 !important;
+  height: 24px !important;
+  width: 24px !important;
+  border-radius: 100% !important;
+  box-shadow: 3px 4px 7px -3px #aeabab !important;
+  text-align: center;
+}
+.marginTop17{
+	margin-top: 17px;
+}

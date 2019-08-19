@@ -1,0 +1,2485 @@
+/*****SignUp.css*****/
+@font-face{
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Raleway-Regular.ttf");
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Poppins-Regular.ttf");
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Roboto-Regular.ttf");
+}
+
+.signUpBackground{
+  background-image: url("/images/TGK.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.margintop20{
+  margin-top: 60px !important;
+}
+
+.margintop0{
+  margin-top: 0px !important;
+}
+
+.signUpFormWrap, .forgetpassFormWrap, .confirmModalFormWrap{
+  border-radius: 10px;
+  height: 650px;
+  position: absolute;
+  box-shadow: 0px 0px 0px;
+  border: 1px solid #ccc;
+  margin-top: 80px;
+  background-color: rgb(0, 0, 0, 0.5);
+  float: right;
+}
+.signUpWrapper{
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px !important;
+  margin-right: -15px !important;
+}
+.signupPadding{
+  padding-top:4%;
+}
+.signUpFormWrap, .forgetpassFormWrap, .confirmModalFormWrap{
+  border-radius: 10px;
+  height: 650px;
+  position: absolute;
+  box-shadow: 0px 0px 0px;
+
+}
+.divLoginInWrap{
+  z-index: 111;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+.signInNameTitle{
+  font-size: 20px;
+  margin-top: 13%;
+  margin-bottom: 10%;
+  color: #333333;
+}
+.signT{
+  margin-top: 30%;
+}
+.OESSubTitle2, .signUpNameTitle,.signInNameTitle,.resetpwdNameTitle{
+  text-align: center;
+  font-family:'Roboto', sans-serif !important;
+}
+.bordbt{
+  border-bottom: 2px solid #1d109d;
+}
+.marBtm30{
+  margin-bottom: 30px;
+}
+.noIb {
+    display: initial;
+}
+.boxMarg{
+  margin-bottom: 20px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.firstverification{
+  margin-top: 32%;
+}
+
+.logoImg{
+  margin-top: 12%;
+  margin-bottom: 4%;
+  width: 90%;
+}
+/*/* login page css */
+.login {
+    padding: 0px !important;
+}
+.bookLoadWrapLog{
+  padding: 2% 0% 0% 3%; 
+}
+.box-view1,.regsterTMSWrap {
+    align-items: center;
+    background: url(/images/examBackground.jpg);
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    height: 100vh;
+}
+
+.divConfirmOtpModalWrap, .divForgotPasswordWrap, 
+.divResetPasswordWrap, .divVerifyEmailWrap{
+  z-index: 111;
+  padding-left: 15px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+.loginPadding{
+  padding-top:80px;
+}
+
+.forgotpwd{
+  margin-top:75px;
+}
+.box-view2{
+  box-shadow: 0px 0px 86px;
+  padding-right: 0px;
+}
+.ETELoginTit,.ETESignTit{
+  font-size: 34px;
+    color: #337ab7;
+    margin-top: 10px !important;
+    font-family: 'Roboto', sans-serif !important;
+    padding: 0px;
+    text-align: center;
+}
+
+.ETELoginSignTit,.ETESignSubTit{
+  margin-top: 2px !important;
+  color: #337ab7;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif !important;
+  text-align: center;
+}
+.ETESignTit{
+  margin-top: 10px !important;
+}
+.ETESignSubTit{
+  margin-bottom: 35px;
+}
+
+.abacusTextbox{
+    border: 0 !important;
+    box-shadow: none;
+    border-bottom: 1px solid #efefef !important;
+    border-radius: 4px;
+    height: 35px !important;
+    font-size: 16px;
+    background: #d8d8d8;
+    font-family: 'Roboto', sans-serif !important;
+}
+.tmsLoginTextBox{
+  height: 35px !important;
+  margin-bottom: 30px;
+  border: 0 !important;
+  box-shadow: none;
+  border-bottom: 1px solid #efefef !important;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #d8d8d8;
+  font-family: 'Roboto', sans-serif !important;
+}
+.glyphi-custommm{
+  border-left: 0px solid; 
+}
+.glyphi-custommmLeft{
+  border-left: 1px solid; 
+}
+.UMname{
+  margin-bottom: 12px;
+}
+.padBoth{
+  padding: 6px 9px;
+}
+.abacusTextbox:focus{
+    box-shadow: none;
+}
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 25px;
+  top: 8px;
+  color: #555;
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.2s ease all;
+}
+.floating-label-Date{
+  display: none;
+}
+/*.inputText:focus ~ .floating-label,.inputText:not(:focus):valid ~ .floating-label,.inputTextSearch:focus ~ .floating-label,.inputTextSearch:not(:focus):valid ~ .floating-label{
+  top: -22px;
+  font-size: 15px;
+  color: #333333;
+  left: 17px;
+  font-weight: bold;
+  display: block;
+  padding: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 85%;
+}*/
+.inputText.has-content ~ .floating-label{
+  top: -22px;
+}
+
+.inputText:focus ~ .floating-label,
+.inputTextSearch:focus ~ .floating-label{
+  top: -22px;
+  /*font-size: 15px;*/
+  color: #333333;
+  /*left: 17px;*/
+  font-weight: bold;
+  display: block;
+  padding: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 85%;
+}
+
+.oesSignUpForm:focus ~, .floating-label,.oesSignUpForm:not(:focus):valid ~, .floating-label{
+  top: -16px;
+  font-size: 15px;
+  color: #4183D7;
+  left: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+.UMsignup{
+  background: #fff;
+}
+
+.login h1{
+  color: #337ab7 !important;
+}
+.tmsUserAccForm{
+  border: 1px solid #eee !important;
+}
+.TMSLoginBTN{
+  background-color: #337ab7 !important;
+  font-size: 18px !important;
+  margin-bottom: 10px !important;
+}
+.loginPageTit,.loginPageTitsub{
+  font-size: 40px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif !important;
+    margin-top: 35px !important;
+
+}
+.loginPageTitsub{
+  margin-top: 5px !important;
+}
+.loadSubTit{
+  color: #fff;
+    margin-top: 10px !important;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif !important;
+}
+.boxed-view__form  .btn{
+  margin-top: 20px !important;
+}
+.createAccTit{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 98%;
+  height: 34px;
+}
+
+/*.switch input {display:none;}*/
+
+.aaaa .sliderNew {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  content: 'ok';
+}
+
+.aaaa .sliderNew:before {
+  position: absolute;
+  content: "";
+  height: 34px;
+  width: 50%;
+  left: 0px;
+  padding-top: 6px;
+  bottom: 0px;
+  color: #fff;
+  background-color: #3c8dbc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  content: 'No, Its not!';
+}
+
+.aaaa input:checked + .sliderNew {
+  background-color: #fff;  
+}
+
+.aaaa input:focus + .sliderNew {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.aaaa input:checked + .sliderNew:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  content: 'Yes, It is!';
+  left: 70px;
+}
+
+.viewNDDel{
+  border-radius: 0px !important;
+  font-family: 'Roboto', sans-serif !important;
+  padding: 2px 6px;
+}
+
+.offeredBtnWrap{
+  z-index: 1;
+    text-align: right;
+    padding: 0px;
+}
+.offeredBtnWrap button{
+  border-radius: 0px;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+.hideHazardousWrap{
+  display: none;
+}
+.HazardousWrap{
+  width: 100%;
+}
+.TMsloginBackgrnd{
+  /*padding-right: 0px;*/
+    background: #fff;
+    /*padding-left: 0px;*/
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+.forgotpass{
+  text-align: center;
+  font-weight: bold;
+  /*font-family: Poppins-Regular;*/
+  font-size: 14px;
+  padding-top: 5px;
+  background:#d8d8d8;
+  padding: 4px;
+  border-radius:4px;
+  margin-top: 8px; 
+  /*margin-left: 17px;*/
+}
+.UMcreateacc{
+  /*font-family: Poppins-Regular;*/
+  background:#d8d8d8;
+  font-size: 16px;
+  text-align: center;
+  padding: 3px;
+  border-radius:4px;
+  margin-top: 12px !important;
+  margin-bottom: 3% !important; 
+  /*margin-left: 17px;*/
+  font-weight: bold;
+}
+.signupp{
+  padding-top: 5%;
+  background: #fff;
+  padding-bottom: 5%;
+}
+.customFl{
+  float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.UMGrey,.UMGrey1,.UMGreyy, .UMIHaveRead{
+  color: #999;
+  /*font-family: Poppins-Regular;*/
+  font-size: 14px;
+  margin-left: 0px;
+}
+.UMGrey1{
+  color: #333333;
+}
+.UMGrey{
+  color: #333333;
+  float: left;
+}
+/*.UMGrey:hover{
+  color: #337ab7;
+  text-decoration: underline;
+}*/
+
+.UMGreyy{
+  color: #333333;
+  float: left;
+}
+#businessListTable > tbody > tr > td:first-child{
+  /*cursor: pointer;*/
+} 
+.carFlatSubmitBtn{
+  display: none;
+}
+#awardModal .close{
+  text-align: right;
+}
+.awarModalHead{
+  padding: 0px;
+    text-align: right !important;
+    /*background: #d43f3a !important;*/
+}
+.awarModalHead h4{
+  text-align: left;
+    margin-top: -20px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    color: #555;
+}
+.awarModalHead label{
+  color: #666;
+  font-size: 14px;
+}
+.awarModalHead button{
+      /* color: #fff; */
+    /* background: #dd4b39; */
+    border: 0px;
+    padding: 0px 8px;
+    font-size: 20px;
+    background: transparent;
+    /*color: #fff;*/
+}
+.award_ModalBody p{
+  color: #333 !important;
+  font-size: 16px;
+  text-align: center;
+  font-family:'Roboto', sans-serif !important;
+}
+.award_ModalBody{
+  padding: 5% 0px !important;
+}
+.awardYesBtn, .awardCancelBtn{
+  margin-right: 15px;
+  /*background: #38678f !important;*/
+  color: #fff !important;
+  font-family:'Roboto', sans-serif !important;
+  padding: 2px 10px;
+  font-size: 16px;
+  border-radius: 0px!important;
+  border: 0px !important;
+}
+.awardFooter{
+  text-align: center !important;
+  padding: 8px !important;
+  /*background: #2e6da4 !important;*/
+}
+.awardCancelBtn{
+  display: none;
+}
+.UMloginbutton{
+  background: #1d109d;
+  padding: 4px 0;
+  color: #fff;
+  border: 0;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-radius: 4px !important; 
+}
+
+.UMloginbutton:hover{
+  color: #fff;
+}
+.UMloginbutton:focus{
+  outline: none;
+  background: #54Aff3;
+  color: #fff;
+}
+
+
+/*-------------------- Online Exam system csss ------------------------*/
+
+.signUpLeftWrap{
+  background: #fff;
+  padding: 0px 15px !important;
+
+  /*height: 699px;*/
+}
+.signUpRighttWrap{
+  overflow: hidden;
+  /*height: 680px;*/
+  padding: 0px !important;
+  /*background: repeating-linear-gradient(
+  -45deg,
+  #606dbc,
+  #606dbc 10px,
+  #465298 60px,
+  #465298 60px
+);*/
+/*background: linear-gradient(-45deg, 
+    #fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);*/
+
+}
+.div1{
+  height: 166px;
+  background-color: #ffb900;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div2{
+  height: 166px;
+  background-color: #f56e28;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div3{
+  height: 166px;
+  background-color: #ea3771;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div4{
+  height: 166px;
+  background-color: #f190bb;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div5{
+  height: 166px;
+  background-color: #46c6f5;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div6{
+  height: 166px;
+  background-color: #08b3ba;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div7{
+  height: 166px;
+  background-color: #46b450;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div8{
+  height: 166px;
+  background-color: #ff5c5c;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+
+}
+.signInbtn{
+  text-align: center;
+  color: #333333;
+  padding: 4px;
+  background: #d8d8d8;
+ /* margin-top: 15px !important;*/
+  border-radius: 4px;
+  /*margin-left: 5%;*/
+  font-weight: bold;
+}
+.formbg{
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.mrleft{
+  margin-left: 7px;
+}
+
+.signUpBanner{
+  margin-top: 12%;
+}
+
+
+.signUpNameTitle{
+  font-size: 20px;
+  margin-top: 15%;
+  margin-bottom: 5%;
+  color: #333333;
+}
+.resetpwdNameTitle{
+  /*margin-bottom: 30px;*/
+  font-size: 20px;
+  margin-top: 21%;
+  margin-bottom: 10%;
+  color: #333333;
+}
+
+.OESSubTitle{
+  font-weight: normal;
+  color: #555;
+  font-size: 12px;
+}
+.OESTitle{
+  margin-bottom: 0px !important;
+}
+.OESSubTitle2{
+  color: #1d109d;
+  font-size: 20px;
+  font-weight: bold;
+}
+.signUpInnerWrapperOES,.forPassWrap{
+  padding: 0px;
+}
+.termsClass{
+  margin-left: 5px;
+}
+.OEXLogoWrapverify{
+  margin-bottom: 15%;
+}
+.otpHeader{
+  
+  margin-bottom: 5%;
+  /*text-align: left;*/
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px;
+  padding-left: 0px;
+  padding-right: 15px;
+}
+.OEXLogoWrap{
+  margin-bottom: 4.5%;
+}
+.OESSubTitleee{
+  margin-bottom: 8%;
+}
+.signupIconFont{
+  margin-right: 5px;
+}
+.resendOtpColor{
+  /*background: #d8d8d8;*/
+}
+.resendOtpWrap{
+    text-align: right;
+    /*background: #d8d8d8;*/
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    /*margin-top: 17px;*/
+    margin-left: 75px;
+    font-weight: bold;
+}
+.resendOtpWrap span{
+   /*font-family: "Poppins","Sans-serif";*/
+  color: #333333;
+  cursor: pointer;
+}
+
+
+.maintenanceClass{
+  margin-top: 70px;
+}
+.pVText{
+  text-align: center;
+}
+.loginLoadingTimeDiv{
+  text-align: center;
+  text-transform: capitalize;
+  /*opacity: 0.4;*/
+  cursor: not-allowed;
+}
+/**********Garima**********/
+.logWrapper{
+  background-image: url(/images/formbg.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.oesSignUpForm:focus ~ .floating-label, .oesSignUpForm:not(:focus):valid ~ .floating-label {
+    top: -16px;
+    font-size: 13px;
+    color: #4183D7;
+    left: 18px !important;
+    display: block;
+    font-weight: bold;
+}
+.floating-label1 {
+    position: absolute;
+    pointer-events: none;
+    left: 17.5px;
+    top: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 13px;
+    transition: 0.2s ease all;
+}
+.oesSignUpForm:focus ~ .floating-label1, .oesSignUpForm:not(:focus):valid ~ .floating-label1 {
+    top: -16px;
+    font-size: 13px;
+    color: #4183D7;
+    left: 5px !important;
+    display: block;
+    font-weight: bold;
+}
+.lbfloatpass{
+  left: 10px !important;
+}
+.form-group1{
+  float:left;
+  margin-bottom:0px;
+
+}
+.form-group2{
+  margin-bottom:5px!important;
+}
+
+.UMloginbutton1{
+  margin-bottom:5px!important;
+}
+
+
+.modalbg {
+  position: fixed;
+  font-family: 'Roboto', sans-serif !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0);
+  z-index: 99999;
+  /*transition(0.5s);
+  transition-delay(.2s);*/
+  display: none;
+  pointer-events: none;
+  transform:scaleY(.01) scaleX(0);
+  animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  
+}
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+.dialog {
+    width: 400px;
+    position: relative;
+    color:white;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius:10px;
+    /*.gradient;
+    .box-shadow;*/
+    background:rgba(255,255,255,0.2)
+  }
+
+.modalbg:target {
+  display: none;
+  pointer-events: auto;
+  background: rgba(4, 10 ,30, .8);
+  /*.transition();
+  .dialog {
+    top: -20px;
+    .transition(.3s);
+    .transition-delay;*/
+  /*}*/
+}
+
+
+.modalclose {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -10px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  /*.box-shadow;
+  .transition;
+  .transition-delay(.2s);*/
+ /* &:hover { background: #00d9ff; .transition; }*/
+}
+
+.fineprint {
+  font-style: italic;
+  font-size: 10px;
+  color: #646;
+}
+a { color: #333; text-decoration: none; }
+.modaltext{
+  color:#666;
+}
+.termsconditionslink{
+  margin-bottom:10px;
+}
+.modalpara{
+  white-space: pre-line;
+}
+.modalparascroll{
+  height:300px;
+  overflow-y: auto;
+}
+.radiobtnbox{
+ border:1px solid #d8d8d8;
+ border-radius: 5px;
+ background:#d8d8d8;
+}
+.leftpaddingzero{
+  padding-left:0!important;
+}
+.radiolabel{
+  color:#444!important;
+  font-weight:normal!important;
+  font-size:14px!important;
+  /*margin-top:2px;*/
+}
+
+.radiobtnstyle{
+  height: 15px;
+  width: 15px;
+}
+
+.radiobtnbx{
+  padding-right: 0!important;
+  padding-top: 4px!important;
+  padding-bottom: 0!important;
+}
+.pdleftclr{
+  padding-left: 0px;
+}
+.mrotplf{
+  margin-left: 5% !important;
+}
+.resettitle1{
+  margin-top: 63% !important;
+}
+
+.loginforms{
+  padding-top: 5%;
+  padding-left: 20%;
+  padding-right: 5%;
+
+}
+
+
+.termspad{
+    padding-bottom: 15px;
+   /* padding-top: 5px;*/
+    /*padding-left: 31px;*/
+}
+
+
+
+.sidebar{
+  /*display: none;
+  background: #fff;*/
+}
+.pdrmv{
+  padding: 0px;
+}
+.rdolb{
+  font-size: 13px;
+  float: right;
+  padding: 3px;
+  color: #333;
+  font-weight: bold;
+}
+.signupfrm{
+  margin-top: 8%;
+}
+.verifypd{
+  padding: 4px;
+}
+.veribtm{
+  margin-bottom: 30px;
+}
+.veribtm1{
+  margin-bottom: 15px;
+}
+.veriemail{
+  padding-left: 7px;
+  padding-right: 18px;
+}
+.veriemailmr{
+  margin-left: 6% !important;
+}
+.FormWrapper1{
+  padding: 7px;
+  margin-top: 30px;
+}
+input[type=radio]:checked ~ span{
+  color: #4183D7;
+}
+.signUpNameTitle2{
+  font-size: 20px;
+  margin-top: 15%;
+  margin-bottom: 8%;
+  color: #333333;
+  text-align: center;
+  font-family: 'Roboto', sans-serif !important;
+}
+.signInbtn1{
+  text-align: center;
+  color: #333333;
+  padding: 4px;
+  background: #fff;
+  margin-top: 12px !important;
+  border-radius: 4px;
+  /* margin-left: 5%; */
+  font-weight: bold;
+}
+.signuppd1{
+  padding: 3px;
+}
+/*input[type='radio']:before {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 60%;
+      margin: 20% auto;
+      border-radius: 50%;
+  }
+
+input[type="radio"]:checked:before {
+      background: #4183D7;
+   }*/
+/*input[type=radio]:checked ~ .check {
+  border: 5px solid #0DFF92;
+}*/
+.confirmbtm{
+  border: 0 !important;
+  box-shadow: none;
+  border-bottom: 1px solid #efefef !important;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  height: 35px !important;
+  font-size: 16px;
+  background: #d8d8d8;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.userCreateWrap{
+  padding-top:55px;
+}
+.under{
+  text-decoration: underline;
+}
+.terms1{
+  position: relative;
+  top: -2px;
+}
+.mrleftsign{
+  margin-left: 15px;
+}
+
+.backgroundErrImg,.backgroundErrImgMain{
+    background: url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    height: 300px;
+    box-shadow: 0px 0px 10px !important;
+    margin-top: 71px;
+    color: #fff;
+    padding-top: 110px;
+    text-align: center;
+}
+.backgroundErrImgMain{
+  background: url(/images/background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  margin-top: 0px;
+
+
+}
+.backgroundErrImg h4{
+  font-size: 22px; 
+  line-height: 1.4;
+}
+.backgroundErrImg b{
+  font-size: 22px;
+  text-decoration: underline;
+  color: #f00;
+  background: #fff; 
+}
+.resendOtpWrapcss{
+  background: #d8d8d8!important;
+}
+.textpd{
+  padding-right: 7px;
+}
+.textpd1{
+  padding-left: 1px;
+}
+.textpdEye{
+  padding-left: 7px !important;
+}
+.fltlft{
+  float:left !important;
+}
+.pdcls {
+    padding: 0px;
+}
+.studentSidebar{
+  position: fixed;
+}
+.tip{
+    top: 67% !important;
+}
+.long{
+    top: 58% !important;
+}
+.selectLabel{
+  margin-bottom: 4px;
+  color: #555;
+    font-weight: 600;
+    font-size: 13px;
+}
+.bcktolgn{
+  padding-top:10px;
+  color:white;  
+}
+.bcktolgn:hover{
+  cursor:pointer;
+}
+.greyText{
+  color:#777;
+}
+.form-control:focus{
+  background: #D8D8D8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{
+  font-family:'Roboto', sans-serif !important;
+  src: url("/fonts/Roboto-BoldCondensed.ttf");
+  font-style: normal;
+}
+.imageSize{
+  font-size: 12px!important;
+  padding-right: 35px;
+}
+.fontwt{
+  font-weight: normal;
+}
+.customCls {
+  border-bottom: 1px solid #efefef !important;
+  background-color: #d8d8d8 !important;
+  padding: 0px !important;
+  padding-right: 10px !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+.customCls1 {
+  padding-left: 10px !important;
+}
+.pass{
+      z-index: 0 !important;
+}
+
+.showPwd{
+  display: block;
+}
+.hidePwd{
+  display: none;
+}
+.showPwd1{
+  display: none;
+}
+.hidePwd1{
+  display: block;
+}
+.showPwdC{
+  display: block;
+}
+.hidePwdC{
+  display: none;
+}
+.showPwd1C{
+  display: none;
+}
+.hidePwd1C{
+  display: block;
+}
+
+.marBtm{
+  margin-bottom: 20px;
+}
+
+/*.showPwd,.hidePwd1C,.hidePwd1,.showPwdC{
+  display: block;
+}
+.hidePwd,.showPwd1C,.showPwd1,.hidePwdC{
+  display: none;
+}*/
+
+/*modal bck css*/
+
+/*****SignUp.css*****/
+@font-face{
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Raleway-Regular.ttf");
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Poppins-Regular.ttf");
+  font-family: 'Roboto', sans-serif !important;
+  src: url("/fonts/Roboto-Regular.ttf");
+}
+.signUpWrapper{
+  background-color:#fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px !important;
+  margin-right: -15px !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+/*.signupPadding{
+  padding-top:4%;
+}*/
+.signUpFormWrap, .forgetpassFormWrap, .confirmModalFormWrap{
+  border-radius: 10px;
+  height: 650px;
+  position: absolute;
+  box-shadow: 0px 0px 0px;
+  border: 1px solid #ccc;
+  margin-top: 80px;
+  background-color: rgb(0, 0, 0, 0.5);
+  float: right;
+}
+.divLoginInWrap{
+  z-index: 111;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+.signInNameTitle{
+  font-size: 20px;
+  margin-top: 8%;
+  margin-bottom: 10%;
+  /*color: #333333;*/
+  color: #DAA520;
+  font-weight: bold;
+  font-family:'Roboto', sans-serif !important;
+}
+.signT{
+  margin-top: 8%;
+}
+.OESSubTitle2, .signUpNameTitle,.signInNameTitle,.resetpwdNameTitle{
+  text-align: center;
+  /*font-family:'Roboto-BoldCondensed';*/
+}
+/*.bordbt{
+  border-bottom: 2px solid #1d109d;
+}*/
+.marBtm30{
+  margin-bottom: 30px;
+}
+.noIb {
+    display: initial;
+}
+.boxMarg{
+  margin-bottom: 20px !important;
+}
+
+
+
+.firstverification{
+  margin-top: 12%;
+}
+
+.logoImg{
+  margin-top: 12%;
+  margin-bottom: 4%;
+  width: 90%;
+}
+/*/* login page css */
+.login {
+    padding: 0px !important;
+}
+.bookLoadWrapLog{
+  padding: 2% 0% 0% 3%; 
+}
+.box-view1,.regsterTMSWrap {
+    align-items: center;
+    background: url(/images/examBackground.jpg);
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    height: 100vh;
+}
+
+.divConfirmOtpModalWrap, .divForgotPasswordWrap, 
+.divResetPasswordWrap, .divVerifyEmailWrap{
+  z-index: 111;
+  padding-left: 15px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+.loginPadding{
+  padding-top:80px;
+}
+
+/*.forgotpwd{
+  margin-top:75px;
+}*/
+.box-view2{
+  box-shadow: 0px 0px 86px;
+  padding-right: 0px;
+}
+.ETELoginTit,.ETESignTit{
+  font-size: 34px;
+    color: #337ab7;
+    margin-top: 10px !important;
+    font-family:'Roboto', sans-serif !important;
+    padding: 0px;
+    text-align: center;
+}
+
+.ETELoginSignTit,.ETESignSubTit{
+  margin-top: 2px !important;
+  color: #337ab7;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif !important;
+  text-align: center;
+}
+.ETESignTit{
+  margin-top: 10px !important;
+}
+.ETESignSubTit{
+  margin-bottom: 35px;
+}
+
+.abacusTextbox{
+    /*border: 0 !important;*/
+    box-shadow: none;
+    /*border-bottom: 1px solid #efefef !important;*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 35px !important;
+    font-size: 16px;
+    /*background: #d8d8d8;*/
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif !important;
+}
+.tmsLoginTextBox{
+  height: 35px !important;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  box-shadow: none;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #fff;
+  font-family: 'Roboto', sans-serif !important;
+}
+.glyphi-custommm{
+  border-left: 0px solid; 
+}
+.glyphi-custommmLeft{
+  border-left: 1px solid; 
+}
+.UMname{
+  margin-bottom: 12px;
+}
+.padBoth{
+  padding: 6px 9px;
+}
+.abacusTextbox:focus{
+    box-shadow: none;
+}
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 25px;
+  top: 8px;
+  color: #333;
+  color: #333;
+  font-weight: 100;
+  font-size: 13px;
+  transition: 0.2s ease all;
+}
+
+
+
+
+.floating-label-Date{
+  display: none;
+}
+/*.inputText:focus ~ .floating-label,.inputText:not(:focus):valid ~ .floating-label,.inputTextSearch:focus ~ .floating-label,.inputTextSearch:not(:focus):valid ~ .floating-label{
+  top: -22px;
+  font-size: 15px;
+  color: #333333;
+  left: 17px;
+  font-weight: bold;
+  display: block;
+  padding: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 85%;
+}*/
+.inputText.has-content ~ .floating-label{
+  top: -22px;
+}
+
+.inputText:focus ~ .floating-label,
+.inputTextSearch:focus ~ .floating-label{
+  top: -22px;
+  /*font-size: 15px;*/
+  color: #fff;
+  /*left: 17px;*/
+  font-weight: 100;
+  display: block;
+  padding: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 85%;
+}
+
+.oesSignUpForm:focus ~, .floating-label,.oesSignUpForm:not(:focus):valid ~, .floating-label{
+  top: -16px;
+  font-size: 15px;
+  color: #fff !important;
+  left: 10px;
+  display: block;
+  font-weight: 100;
+}
+
+.UMsignup{
+  background: #fff;
+}
+
+.login h1{
+  color: #337ab7 !important;
+}
+.tmsUserAccForm{
+  border: 1px solid #eee !important;
+}
+.TMSLoginBTN{
+  background-color: #337ab7 !important;
+  font-size: 18px !important;
+  margin-bottom: 10px !important;
+}
+.loginPageTit,.loginPageTitsub{
+  font-size: 40px;
+    color: #fff;
+    font-family:'Roboto', sans-serif !important;
+    margin-top: 35px !important;
+
+}
+.loginPageTitsub{
+  margin-top: 5px !important;
+}
+.loadSubTit{
+  color: #fff;
+    margin-top: 10px !important;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif !important;
+}
+.boxed-view__form  .btn{
+  margin-top: 20px !important;
+}
+.createAccTit{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 98%;
+  height: 34px;
+}
+
+/*.switch input {display:none;}*/
+
+.aaaa .sliderNew {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  content: 'ok';
+}
+
+.aaaa .sliderNew:before {
+  position: absolute;
+  content: "";
+  height: 34px;
+  width: 50%;
+  left: 0px;
+  padding-top: 6px;
+  bottom: 0px;
+  color: #fff;
+  background-color: #3c8dbc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  content: 'No, Its not!';
+}
+
+.aaaa input:checked + .sliderNew {
+  background-color: #fff;  
+}
+
+.aaaa input:focus + .sliderNew {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.aaaa input:checked + .sliderNew:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  content: 'Yes, It is!';
+  left: 70px;
+}
+
+.viewNDDel{
+  border-radius: 0px !important;
+  font-family:'Roboto', sans-serif !important;
+  padding: 2px 6px;
+}
+
+.offeredBtnWrap{
+  z-index: 1;
+    text-align: right;
+    padding: 0px;
+}
+.offeredBtnWrap button{
+  border-radius: 0px;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+.hideHazardousWrap{
+  display: none;
+}
+.HazardousWrap{
+  width: 100%;
+}
+.TMsloginBackgrnd{
+  /*padding-right: 0px;*/
+    background: #fff;
+    /*padding-left: 0px;*/
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+.forgotpass{
+  text-align: center;
+  font-weight: bold;
+  /*font-family: Poppins-Regular;*/
+  font-size: 14px;
+  padding-top: 5px;
+  background:#FFFFFF;
+  padding: 7px;
+  border-radius:4px;
+  margin-top: 8px; 
+  border: 1px solid #ccc;
+  /*margin-left: 17px;*/
+}
+.UMcreateacc{
+  /*font-family: Poppins-Regular;*/
+  background:#fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 7px;
+  border-radius:4px;
+  margin-top: 12px !important;
+  margin-bottom: 3% !important; 
+  /*margin-left: 17px;*/
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+.UMGreyy a, a:hover, a:focus {
+    color: #333 ;
+    text-decoration: none;
+
+}
+.signupp{
+  padding-top: 5%;
+  background: #fff;
+  padding-bottom: 5%;
+}
+.customFl{
+  float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.UMGrey,.UMGrey1,.UMGreyy, .UMIHaveRead{
+  color: #999;
+  /*font-family: Poppins-Regular;*/
+  font-size: 14px;
+  margin-left: 0px;
+}
+.UMGrey1{
+  color: #333333;
+}
+.UMGrey{
+  color: #333333;
+  float: left;
+}
+/*.UMGrey:hover{
+  color: #337ab7;
+  text-decoration: underline;
+}*/
+
+.UMGreyy{
+  color: #333333;
+  float: left;
+}
+#businessListTable > tbody > tr > td:first-child{
+  /*cursor: pointer;*/
+} 
+.carFlatSubmitBtn{
+  display: none;
+}
+#awardModal .close{
+  text-align: right;
+}
+.awarModalHead{
+  padding: 0px;
+    text-align: right !important;
+    /*background: #d43f3a !important;*/
+}
+.awarModalHead h4{
+  text-align: left;
+    margin-top: -20px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    color: #555;
+}
+.awarModalHead label{
+  color: #666;
+  font-size: 14px;
+}
+.awarModalHead button{
+      /* color: #fff; */
+    /* background: #dd4b39; */
+    border: 0px;
+    padding: 0px 8px;
+    font-size: 20px;
+    background: transparent;
+    /*color: #fff;*/
+}
+.award_ModalBody p{
+  color: #333 !important;
+  font-size: 16px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif !important;
+}
+.award_ModalBody{
+  padding: 5% 0px !important;
+}
+.awardYesBtn, .awardCancelBtn{
+  margin-right: 15px;
+  /*background: #38678f !important;*/
+  color: #fff !important;
+  font-family: 'Roboto', sans-serif !important;
+  padding: 2px 10px;
+  font-size: 16px;
+  border-radius: 0px!important;
+  border: 0px !important;
+}
+.awardFooter{
+  text-align: center !important;
+  padding: 8px !important;
+  /*background: #2e6da4 !important;*/
+}
+.awardCancelBtn{
+  display: none;
+}
+.UMloginbutton{
+  background: #DAA520;
+  padding: 7px 0;
+  color: #fff;
+  border: 0;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-radius: 4px !important; 
+  font-family:'Roboto', sans-serif !important;
+}
+
+.UMloginbutton:hover{
+  color: #fff;
+}
+.UMloginbutton:focus{
+  outline: none;
+  background: #54Aff3;
+  color: #fff;
+}
+
+
+/*-------------------- Online Exam system csss ------------------------*/
+
+.signUpLeftWrap{
+  background: #fff;
+  padding: 0px 15px !important;
+
+  /*height: 699px;*/
+}
+.signUpRighttWrap{
+  overflow: hidden;
+  /*height: 680px;*/
+  padding: 0px !important;
+  /*background: repeating-linear-gradient(
+  -45deg,
+  #606dbc,
+  #606dbc 10px,
+  #465298 60px,
+  #465298 60px
+);*/
+/*background: linear-gradient(-45deg, 
+    #fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);*/
+
+}
+.div1{
+  height: 166px;
+  background-color: #ffb900;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div2{
+  height: 166px;
+  background-color: #f56e28;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div3{
+  height: 166px;
+  background-color: #ea3771;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div4{
+  height: 166px;
+  background-color: #f190bb;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div5{
+  height: 166px;
+  background-color: #46c6f5;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div6{
+  height: 166px;
+  background-color: #08b3ba;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div7{
+  height: 166px;
+  background-color: #46b450;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+}
+.div8{
+  height: 166px;
+  background-color: #ff5c5c;
+  transform: skewY(-45deg);
+  transform-origin: 0;
+
+}
+.signInbtn{
+  text-align: center;
+  /*color: #333333;*/
+  color: #fff;
+  padding: 4px;
+  /*background: #fff;*/
+ /* margin-top: 15px !important;*/
+  /*border-radius: 4px;*/
+  /*margin-left: 5%;*/
+  font-weight: bold;
+  /*border: 1px solid #ccc;*/
+  margin-left: -27px;
+}
+.signInbtn a{
+    color: #fff !important;
+    /* text-decoration: none; */
+    
+}
+.formbg{
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.mrleft{
+  margin-left: 7px;
+}
+
+.signUpBanner{
+  margin-top: 12%;
+}
+
+
+.signUpNameTitle{
+  font-size: 20px;
+  margin-top: 15%;
+  margin-bottom: 5%;
+  color: #333333;
+}
+.resetpwdNameTitle{
+  /*margin-bottom: 30px;*/
+  font-size: 20px;
+  margin-top: 21%;
+  margin-bottom: 10%;
+  color: #333333;
+}
+
+.OESSubTitle{
+  font-weight: normal;
+  color: #555;
+  font-size: 12px;
+}
+.OESTitle{
+  margin-bottom: 0px !important;
+}
+.OESSubTitle2{
+  color: #1d109d;
+  font-size: 20px;
+  font-weight: bold;
+}
+.signUpInnerWrapperOES,.forPassWrap{
+  padding: 0px;
+}
+.termsClass{
+  margin-left: 5px;
+}
+.OEXLogoWrapverify{
+  margin-bottom: 15%;
+}
+.otpHeader{
+  /*color: #333;*/
+  color: #fff;
+  margin-bottom: 1%;
+  /*text-align: left;*/
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px;
+  padding-left: 0px;
+  padding-right: 15px;
+}
+.OEXLogoWrap{
+  margin-bottom: 4.5%;
+}
+.OESSubTitleee{
+  margin-bottom: 8%;
+}
+.signupIconFont{
+  margin-right: 5px;
+}
+.resendOtpColor{
+  /*background: #d8d8d8;*/
+}
+.resendOtpWrap{
+    text-align: right;
+    /*background: #d8d8d8;*/
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    /*margin-top: 17px;*/
+    margin-left: 75px;
+    font-weight: bold;
+}
+.resendOtpWrap span{
+   /*font-family: "Poppins","Sans-serif";*/
+  color: #333333;
+  cursor: pointer;
+}
+
+
+.maintenanceClass{
+  margin-top: 70px;
+}
+.pVText{
+  text-align: center;
+}
+.loginLoadingTimeDiv{
+  text-align: center;
+  text-transform: capitalize;
+  /*opacity: 0.4;*/
+  cursor: not-allowed;
+}
+/**********Garima**********/
+.logWrapper{
+  background-image: url(/images/formbg.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.oesSignUpForm:focus ~ .floating-label, .oesSignUpForm:not(:focus):valid ~ .floating-label {
+    top: -16px;
+    font-size: 13px;
+    color: #fff;
+    left: 18px !important;
+    display: block;
+    font-weight: 100;
+}
+.floating-label1 {
+    position: absolute;
+    pointer-events: none;
+    left: 17.5px;
+    top: 8px;
+    color: #333;
+    font-weight: 100;
+    font-size: 13px;
+    transition: 0.2s ease all;
+}
+.oesSignUpForm:focus ~ .floating-label1, .oesSignUpForm:not(:focus):valid ~ .floating-label1 {
+    top: -16px;
+    font-size: 13px;
+    color: #fff;
+    left: 5px !important;
+    display: block;
+    font-weight: 100;
+}
+.lbfloatpass{
+  left: 10px !important;
+}
+.form-group1{
+  float:left;
+  margin-bottom:0px;
+
+}
+.form-group2{
+  margin-bottom:5px!important;
+}
+
+.UMloginbutton1{
+  margin-bottom:5px!important;
+}
+
+
+.modalbg {
+  position: fixed;
+  font-family:'Roboto', sans-serif !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0);
+  z-index: 99999;
+  /*transition(0.5s);
+  transition-delay(.2s);*/
+  display: none;
+  pointer-events: none;
+  transform:scaleY(.01) scaleX(0);
+  animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  
+}
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+.dialog {
+    width: 400px;
+    position: relative;
+    color:white;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius:10px;
+    /*.gradient;
+    .box-shadow;*/
+    background:rgba(255,255,255,0.2)
+  }
+
+.modalbg:target {
+  display: none;
+  pointer-events: auto;
+  background: rgba(4, 10 ,30, .8);
+  /*.transition();
+  .dialog {
+    top: -20px;
+    .transition(.3s);
+    .transition-delay;*/
+  /*}*/
+}
+
+
+.modalclose {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -10px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  /*.box-shadow;
+  .transition;
+  .transition-delay(.2s);*/
+ /* &:hover { background: #00d9ff; .transition; }*/
+}
+
+.fineprint {
+  font-style: italic;
+  font-size: 10px;
+  color: #646;
+}
+a { color: #333; text-decoration: none; }
+.modaltext{
+  color:#666;
+}
+.termsconditionslink{
+  margin-bottom:10px;
+}
+.modalpara{
+  white-space: pre-line;
+}
+.modalparascroll{
+  overflow-y: auto;
+}
+.radiobtnbox{
+ border:1px solid #d8d8d8;
+ border-radius: 5px;
+ background:#d8d8d8;
+}
+.leftpaddingzero{
+  padding-left:0!important;
+}
+.radiolabel{
+  color:#444!important;
+  font-weight:normal!important;
+  font-size:14px!important;
+  /*margin-top:2px;*/
+}
+
+.radiobtnstyle{
+  height: 15px;
+  width: 15px;
+}
+
+.radiobtnbx{
+  padding-right: 0!important;
+  padding-top: 4px!important;
+  padding-bottom: 0!important;
+}
+.pdleftclr{
+  padding-left: 0px;
+}
+.mrotplf{
+  margin-left: 5% !important;
+}
+.resettitle1{
+  margin-top: 63% !important;
+}
+
+.loginforms{
+  padding-top: 5%;
+  padding-left: 20%;
+  padding-right: 5%;
+
+}
+
+
+.termspad{
+    padding-bottom: 15px;
+   /* padding-top: 5px;*/
+    /*padding-left: 31px;*/
+}
+
+
+
+.sidebar{
+  /*display: none;
+  background: #fff;*/
+}
+.pdrmv{
+  padding: 0px;
+}
+.rdolb{
+  font-size: 13px;
+  float: right;
+  padding: 3px;
+  color: #333;
+  font-weight: bold;
+}
+.signupfrm{
+  margin-top: 8%;
+}
+.verifypd{
+  padding: 4px;
+}
+.veribtm{
+  margin-bottom: 10px;
+}
+.veribtm1{
+  margin-bottom: 15px;
+}
+.veriemail{
+  padding-left: 7px;
+  padding-right: 18px;
+}
+.veriemailmr{
+  margin-left: 6% !important;
+}
+.FormWrapper1{
+  padding: 7px;
+  margin-top: 30px;
+}
+input[type=radio]:checked ~ span{
+  color: #4183D7;
+}
+.signUpNameTitle2{
+  font-size: 20px;
+  margin-top: 8%;
+  margin-bottom: 5%;
+  /*color: #333333;*/
+  color: #DAA520;
+  font-weight: bold;
+  text-align: center;
+  font-family:'Roboto', sans-serif !important;
+  /*font-family: 'Roboto-BoldCondensed';*/
+}
+.signInbtn1{
+  text-align: center;
+ /* color: #333333;*/
+ /*color: #fff;*/
+  /*padding: 4px;*/
+  /*background: #d8d8d8;*/
+  margin-top: 12px !important;
+  /*border-radius: 4px;*/
+  /* margin-left: 5%; */
+  font-weight: bold;
+}
+.signuppd1{
+  padding: 3px;
+}
+/*input[type='radio']:before {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 60%;
+      margin: 20% auto;
+      border-radius: 50%;
+  }
+
+input[type="radio"]:checked:before {
+      background: #4183D7;
+   }*/
+/*input[type=radio]:checked ~ .check {
+  border: 5px solid #0DFF92;
+}*/
+.confirmbtm{
+  /*border: 0 !important;*/
+  box-shadow: none;
+  border: 1px solid #ccc;
+  /*border-bottom: 1px solid #efefef !important;*/
+  border-radius: 4px;
+  margin-bottom: 15px;
+  height: 35px !important;
+  font-size: 16px;
+  /*background: #d8d8d8;*/
+  background-color: #fff;
+  font-family:'Roboto', sans-serif !important;
+}
+
+.userCreateWrap{
+  padding-top:55px;
+}
+.under{
+  text-decoration: underline;
+}
+.terms1{
+  position: relative;
+  top: -2px;
+  color: #fff;
+  left: 2px;
+}
+.mrleftsign{
+  margin-left: -15px;
+}
+.mrleftsign:hover{
+  color: #fff !important;
+}
+
+.backgroundErrImg,.backgroundErrImgMain{
+    background: url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    height: 300px;
+    box-shadow: 0px 0px 10px !important;
+    margin-top: 71px;
+    color: #fff;
+    padding-top: 110px;
+    text-align: center;
+}
+.backgroundErrImgMain{
+  background: url(/images/background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  margin-top: 0px;
+
+
+}
+.backgroundErrImg h4{
+  font-size: 22px; 
+  line-height: 1.4;
+}
+.backgroundErrImg b{
+  font-size: 22px;
+  text-decoration: underline;
+  color: #f00;
+  background: #fff; 
+}
+.resendOtpWrapcss{
+  background: #d8d8d8!important;
+}
+.textpd{
+  padding-right: 7px;
+}
+.textpd1{
+  padding-left: 1px;
+}
+.textpdEye{
+  padding-left: 7px !important;
+}
+.fltlft{
+  float:left !important;
+}
+.pdcls {
+    padding: 0px;
+}
+.studentSidebar{
+  position: fixed;
+}
+.tip{
+    top: 67% !important;
+}
+.long{
+    top: 58% !important;
+}
+.selectLabel{
+  margin-bottom: 4px;
+  color: #555;
+    font-weight: 600;
+    font-size: 13px;
+}
+.bcktolgn{
+  padding-top:10px;
+  color:white;  
+}
+.bcktolgn:hover{
+  cursor:pointer;
+}
+.greyText{
+  color:#777;
+}
+.form-control:focus{
+  background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.marbtm10{
+  margin-bottom: 20px;
+}
+
+.border3{
+  border-radius: 3px !important;
+}
+@font-face{
+  /*font-family:'Roboto-BoldCondensed';*/
+  src: url("/fonts/Roboto-BoldCondensed.ttf");
+  font-style: normal;
+}
+.imageSize{
+  font-size: 12px!important;
+  padding-right: 35px;
+}
+.fontwt{
+  font-weight: normal;
+}
+.customCls {
+  border-bottom: 1px solid #efefef !important;
+  background-color: #fff !important;
+  padding: 0px !important;
+  padding-right: 10px !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+.eyeicon{
+  border-bottom: 1px solid #efefef !important;
+  background-color: #fff !important;
+  
+  /*padding-right: 10px !important;*/
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+.customCls1 {
+  padding-left: 10px !important;
+}
+.pass{
+      z-index: 0 !important;
+}
+
+.showPwd{
+  display: block;
+}
+.hidePwd{
+  display: none;
+}
+.showPwd1{
+  display: none;
+}
+.hidePwd1{
+  display: block;
+}
+.showPwdC{
+  display: block;
+}
+.hidePwdC{
+  display: none;
+}
+.showPwd1C{
+  display: none;
+}
+.hidePwd1C{
+  display: block;
+}
+
+.marBtm{
+  margin-bottom: 20px;
+}
+
+/*.showPwd,.hidePwd1C,.hidePwd1,.showPwdC{
+  display: block;
+}
+.hidePwd,.showPwd1C,.showPwd1,.hidePwdC{
+  display: none;
+}*/
+
+.showHideSignDiv{
+    top:-28px;
+    float: right;
+    margin-right: 9px;
+    z-index: 999;
+    position: relative;
+    font-size: 16px;
+}
+
+.signUpBackground{
+  background-image: url("/images/TGK.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.backImageModal{
+  background-image: url("/images/TGK_Post.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+/*a:hover{
+  color: #fff;
+}*/
+
+.page_content{
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+.mrgleft{
+  margin-left: -15px;
+}
+.modal{
+  overflow-y: auto !important;
+}
