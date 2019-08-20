@@ -45,15 +45,9 @@ componentDidMount(){
                     </Link>
                   </li>                    
                   <li className="active">
-                    <Link to="/umlistofusers">
+                    <Link to="/userManagement">
                       <i className="glyphicon glyphicon-user"></i>
-                      Add User
-                    </Link>
-                  </li>
-                  <li className="active">
-                    <Link to="/ViewTemplates">
-                      <i className="glyphicon glyphicon-comment"></i>
-                      Notification Management
+                      User Management
                     </Link>
                   </li>
               </ul>

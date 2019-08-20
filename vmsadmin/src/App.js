@@ -1,13 +1,13 @@
 import React,{Component} 	from 'react';
-import LayoutSystemSecurity from './coreAdmin/LayoutSystemSecurity/LayoutSystemSecurity.js';
-import Layout 				from './coreAdmin/Layout/Layout.js';
+import Layout 				from './admin/Layout/Layout.js';
 import axios 				from 'axios';
 import $ 					from 'jquery';
 import './lib/router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-axios.defaults.baseURL = 'http://qatgk3tapi.iassureit.com/';
+// axios.defaults.baseURL = 'http://qatgk3tapi.iassureit.com/';
+axios.defaults.baseURL = 'http://localhost:5016';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
  class App extends Component {

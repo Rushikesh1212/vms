@@ -33,10 +33,10 @@ export default class Footer extends Component{
         {/* <footer  className={mainfootershow}>*/}
         <div className="pull-right col-lg-6">
         </div>
-        <strong>Copyright © 2018 <a href="" className="footclr">Online Abacus</a></strong> All rights
+        <strong>Copyright © 2019 <a href="" className="footclr">VMS Team</a></strong> All rights
         reserved.
-        <div className="iAssureITNM col-lg-6 ">
-        <strong>Design & Developed by <a href="http://iassureit.com">iAssure International Technology Pvt Ltd</a></strong>
+        <div className="VMSNM col-lg-6 ">
+        <strong>Design & Developed by <a href="http://vms.com">VMS Team</a></strong>
         </div>
       </footer>
 

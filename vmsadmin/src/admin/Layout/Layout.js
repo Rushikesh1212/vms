@@ -10,32 +10,12 @@ import $ from "jquery";
 
 // Section: 1 - SystemSecurity ******************************************************
 import Login            from '../systemSecurity/Login.js';
-import ConfirmOtp       from '../systemSecurity/ConfirmOtp.js';
-import ForgotPassword   from '../systemSecurity/ForgotPassword.js';
-import ResetPassword    from '../systemSecurity/ResetPassword.js';
 import SignUp           from '../systemSecurity/SignUp.js';
-import VerifyAccount    from '../systemSecurity/VerifyAccount.js';
-// import CommonPage        from './components/layouts/CommonLayout.js';
-
 import Header from '../common/header/Header.js'
 import Footer from '../common/footer/Footer.js'
 import Dashboard from '../dashboard/Dashboard.js'
 import Leftsidebar from '../common/leftSidebar/Leftsidebar.js'
-import Rightsidebar from '../common/rightSidebar/Rightsidebar.js'
-// import UMListOfUsers from '../userManagement/UM/UMListOfUsers.js';
-import UMListOfUsers from '../../TGKSpecific/TGKuserManagement/UM/UMListOfUsers.js';
-import UMListOfEmp from '../../TGKSpecific/TGKuserManagement/UM/OfficeEmpList.js';
-
-// import EditUserProfile from '../userManagement/UM/EditUserProfile.js';
-import EditUserProfile from '../../TGKSpecific/TGKuserManagement/UM/EditUserProfile.js';
-import UMRolesList from '../userManagement/Roles/UMRolesList.js';
-// import CompanySetting from '../companysetting/Components/CompanySetting.js';
-import CompanySetting from '../../TGKSpecific/TGKcompanysetting/Components/CompanySetting.js';
-import ViewTemplates from '../NotificationManagement/ViewTemplates.jsx';
-// section- admin operation
-import MasterData from '../../adminTGK/masterData/masterData.js';
-import SellOMeter from '../../adminTGK/sell-o-meter/sellOMeter.js';
-import ClassRating from '../../adminTGK/sell-o-meter/classRating.js';
+import UserMgmt from '../userManagement/UserMgmt.js';
 
 class Layout extends Component{
   
@@ -116,11 +96,7 @@ componentDidMount(){
                 <div className="">                  
                   <div id="dashbordid" className="">
                     <Switch>
-                      <Route path="/umlistofusers" component={UMListOfUsers} exact />
-                      <Route path="/umlistofemp" component={UMListOfEmp} exact />
-                      <Route path="/umroleslist" component={UMRolesList} exact />
-                      <Route path="/edituserprofile/:id" component={EditUserProfile} exact />
-                      <Route path="/ViewTemplates" component={ViewTemplates} exact />
+                      <Route path="/userManagement" component={UserMgmt} exact />
                       <Route path="/dashboard" component={Dashboard} exact />
                       <Route path="/" component={Dashboard} exact />
                     </Switch>        
@@ -145,10 +121,6 @@ componentDidMount(){
               <Route path="/"               exact strict component={ Login } />
               <Route path="/login"          exact strict component={ Login } />
               <Route path="/signup"         exact strict component={ SignUp } />
-              <Route path="/forgot-pwd"     exact strict component={ ForgotPassword } />
-              <Route path="/reset-pwd"      exact strict component={ ResetPassword } />
-              <Route path="/verify-account" exact strict component={ VerifyAccount } />
-              <Route path="/confirm-otp"    exact strict component={ ConfirmOtp } />
             </Switch>        
           </Router>
         </div>

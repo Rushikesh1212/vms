@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {browserHistory} from 'react-router';
+import axios from 'axios';
 import swal from 'sweetalert';
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,10 +11,6 @@ import 'font-awesome/css/font-awesome.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
 
-import axios from 'axios';
-axios.defaults.baseURL = 'http://apitgk3t.iassureit.com/';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const formValid = formerrors=>{
   console.log("formerrors",formerrors);

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 import './Header.css';
-import Rightsidebar from '../rightSidebar/Rightsidebar.js';
+// import Rightsidebar from '../rightSidebar/Rightsidebar.js';
 
 export default class Header extends Component{
   
