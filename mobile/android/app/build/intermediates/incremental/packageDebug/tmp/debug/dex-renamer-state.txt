@@ -1,0 +1,4 @@
+#Tue Aug 20 23:02:08 IST 2019
+base.0=/home/iassureit/Abhimanyu/vms/mobile/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
