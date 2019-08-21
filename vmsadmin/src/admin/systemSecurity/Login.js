@@ -18,6 +18,8 @@ class Login extends Component {
       super();
         this.state = {           
           loggedIn : false,
+          loginusername : "",
+          loginpassword : "",
           auth: {
                 email           : '',
                 pwd             : '',
@@ -31,14 +33,14 @@ class Login extends Component {
     event.preventDefault();
     console.log("in login mode",this.state.auth);
         var auth= {
-          email       : this.refs.loginusername.value,
-          password    : this.refs.loginpassword.value,
+          email       : this.state.loginusername,
+          pwd         : this.state.loginpassword,
         }
 
         console.log("auth value",auth);
 
     axios
-      .post('/api/users/post/login',auth)
+      .post('/api/users/post/adminLogin',auth)
       .then((response)=> {
         console.log("-------userData------>>",response);
         // this.setState({
@@ -80,6 +82,15 @@ class Login extends Component {
       $('.hidePwd').toggleClass('hidePwd1');
       return $('.inputTextPass').attr('type', 'password');
   }
+  handleChange(event){
+    const target = event.target;
+    const name   = target.name;
+    console.log('handle',event.target.value)
+    this.setState({
+      [name]: event.target.value,
+    });
+  }
+
   render(){
     // var winHeight = window.innerHeight;
     // var divHeight = winHeight/4.5+'px';
@@ -115,20 +126,20 @@ class Login extends Component {
         <div className="col-lg-4 col-lg-offset-7 col-md-4 col-md-offset-7 col-sm-12 signupPadding signUpFormWrap " style={{"height": divHeight}}>
           <div className="divLoginInWrap">
 
-            <div className="col-lg-4 col-lg-offset-4 marbtm10 ">
-              <img src="images/Logo.png" height="70px"/>
+            <div className="col-lg-4 col-lg-offset-4 marbtm10 text-center">
+              <img src="images/voterlogo.png" height="70px"/>
               </div>
 
             <form id="login" onSubmit={this.userlogin.bind(this)}>
               <br/>
-              <div className="col-lg-4 col-lg-offset-4 ">
+              <div className="col-lg-6 col-lg-offset-3 ">
              {/* <h3> hhhh</h3>*/}
-              {<h4 className="signInNameTitle "><span className="bordbt">SIGN IN</span></h4>
+              {<h4 className="signInNameTitle "><span className="bordbt">ADMIN&nbsp; LOGIN</span></h4>
               }</div>
               <div className="col-lg-12 col-md-12 col-sm-12 ">
                 <div className="inputContent">
                   <span className="blocking-span noIb">
-                    <input type="email" className="col-lg-12 col-md-1col-lg-12 col-md-12 col-sm-12 oesSignUpForm tmsLoginTextBox" onChange={this.handleChange} ref="loginusername" id="loginusername" name="loginusername" placeholder="" required/>
+                    <input type="email" className="col-lg-12 col-md-1col-lg-12 col-md-12 col-sm-12 oesSignUpForm tmsLoginTextBox" onChange={this.handleChange.bind(this)} ref="loginusername" id="loginusername" name="loginusername" placeholder="" required/>
                     <span className="floating-label"><i className="fa fa-envelope signupIconFont" aria-hidden="true"/>Email ID</span>   
                   </span>
                 </div>
@@ -136,7 +147,7 @@ class Login extends Component {
               <div className="col-lg-12 col-md-12 col-sm-12 marBtm30">
                 <div className="form-group form-group1 fltlft input-group col-lg-12 col-md-12 col-sm-12 inputContent ">     
                   <span className="blocking-span noIb">
-                    <input type="password" className="form-control border3 pass oesSignUpForm confirmbtm inputTextPass tmsLoginTextBox" ref="loginpassword" name="loginpassword" required/>
+                    <input type="password" className="form-control border3 pass oesSignUpForm confirmbtm inputTextPass tmsLoginTextBox" onChange={this.handleChange.bind(this)} ref="loginpassword" name="loginpassword" required/>
                     <span className="floating-label1 lbfloatpass"><i className="fa fa-lock" aria-hidden="true"></i> Password</span>                 
                   </span>
                

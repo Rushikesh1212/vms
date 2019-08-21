@@ -30,17 +30,16 @@ class CreateUser extends Component {
       office            : null,
       allPosts          : null,
       firstname         : "",
-      role              : "--select--",
-      lastname          :"",
+      lastname          : "",
       signupEmail       : "",
       mobNumber         : "",
       
       formerrors :{
          firstname    : "",
-         lastname     :"",
+         lastname     : "",
          signupEmail  : "",
          mobNumber    : "",
-         role         : "",
+         role         : "User",
       },
 
     };
@@ -52,7 +51,6 @@ class CreateUser extends Component {
     const {name,value} = event.target;
     let formerrors = this.state.formerrors;
     
-    // console.log("value",value);
     switch (datatype){
       case 'firstname' : 
         formerrors.firstname = nameRegex.test(value)  && value.length>0 ? '' : "Please Enter Valid Name";
@@ -78,6 +76,7 @@ class CreateUser extends Component {
       break;
 
     }
+    console.log("value",value);
     
     this.setState({ formerrors,
       [name]:value
@@ -87,65 +86,7 @@ class CreateUser extends Component {
 
     componentDidMount() {
 
-      axios
-      .get('/api/tgkSpecificcompanysettings/list')
-      .then(
-        (res)=>{
-          // console.log('res', res);
-          const postsdata = res.data;
-          // console.log('postsdata',postsdata);
-          this.setState({
-            allPosts : postsdata,
-          });
-          // console.log("allPosts___________________",this.state.allPosts);
-          let locationArray =[];
-          if(this.state.allPosts!=null){
-            locationArray = this.state.allPosts.map(function(item) { return item.companyLocationsInfo });
-          }else{
-             locationArray = "no data";
-          }
-          this.setState({
-            office : locationArray,
-          });
-          
-        // here for list
-                  var data = {
-                                    "startRange"        : this.state.startRange,
-                                    "limitRange"        : this.state.limitRange, 
-                            }
-                      axios.post('/api/users/post/userslist', data)
-                      .then( (res)=>{      
-                        // console.log("herer",res);
-                        var tableData = res.data.map((a, i)=>{
-                          return {
-                                    _id             : a._id,
-                                    fullName        : a.fullName,
-                                    emailId         : a.emailId,
-                                    mobNumber       : a.mobNumber, 
-                                    status          : a.status, 
-                                    roles           : a.roles,
-                          }
-                        })
-                        this.setState({
-                              completeDataCount : res.data.length,
-                              tableData     : tableData,          
-                            },()=>{
-                              console.log('tableData', this.state.tableData);
-                            })
-                      })
-                      .catch((error)=>{
-                        console.log("error = ",error);
-                        // alert("Something went wrong! Please check Get URL.");
-                      });
-
-
-        }
-      )
-      .catch((error)=>{
-
-        console.log("error = ",error);
-        // alert("Something went wrong! Please check Get URL.");
-         });  
+     
     }  
 
     createUser(event){
@@ -153,37 +94,48 @@ class CreateUser extends Component {
       const formValues = {
           "firstName"       : this.state.firstname,
           "lastName"        : this.state.lastname,
-          "emailId"         : this.state.signupEmail,
-          "countryCode"     : "+91",
+          "email"           : this.state.signupEmail,
           "mobileNumber"    : this.state.mobNumber,
-          "pwd"             : "user123",
-          
-          "status"          : "Active",
-          "roles"           :  this.state.role,
-          "officeLocation"  : this.refs.office.value,
+          "role"            : "User",
         }
 
-        if(this.state.firstname!="" && this.state.lastname !="" && this.state.signupEmail && this.state.mobNumber && this.state.role != "--select--"){
+        if(this.state.firstname!="" && this.state.lastname !="" && this.state.signupEmail && this.state.mobNumber ){
            axios.post('/api/users/post', formValues)
                 .then( (res)=>{
-                    swal("User added successfully", "", "success");
-                    this.refs.firstname.value = '';
-                    this.refs.lastname.value  = '';
-                    this.refs.signupEmail.value  = '';
-                    this.refs.mobNumber.value = '';
-                    this.setState({show: false})
+                    console.log("response = ",res);
+                    if(res.data.message === "NEW-USER-CREATED"){
+                      swal("User added successfully", "", "success");
+                      $('body').removeClass("modal-open");
+                      this.setState({
+                        firstname         : "",
+                        lastname          : "",
+                        signupEmail       : "",
+                        mobNumber         : "",
+                      })
+                      axios
+                          .get('/api/users/get/list')
+                          .then(
+                            (res)=>{
+                              console.log('res', res.data);
+                              const postsdata = res.data;
+                              // console.log('postsdata',postsdata);
+                              this.setState({
+                                allPosts : postsdata,
+                              },()=>{
+                                this.props.userList(this.state.allPosts)
+                              });         
+                            }
+                          )
+                          .catch((error)=>{
 
-                    var data = {
-                      "startRange"        : this.state.startRange,
-                      "limitRange"        : this.state.limitRange, 
-                    }
-                                  
-                    this.props.getData(0, 10);
-                    var modal = document.getElementById("CreateUserModal");
-                    modal.style.display = "none";
-                    $('.modal-backdrop').remove();
-                    // this.props.history.push("/umlistofusers");       
-                    window.location.reload();
+                            console.log("error = ",error);
+                            // alert("Something went wrong! Please check Get URL.");
+                             }); 
+                     }
+                     else if(res.data.message === "USER-ALREADY-EXIST"){
+                        swal("User already exists", "", "warning");
+                     } 
+       
                 })
               .catch((error)=>{
                 console.log("error = ",error);
@@ -198,10 +150,14 @@ class CreateUser extends Component {
     }
 
     render() {
+
       const {formerrors} = this.state;
+
+    
+
       return (
             <div>
-              <div className="modal fade" id="CreateUserModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal fade" id="userModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg " role="document">
                   <div className="modal-content modalContent ummodallftmg ummodalmfdrt col-lg-12 ">
                     <div className="modal-header userHeader">

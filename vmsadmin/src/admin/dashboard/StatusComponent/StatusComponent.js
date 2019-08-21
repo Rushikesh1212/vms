@@ -37,7 +37,7 @@ export default class StatusComponent extends Component{
               <div className="col-lg-4 ccon1" style={{backgroundColor:this.props.stats.color}} >
                 <div className="row"><i className={"fa fa-"+this.props.stats.icon}></i></div>
               </div>
-              <div className="col-lg-7">
+              <div className="col-lg-7 marTop15">
                   <div>{this.props.stats.heading}</div>
                   <div className="per"><strong>{this.props.stats.value}</strong></div>
               </div>

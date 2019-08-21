@@ -3905,7 +3905,7 @@ right: 15px;
 .box-header {
   color: #444;
   display: block;
-  padding: 5px 30px;
+  padding: 5px 0px;
   position: relative;
 }
 
@@ -4000,4 +4000,9 @@ right: 15px;
 
 .cursorpointer{
   cursor: pointer;
+}
+.custTblHdng{
+  font-weight: normal;
+  font-size: 16px;
+  margin-top:3%;
 }

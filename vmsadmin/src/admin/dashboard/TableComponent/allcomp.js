@@ -23,7 +23,7 @@
               <div className="row"><i className="fa fa-cog"></i></div>
               
             </div>
-            <div className="col-lg-7  ">
+            <div className="col-lg-7 marTop15">
                 <div>TOTAL USERS</div>
                 <div className="per"><strong>100</strong></div>
             </div>

@@ -38,7 +38,7 @@ class SignUp extends Component {
                 email           : '',
                 pwd       		: '',
                 signupPassword  : '',
-                role 			: ''
+                role 			: 'Admin'
                
             },
              formerrors :{
@@ -58,13 +58,13 @@ class SignUp extends Component {
  		event.preventDefault();
  			console.log("-------this.state.auth------>>",this.state.auth);
  			var auth={
-	                firstname       : this.refs.firstname.value,
-	                lastname        : this.refs.lastname.value,
-	                mobNumber       : this.refs.mobNumber.value,
+	                firstName       : this.refs.firstname.value,
+	                lastName        : this.refs.lastname.value,
+	                mobileNumber    : this.refs.mobNumber.value,
 	                email           : this.refs.signupEmail.value,
 	                pwd        		: this.refs.signupPassword.value,
 	                signupPassword  : this.refs.signupConfirmPassword.value,
-	                role 			: 'users'
+	                role 			: 'Admin'
 	            }
 	            
  			console.log("-------auth------>>",auth);
@@ -86,7 +86,7 @@ class SignUp extends Component {
 		             document.getElementById("signUpBtn").value = 'Sign Up',
       				// browserHistory.push("/"),
                 	axios
-                	 	.post('/api/users',auth)
+                	 	.post('/api/users/post',auth)
 			            .then((response)=> {
 			                console.log("-------userData------>>",response);
 		            		swal("Great","Information submitted successfully and OTP is sent to your registered Email ID and Mobile no","success");

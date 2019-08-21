@@ -4,6 +4,8 @@ import axios                from 'axios';
 import _                    from 'underscore';
 import swal                 from 'sweetalert';
 import $ 					from 'jquery';
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 import './userManagement.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -13,42 +15,35 @@ class UserMgmt extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-		 	
+     		 allPosts          : [],
 		}
 	}
 
-	componentDidMount(){
+componentDidMount(){	
+      axios
+      .get('/api/users/get/list')
+      .then(
+        (res)=>{
+          console.log('res', res.data);
+          const postsdata = res.data;
+          // console.log('postsdata',postsdata);
+          this.setState({
+            allPosts : postsdata,
+          });         
+        }
+      )
+      .catch((error)=>{
 
-	}
-	getData(startRange, limitRange){    
-		var data = {
-			"startRange"        : startRange,
-            "limitRange"        : limitRange, 
-		}    
-       axios.post('/api/users/post/userslist', data)
-        .then( (res)=>{  
-        	var tableData = res.data.map((a, i)=>{
-				return {
-					_id 			: a._id,
-					fullName        : a.fullName ? a.fullName : "-",
-	                emailId    		: a.emailId ? a.emailId : "-",
-	                mobileNumber    : a.mobileNumber ? a.mobileNumber : "-", 
-	                status        	: a.status ? a.status : "-",	
-	                roles 			: a.roles ? a.roles : "-",
-	                checked        : false,
-				}
-			})
-        	// console.log('res============', res.data);
-          	this.setState({
-              completeDataCount : res.data.length,
-              tableData 		: tableData,          
-            },()=>{
-            })
-        })
-	    .catch((error)=>{
-	      // console.log("error = ",error);
-	      alert("Something went wrong! Please check Get URL.");
-	    }); 
+        console.log("error = ",error);
+        // alert("Something went wrong! Please check Get URL.");
+         });  
+     	} 
+	userList(userList){
+      $('body').removeClass("modal-open");
+
+		  this.setState({
+        allPosts:userList
+      })
     }
 
 	closeModal(event){
@@ -57,20 +52,47 @@ class UserMgmt extends Component {
 	}
 
 	render(){
+	const data = this.state.allPosts;
+      console.log(data);
+	const columns = [{
+        Header: 'Name',
+        accessor: 'profile.fullName' // String-based value accessors!
+      }, {
+        Header: 'Mobile Number',
+        accessor: 'profile.mobileNumber',
+      }, {
+        Header: 'Email ID',
+        accessor: 'profile.emailId',
+      }]
 	var adminRolesListDataList = this.state.adminRolesListData;
-	    return(
+	  return(
 			<div className="modal-bodyuser">
-		        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
-					<div className="col-lg-3 col-md-3 col-sm-6 col-xs-12  paddingright">
-						<h4 className="usrmgnttitle weighttitle">User Management</h4>
+		    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
+					<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
+						<h4 className="usrmgnttitle weighttitle">To add the new user, click on <i>'Add New User'</i> button:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
 					</div>
 					<div className="col-lg-2 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
-						<button type="button" className="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 addexamform userbtn clickforhideshow" data-toggle="modal" data-target="#CreateUserModal">Add User</button>
-						<CreateUser getData={this.getData.bind(this)}/>
+						<button type="button" className="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 addexamform userbtn clickforhideshow" data-toggle="modal" data-target="#userModal">Add New User</button>
+						<CreateUser userList={this.userList.bind(this)}/>
 					</div>
 				</div>
-		    </div>
-	      );
-	    }
+        <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
+          <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All users appeare in below table)</i></h4>
+        </div>
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  				<ReactTable
+  						    data={data}
+  						    columns={columns}
+  						    filterable= {true}
+  						    sortable= {true}
+  						    showPagination= {true}
+  						    pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
+    							defaultPageSize= {10}
+    							minRows ={10}
+  						  />
+  		  </div>
+      </div>
+	  );
+	}
 }
 export default UserMgmt;
