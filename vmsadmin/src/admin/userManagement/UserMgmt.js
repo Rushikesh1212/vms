@@ -54,7 +54,17 @@ componentDidMount(){
 	render(){
 	const data = this.state.allPosts;
       console.log(data);
-	const columns = [{
+	const columns = [
+      {
+          Header: "Sr. No.",
+          id: "row",
+          maxWidth: 100,
+          filterable: false,
+          Cell: (row) => {
+              return <div>{row.index+1}</div>;
+          }
+      },
+      {
         Header: 'Name',
         accessor: 'profile.fullName' // String-based value accessors!
       }, {
