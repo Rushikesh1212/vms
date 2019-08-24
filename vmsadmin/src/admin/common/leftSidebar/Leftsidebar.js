@@ -49,6 +49,12 @@ componentDidMount(){
                       <i className="glyphicon glyphicon-user"></i>
                       User Management
                     </Link>
+                  </li>                  
+                  <li className="active">
+                    <Link to="/voterManagement">
+                      <i className="glyphicon glyphicon-send"></i>
+                      Voter Management
+                    </Link>
                   </li>
               </ul>
             </nav>

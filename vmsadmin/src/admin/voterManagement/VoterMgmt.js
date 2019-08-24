@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import CreateUser 			from './CreateUser.js';
+import CreateVoter 			    from './CreateVoter.js';
 import axios                from 'axios';
 import _                    from 'underscore';
 import swal                 from 'sweetalert';
-import $ 					from 'jquery';
-import ReactTable from 'react-table'
+import $ 					          from 'jquery';
+import ReactTable           from 'react-table'
 import 'react-table/react-table.css'
-import './userManagement.css';
+import './VoterManagement.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/js/modal.js';
 
-class UserMgmt extends Component {
+class VoterMgmt extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -38,11 +38,11 @@ componentDidMount(){
         // alert("Something went wrong! Please check Get URL.");
          });  
      	} 
-	userList(userList){
+	voterList(voterList){
       $('body').removeClass("modal-open");
 
 		  this.setState({
-        allPosts:userList
+        allPosts:voterList
       })
     }
 
@@ -67,17 +67,27 @@ componentDidMount(){
 	var adminRolesListDataList = this.state.adminRolesListData;
 	  return(
 			<div className="modal-bodyuser">
-		    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
-					<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
-						<h4 className="usrmgnttitle weighttitle">To add the new user, click on <i>'Add New User'</i> button:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
+		    <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
+					<div className="col-lg-8 col-md-6 col-sm-6 col-xs-12 paddingright">
+						<h4 className="usrmgnttitle weighttitle">Click to add the new single voter:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
 					</div>
-					<div className="col-lg-2 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
-						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#userModal">Add New User</button>
-						<CreateUser userList={this.userList.bind(this)}/>
+					<div className="col-lg-4 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
+						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#userModal">Add New Voter</button>
+						<CreateVoter voterList={this.voterList.bind(this)}/>
 					</div>
-				</div>
+				</div>        
+        <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
+          <div className="col-lg-offset-1 col-lg-7 col-md-6 col-sm-6 col-xs-12 paddingright">
+            <h4 className="usrmgnttitle weighttitle">Click to add multiple voters:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
+            <input type="file" name="file-6[]" id="file-6" className="inputfile inputfile-5" data-multiple-caption="{count} files selected" multiple=""/>
+            <label for="file-6"><h4><span class="glyphicon glyphicon-cloud-upload"></span></h4>
+            </label>
+          </div>
+        </div>
         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
-          <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All users appeare in below table)</i></h4>
+          <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All voters appeare in below table)</i></h4>
         </div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   				<ReactTable
@@ -95,4 +105,4 @@ componentDidMount(){
 	  );
 	}
 }
-export default UserMgmt;
+export default VoterMgmt;

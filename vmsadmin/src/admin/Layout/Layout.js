@@ -1,21 +1,20 @@
-import React,{Component} from 'react';
-// import TrackerReact from 'meteor/ultimatejs:tracker-react';
-import { render } from 'react-dom';
-import { Redirect } from 'react-router-dom';
-import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
-// import {browserHistory} from 'react-router-dom';
+import React,{Component}  from 'react';
+import { render }         from 'react-dom';
+import { Redirect }       from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route,Switch }   from 'react-router-dom';
+// Section: 1 - SystemSecurity ******************************************************
+import $                  from "jquery";
+import Login              from '../systemSecurity/Login.js';
+import SignUp             from '../systemSecurity/SignUp.js';
+import Header             from '../common/header/Header.js'
+import Footer             from '../common/footer/Footer.js'
+import Dashboard          from '../dashboard/Dashboard.js'
+import Leftsidebar        from '../common/leftSidebar/Leftsidebar.js'
+import UserMgmt           from '../userManagement/UserMgmt.js';
+import VoterMgmt          from '../voterManagement/VoterMgmt.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import $ from "jquery";
-
-// Section: 1 - SystemSecurity ******************************************************
-import Login            from '../systemSecurity/Login.js';
-import SignUp           from '../systemSecurity/SignUp.js';
-import Header from '../common/header/Header.js'
-import Footer from '../common/footer/Footer.js'
-import Dashboard from '../dashboard/Dashboard.js'
-import Leftsidebar from '../common/leftSidebar/Leftsidebar.js'
-import UserMgmt from '../userManagement/UserMgmt.js';
 
 class Layout extends Component{
   
@@ -97,6 +96,7 @@ componentDidMount(){
                   <div id="dashbordid" className="">
                     <Switch>
                       <Route path="/userManagement" component={UserMgmt} exact />
+                      <Route path="/voterManagement" component={VoterMgmt} exact />
                       <Route path="/dashboard" component={Dashboard} exact />
                       <Route path="/" component={Dashboard} exact />
                     </Switch>        
