@@ -57,12 +57,26 @@ componentDidMount(){
 	const columns = [{
         Header: 'Name',
         accessor: 'profile.fullName' // String-based value accessors!
+      },{
+        Header: 'Voting Card No.',
+        accessor: 'profile.emailId',
       }, {
         Header: 'Mobile Number',
         accessor: 'profile.mobileNumber',
       }, {
         Header: 'Email ID',
         accessor: 'profile.emailId',
+      },{
+        Header: 'Voting Card No.',
+        accessor: 'profile.emailId',
+      },{
+        Header : 'Action',
+        Cell:row =>(
+            <div className="text-center">
+              <i className="actionIcon fa fa-pencil"></i>
+              {/*<button className=" actionIcon btn bg-primary">Reset Password</button>*/}
+            </div>
+          )
       }]
 	var adminRolesListDataList = this.state.adminRolesListData;
 	  return(
@@ -99,6 +113,7 @@ componentDidMount(){
   						    pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
     							defaultPageSize= {10}
     							minRows ={10}
+                  className ={"-striped -highlight"}
   						  />
   		  </div>
       </div>

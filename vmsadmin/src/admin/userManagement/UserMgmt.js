@@ -15,7 +15,8 @@ class UserMgmt extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-     		 allPosts          : [],
+     		 allPosts     : [],
+         editUser     : "",
 		}
 	}
 
@@ -51,6 +52,11 @@ componentDidMount(){
 		 $('#deleteModal').css("display","none");
 	}
 
+  handleEdit(row){
+    console.log("row",row);
+    this.setState({'editUser':row.profile})
+  }
+
 	render(){
 	const data = this.state.allPosts;
       console.log(data);
@@ -73,6 +79,14 @@ componentDidMount(){
       }, {
         Header: 'Email ID',
         accessor: 'profile.emailId',
+      },{
+        Header : 'Action',
+        Cell:row =>(
+            <div className="text-center">
+              <i className="actionIcon fa fa-pencil" data-toggle="modal" data-target="#userModal" onClick={()=> this.handleEdit(row.original)}></i>
+              <button className=" actionIcon btn bg-primary">Reset Password</button>
+            </div>
+          )
       }]
 	var adminRolesListDataList = this.state.adminRolesListData;
 	  return(
@@ -83,7 +97,7 @@ componentDidMount(){
 					</div>
 					<div className="col-lg-2 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
 						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#userModal">Add New User</button>
-						<CreateUser userList={this.userList.bind(this)}/>
+						<CreateUser userList={this.userList.bind(this)} editUser={this.state.editUser}/>
 					</div>
 				</div>
         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
@@ -99,6 +113,7 @@ componentDidMount(){
   						    pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
     							defaultPageSize= {10}
     							minRows ={10}
+                  className ={"-striped -highlight"}
   						  />
   		  </div>
       </div>

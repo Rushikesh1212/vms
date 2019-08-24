@@ -5,7 +5,12 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
+    cursor: pointer;
   }
 #createmodalcl{
   margin-top: 5px;
+}
+
+.csvUpload{
+	cursor: pointer;
 }

@@ -35,18 +35,22 @@ class CreateUser extends Component {
       mobNumber         : "",
       
       formerrors :{
-         firstname    : "",
-         lastname     : "",
-         signupEmail  : "",
-         mobNumber    : "",
+          firstName:"",
+          lastName:"",
+          emailId:"",
+          mobileNumber:"",
          role         : "User",
       },
+  
 
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
  handleChange(event){
+  event.preventDefault();
+   
+
     const datatype = event.target.getAttribute('data-text');
     const {name,value} = event.target;
     let formerrors = this.state.formerrors;
@@ -77,29 +81,40 @@ class CreateUser extends Component {
 
     }
     console.log("value",value);
-    
     this.setState({ formerrors,
       [name]:value
-    } );
+    });
+  }
+
+  componentWillReceiveProps(nextState){
+    if(nextState && nextState.editUser && nextState.editUser.length>0){
+      console.log("nextState.editUser",nextState.editUser);
+          this.setState({
+            firstName:nextState.editUser.profile.firstName,
+            lastName:nextState.editUser.profile.lastName,
+            emailId:nextState.editUser.profile.emailId,
+            mobileNumber:nextState.editUser.profile.mobileNumber,
+          })
+    }
+
   }
 
 
     componentDidMount() {
 
-     
     }  
 
     createUser(event){
       event.preventDefault();
       const formValues = {
-          "firstName"       : this.state.firstname,
-          "lastName"        : this.state.lastname,
-          "email"           : this.state.signupEmail,
-          "mobileNumber"    : this.state.mobNumber,
+          "firstName"       : this.state.firstName,
+          "lastName"        : this.state.lastName,
+          "emailId"           : this.state.emailId,
+          "mobileNumber"    : this.state.mobileNumber,
           "role"            : "User",
         }
 
-        if(this.state.firstname!="" && this.state.lastname !="" && this.state.signupEmail && this.state.mobNumber ){
+        if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
            axios.post('/api/users/post', formValues)
                 .then( (res)=>{
                     console.log("response = ",res);
@@ -107,10 +122,10 @@ class CreateUser extends Component {
                       swal("User added successfully", "", "success");
                       $('body').removeClass("modal-open");
                       this.setState({
-                        firstname         : "",
-                        lastname          : "",
-                        signupEmail       : "",
-                        mobNumber         : "",
+                        firstName         : "",
+                        lastName          : "",
+                        emailId       : "",
+                        mobileNumber         : "",
                       })
                       axios
                           .get('/api/users/get/list')
@@ -153,8 +168,6 @@ class CreateUser extends Component {
 
       const {formerrors} = this.state;
 
-    
-
       return (
             <div>
               <div className="modal fade" id="userModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -187,8 +200,8 @@ class CreateUser extends Component {
                                               </div>  
                                                 <input type="text" style={{textTransform:'capitalize'}}
                                                  className="form-control UMname inputText form-control  has-content"
-                                                  id="firstname" ref="firstname" name="firstname" data-text="firstname" placeholder="First Name"  onChange={this.handleChange} 
-                                                  value={this.state.firstname}/>
+                                                  id="firstname" ref="firstname" name="firstName" data-text="firstname" placeholder="First Name"  onChange={this.handleChange} 
+                                                  value={this.state.firstName}/>
                                                    
                                              </div>   
                                             </span>
@@ -207,8 +220,8 @@ class CreateUser extends Component {
                                                 <i className="fa fa-user-circle fa "></i>
                                               </div>  
                                                <input type="text"className="form-control UMname inputText form-control  has-content" 
-                                               id="lastname" ref="lastname" name="lastname" data-text="lastname" onChange={this.handleChange} 
-                                               value={this.state.lastname} placeholder="Last Name" />
+                                               id="lastname" ref="lastname" name="lastName" data-text="lastname" onChange={this.handleChange} 
+                                               value={this.state.lastName} placeholder="Last Name" />
                                                
 
                                             </div>   
@@ -230,7 +243,7 @@ class CreateUser extends Component {
                                             </div> 
 
                                               <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                              ref="signupEmail" name="signupEmail" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.signupEmail}
+                                              ref="signupEmail" name="emailId" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.emailId}
                                                placeholder="Email"/>
                                                 
                                            </div>   
@@ -250,8 +263,8 @@ class CreateUser extends Component {
                                                </div>  
                                                <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
                                                  className= "form-control UMname inputText form-control  has-content"
-                                                  ref="mobNumber" name="mobNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
-                                                   onChange={this.handleChange} value={this.state.mobNumber}/>
+                                                  ref="mobNumber" name="mobileNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
+                                                   onChange={this.handleChange} value={this.state.mobileNumber}/>
                                                     
                                              </div>   
                                             </span>
