@@ -78,23 +78,7 @@ export default  class Menu extends React.Component {
                   
                  <View style={styles.formInputView}>
               <View style={[styles.inputWrapper]}>
-                  <View style={styles.inputTextWrapper}>  
-                    <Dropdown
-                      label               = 'Jaipur'
-                      containerStyle      = {styles.ddContainer}
-                      dropdownOffset      = {{top:0, left: 0}}
-                      itemTextStyle       = {styles.ddItemText}
-                      inputContainerStyle = {styles.ddInputContainer}
-                      labelHeight         = {10}
-                      tintColor           = {'#005270'}
-                      labelFontSize       = {15}
-                      fontSize            = {15}
-                      baseColor           = {'#666'}
-                      textColor           = {'#333'}
-                      labelTextStyle      = {styles.ddLabelText}
-                      style               = {styles.ddStyle}
-                      isRequired          = {true}
-                    />                    
+                  <View style={styles.inputTextWrapper}>                      
                 </View>
               </View>
             </View>
@@ -148,52 +132,7 @@ export default  class Menu extends React.Component {
                   Notifications
                 </Text>
               </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=> this.handleNavigation('PackagePlanList')}>
-              <View style={styles.menu}>
-                <Icon 
-                  size={20} 
-                  name='briefcase' 
-                  type='entypo' 
-                  color='#666' 
-                  containerStyle={styles.iconContainer}
-                />
-                <Text style={styles.menuText}>
-                  Subscription
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity  onPress={()=> this.handleNavigation('CheckinsTab')}>
-              <View style={styles.menu}>
-                <Icon 
-                  size={20} 
-                  name='briefcase' 
-                  type='entypo' 
-                  color='#666' 
-                  containerStyle={styles.iconContainer}
-                />
-                <Text style={styles.menuText}>
-                  My Check-Ins 
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> this.handleNavigation('OrderHistory')}>
-              <View style={styles.menu}>
-                <Icon 
-                  size={20} 
-                  name='briefcase' 
-                  type='entypo' 
-                  color='#666' 
-                  containerStyle={styles.iconContainer}
-                />
-                <Text style={styles.menuText}>
-                  My Orders
-                </Text>
-              </View>
-            </TouchableOpacity>
-
-          
+            </TouchableOpacity>       
 
 
             <TouchableOpacity onPress={this.handleLogout.bind(this)}>

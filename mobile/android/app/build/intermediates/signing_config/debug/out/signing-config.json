@@ -1,1 +1,1 @@
-{"mName":"debug","mStoreFile":"/home/iassureit/Abhimanyu/vms/mobile/android/app/debug.keystore","mStorePassword":"android","mKeyAlias":"androiddebugkey","mKeyPassword":"android","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}
+{"mName":"debug","mStoreFile":"/home/iassureit/.android/debug.keystore","mStorePassword":"android","mKeyAlias":"AndroidDebugKey","mKeyPassword":"android","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}

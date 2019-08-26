@@ -19,11 +19,12 @@ import ChangePassword   from '../components/UserProfile/ChangePassword.js';
 
 import CarouselPage from '../components/CarouselPage/CarouselPage.js';
 
-import WorkspaceList from '../components/WorkspaceList/WorkspaceList.js';
-import WorkspaceInfo from '../components/WorkspaceList/WorkspaceInfo.js';
-import CheckinsTab from '../components/CheckInDetails/CheckinsTab.js';
+import List1 from '../components/List/List1.js';
+import List2 from '../components/List/List2.js';
+import List3 from '../components/List/List3.js';
+import Dashboard from '../components/Dashboard/Dashboard.js';
 
-import  OrderHistory from '../components/OrderHistory/OrderHistory.js';
+import  SearchList from '../components/SearchList/SearchList.js';
 import  Notification from '../components/Notification/Notification.js';
 
 import PackagePlanList from '../components/PackagePlan/PackagePlanList.js';
@@ -78,6 +79,7 @@ const TransitionConfiguration = () =>{
   }
 }
 
+
 const HomeStack = createStackNavigator({
 
   LogIn: {
@@ -94,8 +96,36 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  WorkspaceList: {
-    screen: WorkspaceList,
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  List1: {
+    screen: List1,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  List2: {
+    screen: List2,
+    navigationOptions: {
+      header: null
+    }
+  },
+  
+  List3: {
+    screen: List3,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  SearchList: {
+    screen: SearchList,
     navigationOptions: {
       header: null
     }
@@ -108,7 +138,6 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  
   PackagePlanInfo: {
     screen: PackagePlanInfo,
     navigationOptions: {
@@ -116,41 +145,36 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  
-
   ForgotPassword: {
     screen: ForgotPassword,
     navigationOptions: {
       header: null
     }
   },
+
   ForgotPasswordOTP: {
     screen: ForgotPasswordOTP,
     navigationOptions: {
       header: null
     }
   },
+  
   ResetPassword: {
     screen: ResetPassword,
     navigationOptions: {
       header: null
     }
   },
+  
   UserProfile: {
     screen: UserProfile,
     navigationOptions: {
       header: null
     }
   },
+  
   EditUserProfile: {
     screen: EditUserProfile,
-    navigationOptions: {
-      header: null
-    }
-  },
-
-  CheckinsTab: {
-    screen: CheckinsTab,
     navigationOptions: {
       header: null
     }
@@ -162,8 +186,7 @@ const HomeStack = createStackNavigator({
       header: null
     }
   },
-
-   
+ 
 },{
   transitionConfig: TransitionConfiguration
 });

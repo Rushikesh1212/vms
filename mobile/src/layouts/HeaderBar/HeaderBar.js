@@ -7,7 +7,7 @@ import {
   Alert,
   Image
 } from "react-native";
-import { Header, Icon as Icon2,SearchBar  } from 'react-native-elements';
+import { Header, Icon as Icon2,SearchBar ,Avatar } from 'react-native-elements';
 import ValidationComponent from "react-native-form-validator";
 import Icon from 'react-native-ionicons';
 import styles from "./styles.js";
@@ -62,37 +62,40 @@ export default  class NotificationHeader extends ValidationComponent {
   };
 
   render() {
+    const { headerTitle } = this.props;
     return (
       <Header 
-        backgroundColor={'transparent'}
+        backgroundColor={'#337ab7'}
         placement="left"
         leftContainerStyle={{backgroundColor:'transparent',paddingHorizontal:15}}
-        centerContainerStyle={{backgroundColor:'transparent',paddingLeft:0,paddingRight:0,paddingTop:0}}
+        centerContainerStyle={{backgroundColor:'#337ab7',paddingLeft:0,paddingRight:0,paddingTop:0}}
         rightContainerStyle={{backgroundColor:'transparent',paddingHorizontal:15}}
         leftComponent={
-          <View style={{justifyContent:'center',alignItems:'center',marginTop:10,alignSelf:'center'}}>
+         <View style={{justifyContent:'center',alignItems:'center',marginTop:5,alignSelf:'center'}}>
             <TouchableOpacity onPress={()=>this.props.navigattion.openDrawer()}>
-              <Icon2 size={28} name='menu' type='material-community' color='#333' />
+              <Icon2 size={25} name='dots-three-vertical' type='entypo' color='#111' />
             </TouchableOpacity>
           </View>
         }
         centerComponent={
-          <SearchBar
-            placeholder         = 'Search a Coffic near you'
-            containerStyle      = {styles.searchContainer}
-            inputContainerStyle = {styles.searchInputContainer}
-            inputStyle          = {styles.searchInput}
-            onChangeText        = {this.updateSearch}
-            value               = {this.state.searchText}
-          />
-        }
-        rightComponent={
-          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:10,alignSelf:'center'}}>
-            <TouchableOpacity  style={styles.headerrightside} onPress={()=> this.props.navigate('WorkspaceMap')}>
-              <Icon name="md-globe" size={29}  color="#333"/>
-            </TouchableOpacity>
+         <View style={{justifyContent:'center',alignItems:'center',alignSelf:'center',padding:0, height:30,flexDirection:'row'}}>
+              <Avatar
+                          width={50}
+                          height={50}
+                          rounded
+                          source={require("../../images/congress.png")}
+                          activeOpacity={0.9}
+              />
+            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:18,color:'#eee',paddingLeft:20}}>{headerTitle}</Text>
           </View>
         }
+        // rightComponent={
+        //  <View style={{justifyContent:'center',alignItems:'center',marginTop:10,alignSelf:'center'}}>
+        //     <TouchableOpacity onPress={()=>this.props.navigattion.openDrawer()}>
+        //       <Icon2 size={28} name='dots-three-vertical' type='entypo' color='#333' />
+        //     </TouchableOpacity>
+        //   </View>
+        // }
         containerStyle={{paddingTop:0,paddingLeft:0,paddingRight:0}}
       />
       

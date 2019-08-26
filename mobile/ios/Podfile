@@ -29,7 +29,6 @@ target 'vms' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
-  pod 'react-native-camera-kit', :path => '../node_modules/react-native-camera-kit'
 
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'

@@ -80,8 +80,7 @@ export default class LogIn extends ValidationComponent{
   };
 
   login = ()=>{
-    this.props.navigation.navigate('WorkspaceList')
-
+    this.props.navigation.navigate('CarouselPage')
   }
 
   
@@ -149,8 +148,8 @@ export default class LogIn extends ValidationComponent{
                     style={{width:'100%',height:85}}
                   />
             </View>*/}
-            <View style={{paddingHorizontal:35,marginTop:35}}><Text style={styles.loginTitleTxt}>Hi there,</Text></View>
-            <View style={{paddingHorizontal:35}}><Text style={styles.loginTitleTxt}>Ready to Work? </Text></View>
+            <View style={{paddingHorizontal:35,marginTop:35}}><Text style={styles.loginTitleTxt}>Voters</Text></View>
+            <View style={{paddingHorizontal:35}}><Text style={styles.loginTitleTxt}>Management System</Text></View>
             <View style={{paddingHorizontal:38,marginTop:'10%',marginBottom:10}}><Text style={{fontSize:20,fontFamily:'Montserrat-Regular'}}>Login to continue</Text></View>
             <View style={styles.outerWrapper}>
 
@@ -249,15 +248,6 @@ export default class LogIn extends ValidationComponent{
                   />
                 }
 
-                <View style={[{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:'10%'}]}>
-
-                    <Text style={[styles.linkLightText]}>Don't have an account?  </Text>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate("SignUp")}>
-                    <Text style={[styles.linkText,{}]}>
-                       Sign Up
-                    </Text>
-                  </TouchableOpacity>
-                </View>
                 <Modal isVisible={this.state.incorrectPwModal}  
                        onBackdropPress={() => this.setState({ incorrectPwModal: false })}
                        coverScreen={true}

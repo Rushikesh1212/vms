@@ -126,7 +126,7 @@ export default StyleSheet.create({
     height:30,
     borderTopWidth:0,
     borderBottomWidth:0,
-    backgroundColor:'transparent'
+    backgroundColor:'#f0f'
   },
   searchInputContainer:{
     backgroundColor:'#fff',
