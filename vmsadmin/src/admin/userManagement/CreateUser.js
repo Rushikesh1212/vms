@@ -1,4 +1,3 @@
-
 import React, { Component }      from 'react';
 import InputMask                 from 'react-input-mask';
 import $ from "jquery";
@@ -27,7 +26,6 @@ class CreateUser extends Component {
     super(props);
     this.state = {
       show              : true,
-      office            : null,
       allPosts          : null,
       firstname         : "",
       lastname          : "",
@@ -41,6 +39,7 @@ class CreateUser extends Component {
           mobileNumber:"",
          role         : "User",
       },
+      userId:"",
   
 
     };
@@ -55,31 +54,31 @@ class CreateUser extends Component {
     const {name,value} = event.target;
     let formerrors = this.state.formerrors;
     
-    switch (datatype){
-      case 'firstname' : 
-        formerrors.firstname = nameRegex.test(value)  && value.length>0 ? '' : "Please Enter Valid Name";
-        break;
+    // switch (datatype){
+    //   case 'firstname' : 
+    //     formerrors.firstname = nameRegex.test(value)  && value.length>0 ? '' : "Please Enter Valid Name";
+    //     break;
 
-      case 'lastname' : 
-       formerrors.lastname = nameRegex.test(value)  && value.length>0 ? '' : "Please Enter Valid Name";
-       break;
+    //   case 'lastname' : 
+    //    formerrors.lastname = nameRegex.test(value)  && value.length>0 ? '' : "Please Enter Valid Name";
+    //    break;
 
-      case 'mobNumber' : 
-       formerrors.mobNumber = mobileRegex.test(value) && value.length>0 ? '' : "Please enter a valid Contact Number";
-       break;
+    //   case 'mobNumber' : 
+    //    formerrors.mobNumber = mobileRegex.test(value) && value.length>0 ? '' : "Please enter a valid Contact Number";
+    //    break;
 
-      case 'signupEmail' : 
-       formerrors.signupEmail = emailRegex.test(value)  && value.length>0? "":"Please enter a valid Email ID";
-       break;
+    //   case 'signupEmail' : 
+    //    formerrors.signupEmail = emailRegex.test(value)  && value.length>0? "":"Please enter a valid Email ID";
+    //    break;
 
-      case 'role' : 
-        formerrors.role =  value!= "--select--" ? "":"Please select role";
-        break;
+    //   case 'role' : 
+    //     formerrors.role =  value!= "--select--" ? "":"Please select role";
+    //     break;
       
-      default :
-      break;
+    //   default :
+    //   break;
 
-    }
+    // }
     console.log("value",value);
     this.setState({ formerrors,
       [name]:value
@@ -87,32 +86,45 @@ class CreateUser extends Component {
   }
 
   componentWillReceiveProps(nextState){
-    if(nextState && nextState.editUser && nextState.editUser.length>0){
+      console.log("abc",nextState.editUser)
+    if(nextState && nextState.editUser){
       console.log("nextState.editUser",nextState.editUser);
           this.setState({
             firstName:nextState.editUser.profile.firstName,
             lastName:nextState.editUser.profile.lastName,
             emailId:nextState.editUser.profile.emailId,
             mobileNumber:nextState.editUser.profile.mobileNumber,
+            userId:nextState.editUser._id,
           })
     }
 
   }
+  
+  removeBackdrop(){
+      $(".modal-backdrop").remove();
+      this.setState({
+        firstName         : "",
+        lastName          : "",
+        emailId           : "",
+        mobileNumber      : "",
+      })
+  }
 
-
-    componentDidMount() {
-
-    }  
+  componentDidMount() {
+  
+  }
 
     createUser(event){
       event.preventDefault();
-      const formValues = {
-          "firstName"       : this.state.firstName,
-          "lastName"        : this.state.lastName,
-          "emailId"           : this.state.emailId,
-          "mobileNumber"    : this.state.mobileNumber,
-          "role"            : "User",
-        }
+           const formValues = {
+              "firstName"       : this.state.firstName,
+              "lastName"        : this.state.lastName,
+              "emailId"         : this.state.emailId,
+              "mobileNumber"    : this.state.mobileNumber,
+              "userId"          : this.state.userId,
+              "role"            : "User",
+             }
+             console.log("formValues",formValues);
 
         if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
            axios.post('/api/users/post', formValues)
@@ -124,8 +136,8 @@ class CreateUser extends Component {
                       this.setState({
                         firstName         : "",
                         lastName          : "",
-                        emailId       : "",
-                        mobileNumber         : "",
+                        emailId           : "",
+                        mobileNumber      : "",
                       })
                       axios
                           .get('/api/users/get/list')
@@ -160,8 +172,6 @@ class CreateUser extends Component {
           swal("Please enter mandatory fields", "", "warning");
           console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
         }
-
-
     }
 
     render() {
@@ -174,8 +184,8 @@ class CreateUser extends Component {
                 <div className="modal-dialog modal-lg " role="document">
                   <div className="modal-content modalContent ummodallftmg ummodalmfdrt col-lg-12 ">
                     <div className="modal-header userHeader">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        
+                      <button type="button" className="close" data-dismiss="modal" onClick={this.removeBackdrop.bind(this)}>X
                       </button>
                       <h4 className="modal-title" id="exampleModalLabel">Add New User</h4>
                     </div>
@@ -276,7 +286,7 @@ class CreateUser extends Component {
                                         
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
-                                        <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createUser.bind(this)} id="CreateUserModal" >Register</button>
+                                        <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createUser.bind(this)} id="CreateUserModal" >Create</button>
                                        </div>    
                                   </form>
                                           </div>  

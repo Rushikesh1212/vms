@@ -96,6 +96,7 @@ componentDidMount(){
                   <div id="dashbordid" className="">
                     <Switch>
                       <Route path="/userManagement" component={UserMgmt} exact />
+                      <Route path="/userManagement/:id" component={UserMgmt} exact />
                       <Route path="/voterManagement" component={VoterMgmt} exact />
                       <Route path="/dashboard" component={Dashboard} exact />
                       <Route path="/" component={Dashboard} exact />
