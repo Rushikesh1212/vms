@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CreateUser 			    from './CreateUser.js';
 import axios                from 'axios';
 import swal                 from 'sweetalert';
-import InputMask                 from 'react-input-mask';
+import InputMask            from 'react-input-mask';
 import $ 					          from 'jquery';
 import ReactTable           from 'react-table'
 import 'react-table/react-table.css'
@@ -50,7 +50,7 @@ class UserMgmt extends Component {
 
 	}
 
-componentDidMount(){	
+  componentDidMount(){	
     $(".show-modal").click(function(){
         $("#myModal").modal({
             backdrop: 'static',
@@ -76,10 +76,8 @@ componentDidMount(){
          });  
      	} 
 
-       handleChange(event){
-  event.preventDefault();
-   
-
+  handleChange(event){
+    event.preventDefault();
     const datatype = event.target.getAttribute('data-text');
     const {name,value} = event.target;
     let formerrors = this.state.formerrors;

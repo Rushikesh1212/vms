@@ -13,6 +13,7 @@ import Dashboard          from '../dashboard/Dashboard.js'
 import Leftsidebar        from '../common/leftSidebar/Leftsidebar.js'
 import UserMgmt           from '../userManagement/UserMgmt.js';
 import VoterMgmt          from '../voterManagement/VoterMgmt.js';
+import csvUpload          from '../csvUpload/csvUpload.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -98,6 +99,7 @@ componentDidMount(){
                       <Route path="/userManagement" component={UserMgmt} exact />
                       <Route path="/userManagement/:id" component={UserMgmt} exact />
                       <Route path="/voterManagement" component={VoterMgmt} exact />
+                      <Route path="/csvUpload" component={csvUpload} exact />
                       <Route path="/dashboard" component={Dashboard} exact />
                       <Route path="/" component={Dashboard} exact />
                     </Switch>        
