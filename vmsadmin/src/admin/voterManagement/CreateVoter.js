@@ -1,9 +1,9 @@
 
-import React, { Component }      from 'react';
-import InputMask                 from 'react-input-mask';
-import $ from "jquery";
-import axios from 'axios';
-import swal                      from 'sweetalert';
+import React, { Component }       from 'react';
+import InputMask                  from 'react-input-mask';
+import $                          from "jquery";
+import axios                      from 'axios';
+import swal                       from 'sweetalert';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/js/modal.js';
 import './VoterManagement.css';
@@ -127,15 +127,13 @@ class CreateVoter extends Component {
                             }
                           )
                           .catch((error)=>{
-
                             console.log("error = ",error);
                             // alert("Something went wrong! Please check Get URL.");
-                             }); 
+                          }); 
                      }
                      else if(res.data.message === "USER-ALREADY-EXIST"){
                         swal("User already exists", "", "warning");
                      } 
-       
                 })
               .catch((error)=>{
                 console.log("error = ",error);
@@ -145,16 +143,10 @@ class CreateVoter extends Component {
           swal("Please enter mandatory fields", "", "warning");
           console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
         }
-
-
     }
 
     render() {
-
       const {formerrors} = this.state;
-
-    
-
       return (
             <div>
               <div className="modal fade" id="userModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -170,14 +162,12 @@ class CreateVoter extends Component {
                     <div className="hideModal">
                       <div className="">
                         <div className="">
-                            <div className="">                                        
-                              <section className="">                                          
-                                      <div className="box-body">
-                                          <div className="">
-
-                                            <form id="signUpUser">
-                                      <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr ">
-
+                          <div className="">                                        
+                            <section className="">                                          
+                              <div className="box-body">
+                                <div className="">
+                                  <form id="signUpUser">
+                                    <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr ">
                                        <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
                                             <label className="formLable col-lg-12 col-md-12">First Name <label className="requiredsign">*</label></label>
                                             <span className="blocking-span">
@@ -189,16 +179,12 @@ class CreateVoter extends Component {
                                                  className="form-control UMname inputText form-control  has-content"
                                                   id="firstname" ref="firstname" name="firstname" data-text="firstname" placeholder="First Name"  onChange={this.handleChange} 
                                                   value={this.state.firstname}/>
-                                                   
                                              </div>   
                                             </span>
                                             {this.state.formerrors.firstname &&(
-                                                    <span className="text-danger">{this.state.formerrors.firstname}</span> 
-                                                  )}
+                                              <span className="text-danger">{this.state.formerrors.firstname}</span> 
+                                            )}
                                         </div>
-                                          
-
-
                                         <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
                                             <label className="formLable col-lg-12 col-md-12">Last Name <label className="requiredsign">*</label></label>
                                             <span className="blocking-span ">
@@ -209,16 +195,12 @@ class CreateVoter extends Component {
                                                <input type="text"className="form-control UMname inputText form-control  has-content" 
                                                id="lastname" ref="lastname" name="lastname" data-text="lastname" onChange={this.handleChange} 
                                                value={this.state.lastname} placeholder="Last Name" />
-                                               
-
                                             </div>   
                                             </span>
                                             {this.state.formerrors.lastname &&(
-                                                    <span className="text-danger">{this.state.formerrors.lastname}</span> 
-                                                  )}
-
+                                              <span className="text-danger">{this.state.formerrors.lastname}</span> 
+                                            )}
                                         </div>
-                                        
                                       </div>
                                       <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr">
                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
@@ -228,19 +210,15 @@ class CreateVoter extends Component {
                                              <div className="input-group-addon remove_brdr inputIcon">
                                               <i className="fa fa-envelope-square"></i>
                                             </div> 
-
                                               <input type="text" className="formFloatingLabels form-control  newinputbox" 
                                               ref="signupEmail" name="signupEmail" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.signupEmail}
-                                               placeholder="Email"/>
-                                                
+                                              placeholder="Email"/>
                                            </div>   
                                             </span>
-                                             {this.state.formerrors.signupEmail &&(
-                                                    <span className="text-danger">{this.state.formerrors.signupEmail}</span> 
-                                                  )}
-
+                                            {this.state.formerrors.signupEmail &&(
+                                              <span className="text-danger">{this.state.formerrors.signupEmail}</span> 
+                                            )}
                                         </div>
-                                       
                                         <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
                                             <label className="formLable col-lg-12 col-md-12">Mobile Number <label className="requiredsign">*</label></label>
                                             <span className="blocking-span ">
@@ -249,26 +227,22 @@ class CreateVoter extends Component {
                                                 <i className="fa fa-mobile"></i>
                                                </div>  
                                                <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
-                                                 className= "form-control UMname inputText form-control  has-content"
-                                                  ref="mobNumber" name="mobNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
-                                                   onChange={this.handleChange} value={this.state.mobNumber}/>
-                                                    
+                                                className= "form-control UMname inputText form-control  has-content"
+                                                ref="mobNumber" name="mobNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
+                                                onChange={this.handleChange} value={this.state.mobNumber}/>
                                              </div>   
                                             </span>
                                             {this.state.formerrors.mobNumber &&(
-                                                    <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
-                                                  )}
-
+                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
+                                            )}
                                         </div>
-                                        
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                                         <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createVoter.bind(this)} id="CreateUserModal" >Register</button>
-                                       </div>    
+                                      </div>    
                                   </form>
-                                          </div>  
-                                      </div>
-                                  
+                                </div>  
+                              </div>
                             </section>
                           </div>
                         </div>

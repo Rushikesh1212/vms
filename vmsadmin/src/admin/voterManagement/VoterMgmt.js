@@ -19,7 +19,7 @@ class VoterMgmt extends Component {
         "mobileNumber"    : "",
         "whatsAppNumber"  : "",
         "dead"            : false,
-        "visited"         : false,
+        "visited"         : true,
         "voted"           : false,
         "changeAddress"   : "",
         "areaName"        : "",
@@ -27,9 +27,10 @@ class VoterMgmt extends Component {
         "dob"             : "",
         "emailId"         : "",
         "aadharCard"      : "",
-        "color"           : 0,
+        "color"           : 3,
         "cast"            : "",
         "favourite"       : false,
+        voter_id          : "",
         allPosts          : [],
         editUser          : "",
         show              : true,
@@ -38,7 +39,8 @@ class VoterMgmt extends Component {
         signupEmail       : "",
         mobNumber         : "",
         action            : "Submit",
-        userId            : "",
+        toggleEventHandle   : "",
+        toggleStatus      : "off",
         formerrors        :{
                             firstName:"",
                             lastName:"",
@@ -48,11 +50,12 @@ class VoterMgmt extends Component {
                            },
 		}
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeBtn = this.handleChangeBtn.bind(this);
 	}
 
 componentDidMount(){	
     axios
-      .get('/api/schema/get/')
+      .get('/api/voters/get/')
       .then(
         (res)=>{
           console.log('res', res.data);
@@ -69,6 +72,17 @@ componentDidMount(){
         // alert("Something went wrong! Please check Get URL.");
          });  
      	}
+  handleChangeBtn(event){
+    event.preventDefault();
+
+    var color = event.target.getAttribute("value");
+    console.log("color = ",color);
+
+    this.setState({
+      color : color,
+    }); 
+
+  }
 
   handleChange(event){
     event.preventDefault();
@@ -107,6 +121,51 @@ componentDidMount(){
     });
   }
 
+  toggleEventHandle(event){
+    var name = $(event.target).attr('name');
+      console.log("name = ",name);
+      if(name=="favourite"){
+        this.setState({
+          favourite : true,
+        })
+      }else if(name=="non-favourite"){
+        this.setState({
+          favourite : false,
+        })
+      }else if(name=="alive"){
+        this.setState({
+          dead : false,
+        })
+      }else if(name=="dead"){
+        this.setState({
+          dead : true,
+        })
+      }else if(name=="visited"){
+        this.setState({
+          visited : true,
+        })
+      }else if(name=="non-visited"){
+        this.setState({
+          visited : false,
+        })
+      }else if(name=="voted"){
+        this.setState({
+          voted : true,
+        })
+      }else if(name=="non-voted"){
+        this.setState({
+          voted : false,
+        })
+      }
+    
+      
+        // if(status=="off"){
+        //   swal("Competition has been Shown","","success");
+        // }else{
+        //   swal("Competition has been hidden","","success");
+        // }
+  }
+
 	voterList(voterList){
       $('body').removeClass("modal-open");
 
@@ -123,25 +182,44 @@ componentDidMount(){
   updateData(event){
     event.preventDefault();
     const formValues = {
-        "firstName"       : this.state.firstName,
-        "lastName"        : this.state.lastName,
-        "emailId"         : this.state.emailId,
+        "voter_id"        : this.state.voter_id,
         "mobileNumber"    : this.state.mobileNumber,
-        "userId"          : this.state.userId,
+        "whatsAppNumber"  : this.state.whatsAppNumber,
+        "dead"            : this.state.dead,
+        "visited"         : this.state.visited,
+        "voted"           : this.state.voted,
+        "changeAddress"   : this.state.changeAddress,
+        "areaName"        : this.state.areaName,
+        "otherInfo"       : this.state.otherInfo,
+        "dob"             : this.state.dob,
+        "emailId"         : this.state.emailId,
+        "aadharCard"      : this.state.aadharCard,
+        "color"           : this.state.color,
+        "cast"            : this.state.cast,
+        "favourite"       : this.state.favourite,
        }
-       console.log("formValues",formValues);
-          if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
-         axios.patch('/api/users/patch/one/updateUser/',formValues)
-              .then( (res)=>{
-                  console.log("response = ",res);
+       console.log("dk == ",formValues);
+          // if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
+         axios.patch('/api/voters/patch/',formValues)
+              .then((res)=>{
+                  console.log("response123 = ",res.data);
                     swal("User updated successfully", "", "success");
                     $('body').removeClass("modal-open");
                     this.setState({
-                      firstName         : "",
-                      lastName          : "",
-                      emailId           : "",
-                      mobileNumber      : "",
-                      action            : "Submit",
+                      "mobileNumber"    : "",
+                      "whatsAppNumber"  : "",
+                      "dead"            : false,
+                      "visited"         : true,
+                      "voted"           : false,
+                      "changeAddress"   : "",
+                      "areaName"        : "",
+                      "otherInfo"       : "",
+                      "dob"             : "",
+                      "emailId"         : "",
+                      "aadharCard"      : "",
+                      "color"           : 1,
+                      "cast"            : "",
+                      "favourite"       : false,
                     })
                     axios
                         .get('/api/users/get/list')
@@ -162,22 +240,22 @@ componentDidMount(){
               console.log("error = ",error);
               this.setState({show: false})
             });
-      }else{
-        swal("Please enter mandatory fields", "", "warning");
-        console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-      }
+      // }else{
+      //   swal("Please enter mandatory fields", "", "warning");
+      //   console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+      // }
   }
 
   handleEdit(row){
     console.log("row",row._id);
     // var userData=row.profile;
-    // this.setState({
-    //   firstName:userData.firstName,
-    //   lastName:userData.lastName,
+    this.setState({
+      // firstName:userData.firstName,
+      // lastName:userData.lastName,
     //   mobileNumber:userData.mobileNumber,
     //   emailId:userData.emailId,
-    //   userId:row._id,
-    // })
+      voter_id:row._id,
+    })
   }
 	render(){
 	  const data = this.state.allPosts;
@@ -235,10 +313,10 @@ componentDidMount(){
           <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All voters appeare in below table)</i></h4>
         </div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="progress md-progress primary-color-dark">
+{/*        <div class="progress md-progress primary-color-dark">
             <div class="indeterminate"></div>
         </div>
-        <canvas id="barChart"></canvas>
+        <canvas id="barChart"></canvas>*/}
   				<ReactTable
 				    data={data}
 				    columns={columns}
@@ -428,11 +506,11 @@ componentDidMount(){
                                     <label className="formLable col-lg-12 col-md-12">Color<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        <button type="button" className="btn btn-success pad15">2</button>
-                                        <button type="button" className="btn btn-primary pad15">1</button>
-                                        <button type="button" className="btn btn-info pad15">3</button>
-                                        <button type="button" className="btn btn-warning pad15">4</button>
-                                        <button type="button" className="btn btn-danger pad15">5</button>
+                                          <input type="button" name="color" value="1" className={this.state.color == "1" ? "btn btn-success pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value="2" className={this.state.color == "2" ? "btn btn-primary pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value="3" className={this.state.color == "3" ? "btn btn-info pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value="4" className={this.state.color == "4" ? "btn btn-warning pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value="5" className={this.state.color == "5" ? "btn btn-danger pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
                                         </div>
                                       </span>
                                       {this.state.formerrors.color &&(
@@ -445,12 +523,21 @@ componentDidMount(){
                                     <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        <label class="switch">
-                                          <input type="checkbox"
-                                          ref="favourite" name="favourite" id="favourite" data-text="favourite"
-                                          onChange={this.handleChange} value={this.state.favourite}/>
-                                          <span class="slider round"></span>
-                                        </label>
+                                        {this.state.favourite==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-favourite" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="favourite" onClick={this.toggleEventHandle.bind(this)} checked={this.state.favourite===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
                                         </div>
                                       </span>
                                       {this.state.formerrors.favourite &&(
@@ -461,28 +548,46 @@ componentDidMount(){
                                     <label className="formLable col-lg-12 col-md-12">Alive/Dead<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        <label class="switch">
-                                          <input type="checkbox"
-                                          ref="dead" name="dead" id="dead" data-text="dead"
-                                          onChange={this.handleChange} value={this.state.dead}/>
-                                          <span class="slider round"></span>
-                                        </label>
+                                        {this.state.dead==false ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="dead" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="alive" onClick={this.toggleEventHandle.bind(this)} checked={this.state.dead===false} />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                        }
                                         </div>
                                       </span>
-                                      {this.state.formerrors.color &&(
-                                        <span className="text-danger">{this.state.formerrors.color}</span> 
+                                      {this.state.formerrors.dead &&(
+                                        <span className="text-danger">{this.state.formerrors.dead}</span> 
                                       )}
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">visited<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        <label class="switch">
-                                          <input type="checkbox"
-                                          ref="visited" name="visited" id="visited" data-text="visited"
-                                          onChange={this.handleChange} value={this.state.visited}/>
-                                          <span class="slider round"></span>
-                                        </label>
+                                        {this.state.visited==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-visited" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="visited" onClick={this.toggleEventHandle.bind(this)} checked={this.state.visited===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
                                         </div>
                                       </span>
                                       {this.state.formerrors.visited &&(
@@ -493,16 +598,25 @@ componentDidMount(){
                                     <label className="formLable col-lg-12 col-md-12">Voted<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        <label class="switch">
-                                          <input type="checkbox"
-                                          ref="voted" name="voted" id="voted" data-text="voted"
-                                          onChange={this.handleChange} value={this.state.voted}/>
-                                          <span class="slider round"></span>
-                                        </label>
+                                        {this.state.voted==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-voted" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="voted" onClick={this.toggleEventHandle.bind(this)} checked={this.state.voted===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
                                         </div>
                                       </span>
-                                      {this.state.formerrors.color &&(
-                                        <span className="text-danger">{this.state.formerrors.color}</span> 
+                                      {this.state.formerrors.voted &&(
+                                        <span className="text-danger">{this.state.formerrors.voted}</span> 
                                       )}
                                   </div>
                                 </div>
