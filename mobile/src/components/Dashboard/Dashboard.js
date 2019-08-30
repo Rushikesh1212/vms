@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert} from "react-native";
 import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
-import { NavigationActions,createMaterialTopTabNavigator,createAppContainer } from "react-navigation";
+import { NavigationActions,createMaterialTopTabNavigator,createAppContainer,createStackNavigator } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
 // import Animated from 'react-native-reanimated';
 import PropTypes from "prop-types";
@@ -15,8 +15,11 @@ import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
 import List1 from "../List/List1.js";
 import List2 from "../List/List2.js";
 import List3 from "../List/List3.js";
+import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
 
 import SearchList from "../SearchList/SearchList.js";
+import LogIn from "../LogIn/LogIn.js";
+import UserProfile from "../UserProfile/UserProfile.js";
 
 
 const window = Dimensions.get('window');
@@ -55,10 +58,20 @@ const Dashboard = createMaterialTopTabNavigator(
     },
   }
 )
+// tabNavigator.navigationOptions=({navigation})=>{
+//   return{
+//     headerRight: <HeaderBar navigate={navigate}
+//               navigattion = {this.props.navigation}
+//               headerTitle="Team Congress"
+//               toggle={()=>this.toggle.bind(this)} 
+//               openControlPanel={()=>this.openControlPanel.bind(this)}
+//             />
+//   }
+// }
 
 const Dashboard1 = createStackNavigator({
-  List1: {
-    screen: List1,
+  Dashboard: {
+    screen: Dashboard,
     navigationOptions: {
       header: null
     }
@@ -66,6 +79,20 @@ const Dashboard1 = createStackNavigator({
 
   SearchList: {
     screen: SearchList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  LogIn: {
+    screen: LogIn,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  UserProfile: {
+    screen: UserProfile,
     navigationOptions: {
       header: null
     }
@@ -83,7 +110,7 @@ const Dashboard1 = createStackNavigator({
 //     }
 // })
 
-export default createAppContainer(Dashboard);
+export default createAppContainer(Dashboard1);
 // export default  class Checkins extends Component {
 
 //   constructor(props){

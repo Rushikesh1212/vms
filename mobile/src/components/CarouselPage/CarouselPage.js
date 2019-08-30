@@ -12,6 +12,8 @@ import {
   SafeAreaView,
   Alert
 } from 'react-native';
+import { createSwitchNavigator, createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
+
 import InputScrollView from 'react-native-input-scroll-view';
 import SplashScreen from 'react-native-splash-screen';
 import Carousel from 'react-native-banner-carousel';
@@ -26,10 +28,9 @@ import styles from './styles.js';
 // import HeadText from '../../layouts/HeadText/HeadText.js';
 import {colors,sizes} from '../../config/styles.js';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
-import { LoginManager, AccessToken, GraphRequest, GraphRequestManager} from "react-native-fbsdk";
 import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
-// import Dashboard from "../Dashboard/Dashboard.js";
-const DashboardContainer = createAppContainer(Dashboard1);
+import Dashboard1 from "../Dashboard/Dashboard.js";
+// const DashboardContainer = createAppContainer(Dashboard1);
 
 const window = Dimensions.get('window');
 
@@ -61,7 +62,7 @@ render(){
               openControlPanel={()=>this.openControlPanel.bind(this)}
             />
 
-                <DashboardContainer />
+                <Dashboard1 />
           </ScrollView>
 
     );

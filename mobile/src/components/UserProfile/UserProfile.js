@@ -25,29 +25,6 @@ export default  class UserProfile extends Component {
     };
   }
   componentWillMount(){
-    var token;
-    var user_id;
-    AsyncStorage.multiGet(['token','user_id'])
-      .then((data)=>{
-        // console.log('user',data[1][1])
-        token = data[0][1]
-        user_id = data[1][1]
-        axios.get('api/users/get/one/'+user_id)
-          .then(response=>{
-            // console.log('user',response)
-            this.setState({user:response.data})
-          })
-          .catch(error=>{
-            console.log('error',error)
-          })
-      })
-    // axios.get('api/users/one/'+user_id)
-    //   .then(response=>{
-    //     console.log('user',response)
-    //   })
-    //   .catch(error=>{
-    //     console.log('error',error)
-    //   })
   }
   componentDidMount(){
     
@@ -101,206 +78,43 @@ export default  class UserProfile extends Component {
             side="left"
             >
             
-            <HeaderDy goBack={goBack} headerTitle="User Profile" />
+{/*            <HeaderDy goBack={goBack} headerTitle="User Profile" />*/}
             <ScrollView  keyboardShouldPersistTaps="handled" >
-               <TouchableOpacity  onPress         = {() => this.props.navigation.navigate("EditUserProfile",{user_id:this.state.user._id})}>
-                <View style={{alignItems:'flex-end',paddingHorizontal:20,backgroundColor:"#fff"}}>
-                    <Icon name="account-edit" type="material-community" size={30}  color="#333" />
-                </View>
+               <TouchableOpacity >
               </TouchableOpacity>
-              {
-                this.state.user != '' ?
                 <React.Fragment>
-                  <View style={{ flex: 1,backgroundColor:'#fff'}}>
-                      <View style={{flexDirection:'row',alignSelf:'center',marginTop:"5%"}}>             
+                  <View style={{ flexDirection:'row'/*,backgroundColor:"#d3d"*/,paddingTop:10}}>
+                      <View style={{flex:1,}}>
+                        <View style={{flexDirection:'row',borderBottomWidth:1,borderColor:"#111",paddingTop:8,paddingLeft:10}}>
+                          <Text style={{flex:0.6}}>Const No: </Text>
+                          <Text>232</Text>
+                        </View>
+                        <View style={{flexDirection:'row',borderBottomWidth:1,paddingLeft:10,borderColor:"#111",paddingVertical:8}}>
+                          <Text style={{flex:0.6}}>Booth</Text>
+                          <Text>1</Text>
+                        </View>
+                        <View style={{flexDirection:'row',borderBottomWidth:1,paddingLeft:10,borderColor:"#111",paddingVertical:8}}>
+                          <Text style={{flex:0.6}}>Sr. No.</Text>
+                          <Text>1</Text>
+                        </View>
+                      </View>
+                      <View style={{alignSelf:'flex-end',borderWidth:1,borderColor:"#111",padding:8}}>             
                         <Avatar
-                          width={120}
-                          height={120}
+                          width={80}
+                          height={80}
                           rounded
-                          source={require("../../images/pwalker.jpg")}
+                          source={require("../../images/userIcon.png")}
                           activeOpacity={0.9}
                         />                   
                     </View>           
                   </View>
-                  <View style={{alignSelf:'center',paddingVertical:10}}>
-                    <Text style={styles.userTitleTxt}>{this.state.user.profile.fullName}</Text>
+                  <View style={{paddingTop:10}}>
+                      <View style={{flexDirection:'row',borderBottomWidth:1,borderColor:"#111",paddingTop:8,paddingLeft:10}}>
+                        <Text style={{flex:0.4}}>Name </Text>
+                        <Text style={{flex:0.6}}> Aralvad  Gangabai Maroti </Text>
+                      </View>
                   </View>
-
-
-                  <View style={{marginTop:"10%"}}>
-                    <View style={{flexDirection:'row',marginBottom:10}}>
-                      <View style={{flex:.2,marginTop:1}}>
-                        <Icon name="user-circle-o" type="font-awesome" size={15}  color="#666"/>
-                      </View>
-                      <View style={{flex:.8,flexDirection:'row'}}>
-                        <Text style={{fontSize:15,color:'#666',flex:0.3, fontFamily:'Montserrat-Regular'}}>Name </Text>
-                        <Text style={styles.detailText}>{this.state.user.profile.fullName}</Text>
-                      </View>
-                    </View>
-
-                    <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                      <View style={{flex:.2,marginTop:4}}>
-                        <Icon name="mobile-phone" type="font-awesome" size={20}  color="#666"/>
-                      </View>
-                      <View style={{flex:.8,flexDirection:'row',marginTop:5}}>
-                       <Text style={{fontSize:15,color:'#666',flex:0.3,fontFamily:'Montserrat-Regular'}}>Mobile </Text>
-                        <Text style={styles.detailText}>{this.state.user.mobileNumber}</Text>
-                      </View>
-                    </View>
-                    <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                      <View style={{flex:.2,marginTop:5}}>
-                        <Icon name="email" type="MaterialIcons" size={15}  color="#666"/>
-                      </View>
-                      <View style={{flex:.8,flexDirection:'row',marginTop:5}}>
-                       <Text style={{fontSize:15,color:'#666',flex:0.3,fontFamily:'Montserrat-Regular'}}>Email </Text>
-                        <Text style={styles.detailText}>{this.state.user.profile.emailId}</Text>
-                      </View>
-                    </View>
-                  </View>
-
-                  <View style={{flex:1,paddingHorizontal:20,marginTop:8,}}>
-                  
-                    <View style={{borderWidth:1,paddingHorizontal:15,borderColor:'#aaa',borderRadius:5,paddingVertical:10,shadowOpacity: 0.75,shadowRadius: 5,shadowColor: 'red',shadowOffset: { height: 0, width: 0 },}}>
-                      <View style={{flex:1,paddingVertical:5}}>
-                       <Text style={{fontSize:15,color:'#333',flex:0.5,fontFamily:'Montserrat-SemiBold'}}>Subscription Details</Text>
-                      </View>
-
-                       <View style={{flex:1,flexDirection:'row',marginBottom:5}}>
-                        <View style={{flex:.5,marginTop:5}}>
-                         <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Type</Text>
-                          <Text style={styles.detailText}>Weekly</Text>
-                        </View>
-                     
-                        
-                        <View style={{flex:.5,marginTop:5}}>
-                         <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Available Check-ins</Text>
-                          <Text style={styles.detailText}>04</Text>
-                        </View>
-                      </View>
-                  
-                      <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                        <View style={{flex:.5,marginTop:5}}>
-                         <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Start-Date</Text>
-                          <Text style={styles.detailText}>07 Aug 2019</Text>
-                        </View>
-                     
-                        
-                        <View style={{flex:.5,marginTop:5}}>
-                         <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>End-Date</Text>
-                          <Text style={styles.detailText}>14 Aug 2019</Text>
-                        </View>
-                      </View>
-                  
-                    </View>
-                  </View>
-
-                  <View style={[styles.formInputView,styles.marginBottom30],{flexDirection:'row',paddingHorizontal:20,marginTop:15,alignSelf:'center',justifyContent:'center',alignItem:'center'}}>
-              
-                        <Button
-                            onPress         = {() => this.props.navigation.navigate("ChangePassword",{user_id:this.state.user._id})}
-                            titleStyle      = {styles.buttonText}
-                            title           = "Change Password"
-                            buttonStyle     = {styles.button}
-                            containerStyle  = {styles.buttonContainer}
-                        />
-                    </View>
                 </React.Fragment>
-                :
-                null
-              }
-{/*              <View style={{ flex: 1,backgroundColor:'#fff'}}>
-                  <View style={{flexDirection:'row',alignSelf:'center',marginTop:"5%"}}>             
-                    <Avatar
-                      width={120}
-                      height={120}
-                      rounded
-                      source={require("../../images/pwalker.jpg")}
-                      activeOpacity={0.9}
-                    />                   
-                </View>           
-              </View>
-              <View style={{alignSelf:'center',paddingVertical:10}}>
-                <Text style={styles.userTitleTxt}>Paul Walker</Text>
-              </View>
-
-
-              <View style={{marginTop:"10%",paddingLeft:5}}>
-                <View style={{flexDirection:'row',marginBottom:10}}>
-                  <View style={{flex:.2,marginTop:1}}>
-                    <Icon name="user-circle-o" type="font-awesome" size={15}  color="#666"/>
-                  </View>
-                  <View style={{flex:.8,flexDirection:'row'}}>
-                    <Text style={{fontSize:15,color:'#666',flex:0.3, fontFamily:'Montserrat-Regular'}}>Name </Text>
-                    <Text style={styles.detailText}>Paul Walker</Text>
-                  </View>
-                </View>
-
-                <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                  <View style={{flex:.2,marginTop:4}}>
-                    <Icon name="mobile-phone" type="font-awesome" size={20}  color="#666"/>
-                  </View>
-                  <View style={{flex:.8,flexDirection:'row',marginTop:5}}>
-                   <Text style={{fontSize:15,color:'#666',flex:0.3,fontFamily:'Montserrat-Regular'}}>Mobile </Text>
-                    <Text style={styles.detailText}>8446161390</Text>
-                  </View>
-                </View>
-                <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                  <View style={{flex:.2,marginTop:5}}>
-                    <Icon name="email" type="MaterialIcons" size={15}  color="#666"/>
-                  </View>
-                  <View style={{flex:.8,flexDirection:'row',marginTop:5}}>
-                   <Text style={{fontSize:15,color:'#666',flex:0.3,fontFamily:'Montserrat-Regular'}}>Email </Text>
-                    <Text style={styles.detailText}>paul.walker@coffic.com</Text>
-                  </View>
-                </View>
-              </View>
-
-              <View style={{flex:1,paddingHorizontal:20,marginTop:8,}}>
-              
-                <View style={{borderWidth:1,paddingHorizontal:15,borderColor:'#aaa',borderRadius:5,paddingVertical:10,shadowOpacity: 0.75,shadowRadius: 5,shadowColor: 'red',shadowOffset: { height: 0, width: 0 },}}>
-                  <View style={{flex:1,paddingVertical:5}}>
-                   <Text style={{fontSize:15,color:'#333',flex:0.5,fontFamily:'Montserrat-SemiBold'}}>Subscription Details</Text>
-                  </View>
-
-                   <View style={{flex:1,flexDirection:'row',marginBottom:5}}>
-                    <View style={{flex:.5,marginTop:5}}>
-                     <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Type</Text>
-                      <Text style={styles.detailText}>Weekly</Text>
-                    </View>
-                 
-                    
-                    <View style={{flex:.5,marginTop:5}}>
-                     <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Available Check-ins</Text>
-                      <Text style={styles.detailText}>04</Text>
-                    </View>
-                  </View>
-              
-                  <View style={{flex:1,flexDirection:'row',marginBottom:10}}>
-                    <View style={{flex:.5,marginTop:5}}>
-                     <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>Start-Date</Text>
-                      <Text style={styles.detailText}>07 Aug 2019</Text>
-                    </View>
-                 
-                    
-                    <View style={{flex:.5,marginTop:5}}>
-                     <Text style={{fontSize:15,color:'#666',flex:0.5,fontFamily:'Montserrat-Regular'}}>End-Date</Text>
-                      <Text style={styles.detailText}>14 Aug 2019</Text>
-                    </View>
-                  </View>
-              
-              </View>
-              </View>
-
-              <View style={[styles.formInputView,styles.marginBottom30],{flexDirection:'row',paddingHorizontal:20,marginTop:15,alignSelf:'center',justifyContent:'center',alignItem:'center'}}>
-          
-                    <Button
-                        onPress         = {() => this.props.navigation.navigate("ChangePassword")}
-                        titleStyle      = {styles.buttonText}
-                        title           = "Change Password"
-                        buttonStyle     = {styles.button}
-                        containerStyle  = {styles.buttonContainer}
-                    />
-                </View>*/}
             </ScrollView>
         </Drawer>
     );

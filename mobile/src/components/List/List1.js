@@ -8,6 +8,7 @@ import SideMenu from 'react-native-side-menu';
 import PropTypes from "prop-types";
 import Drawer from 'react-native-drawer';
 import axios from "../../config/axios.js";
+import HomeStack from "../../config/routes.js";
 
 // import Icon from 'react-native-ionicons';
 
@@ -72,14 +73,19 @@ export default  class List1 extends Component {
     
     return(
       <React.Fragment>
-
-            
+{/*
+            <HeaderBar navigate={navigate}
+              navigattion = {this.props.navigation}
+              headerTitle="Team Congress"
+              toggle={()=>this.toggle.bind(this)} 
+              openControlPanel={()=>this.openControlPanel.bind(this)}
+            />*/}
             <View style={{ flex: 1,borderWidth:0,paddingTop:0,backgroundColor:'#fff'}}>
                 <View style={{flex:1,}}>
                     <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>
                               
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('LogIn')}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
 {/*                                        <ImageOverlay
                                         source={require('../../images/Morzine-Restaurants.jpg')}
                                         height={145}
@@ -92,14 +98,14 @@ export default  class List1 extends Component {
                                             </View>
                                         {/*</ImageOverlay>*/}
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('CheckinsTab')}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                                               <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                                                   <Text style={styles.title}>Voter List</Text>
                                               </View>
                                   </TouchableOpacity>
                                 </View>
                                 <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}}>
+                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                                             <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                                                 <Text style={styles.title}>Distribution</Text>
                                             </View>

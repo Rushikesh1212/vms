@@ -11,9 +11,6 @@ import ForgotPasswordOTP from '../components/ForgotPasswordOTP/ForgotPasswordOTP
 import ResetPassword from '../components/ResetPassword/ResetPassword.js';
 
 import UserProfile   from '../components/UserProfile/UserProfile.js';
-import EditUserProfile   from '../components/UserProfile/EditUserProfile.js';
-import ChangePassword   from '../components/UserProfile/ChangePassword.js';
-
 
 
 
@@ -173,13 +170,6 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  EditUserProfile: {
-    screen: EditUserProfile,
-    navigationOptions: {
-      header: null
-    }
-  },
-
   Notification: {
     screen: Notification,
     navigationOptions: {

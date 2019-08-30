@@ -1,7 +1,7 @@
 let METEOR_URL = '';
 
 if (__DEV__) {
-  METEOR_URL = 'ws://192.168.31.212:3000/websocket';
+  METEOR_URL = 'ws://192.168.31.204:3000/websocket';
  } 
 else {  
   METEOR_URL = 'ws://sta.iassureit.com/websocket'; // your production server url

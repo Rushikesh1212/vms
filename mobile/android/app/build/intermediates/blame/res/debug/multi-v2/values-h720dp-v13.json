@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/iassureit/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "/home/iassureit/Documents/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
                     "source": "/home/iassureit/.gradle/caches/transforms-2/files-2.1/56294e5036ab903b1d50e8a2508b93a3/res/values-h720dp-v13/values-h720dp-v13.xml",

@@ -117,19 +117,19 @@ handleCollapse=(state)=>{
                   <View style={{flex:1,}}>
                     <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>                     
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                                             <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                                                 <Text style={styles.title}>Analysis</Text>
                                             </View>
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                                               <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                                                   <Text style={styles.title}>Utility</Text>
                                               </View>
                                   </TouchableOpacity>
                                 </View>
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}}>
+                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                                             <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                                                 <Text style={styles.title}>Last Day Management</Text>
                                             </View>

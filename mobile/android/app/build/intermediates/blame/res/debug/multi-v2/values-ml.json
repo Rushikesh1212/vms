@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/iassureit/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
+            "outputFile": "/home/iassureit/Documents/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
             "map": [
                 {
                     "source": "/home/iassureit/.gradle/caches/transforms-2/files-2.1/e1e794b25421f792245ee20a5526e2db/res/values-ml/values.xml",
