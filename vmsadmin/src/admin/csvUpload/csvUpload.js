@@ -10,7 +10,7 @@ class csvUpload extends Component {
  
   handleReadCSV = (data) => {
     console.log(data);
-    axios.post('/api/schema/post/',data.data)
+    axios.post('/api/voters/post/',data.data)
                 .then( (response)=> {
                   console.log('response',response);
                 })

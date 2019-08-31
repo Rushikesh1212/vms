@@ -197,6 +197,7 @@ componentDidMount(){
         "color"           : this.state.color,
         "cast"            : this.state.cast,
         "favourite"       : this.state.favourite,
+        "userId"          : localStorage.getItem('admin_ID'),
        }
        console.log("dk == ",formValues);
           // if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
@@ -222,7 +223,7 @@ componentDidMount(){
                       "favourite"       : false,
                     })
                     axios
-                        .get('/api/users/get/list')
+                        .get('/api/voters/get/list')
                         .then(
                           (res)=>{
                             this.setState({
@@ -259,7 +260,6 @@ componentDidMount(){
   }
 	render(){
 	  const data = this.state.allPosts;
-    console.log(data);
 	  const columns = [{
         Header: 'Full Name',
         accessor: 'fullName',
