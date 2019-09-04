@@ -24,7 +24,7 @@ class VoterMgmt extends Component {
         "changeAddress"   : "",
         "areaName"        : "",
         "otherInfo"       : "",
-        "dob"             : "",
+        "dob"             : "2001-06-01",
         "emailId"         : "",
         "aadharCard"      : "",
         "color"           : 3,
@@ -32,6 +32,7 @@ class VoterMgmt extends Component {
         "favourite"       : false,
         voter_id          : "",
         allPosts          : [],
+        info              : [],
         editUser          : "",
         show              : true,
         firstname         : "",
@@ -53,7 +54,7 @@ class VoterMgmt extends Component {
     this.handleChangeBtn = this.handleChangeBtn.bind(this);
 	}
 
-componentDidMount(){	
+  componentDidMount(){	
     axios
       .get('/api/voters/get/')
       .then(
@@ -67,21 +68,33 @@ componentDidMount(){
         }
       )
       .catch((error)=>{
-
         console.log("error = ",error);
         // alert("Something went wrong! Please check Get URL.");
-         });  
-     	}
+      });     
+
+    axios
+      .get('/api/voters/get/one/'+this.state.voter_id)
+      .then(
+        (res)=>{
+          console.log('res',res.data);
+          this.setState({
+            info : res.data,
+          });         
+        }
+      )
+      .catch((error)=>{
+        console.log("error = ",error);
+        // alert("Something went wrong! Please check Get URL.");
+      });  
+  }
+
   handleChangeBtn(event){
     event.preventDefault();
-
     var color = event.target.getAttribute("value");
-    console.log("color = ",color);
-
+    console.log("color = ",color, typeof color);
     this.setState({
-      color : color,
+      color : parseInt(color),
     }); 
-
   }
 
   handleChange(event){
@@ -157,7 +170,6 @@ componentDidMount(){
           voted : false,
         })
       }
-    
       
         // if(status=="off"){
         //   swal("Competition has been Shown","","success");
@@ -201,42 +213,40 @@ componentDidMount(){
        }
        console.log("dk == ",formValues);
           // if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
-         axios.patch('/api/voters/patch/',formValues)
-              .then((res)=>{
-                  console.log("response123 = ",res.data);
-                    swal("User updated successfully", "", "success");
-                    $('body').removeClass("modal-open");
-                    this.setState({
-                      "mobileNumber"    : "",
-                      "whatsAppNumber"  : "",
-                      "dead"            : false,
-                      "visited"         : true,
-                      "voted"           : false,
-                      "changeAddress"   : "",
-                      "areaName"        : "",
-                      "otherInfo"       : "",
-                      "dob"             : "",
-                      "emailId"         : "",
-                      "aadharCard"      : "",
-                      "color"           : 1,
-                      "cast"            : "",
-                      "favourite"       : false,
-                    })
-                    axios
-                        .get('/api/voters/get/list')
-                        .then(
-                          (res)=>{
-                            this.setState({
-                              allPosts : res.data,
-                            },()=>{
-                            });         
-                          }
-                        )
-                        .catch((error)=>{
-
-                          console.log("error = ",error);
-                           }); 
-              })
+        axios
+          .patch('/api/voters/patch/',formValues)
+          .then((res)=>{
+              console.log("response123 = ",res.data);
+                swal("User updated successfully", "", "success");
+                $('body').removeClass("modal-open");
+                this.setState({
+                  "mobileNumber"    : "",
+                  "whatsAppNumber"  : "",
+                  "dead"            : false,
+                  "visited"         : true,
+                  "voted"           : false,
+                  "changeAddress"   : "",
+                  "areaName"        : "",
+                  "otherInfo"       : "",
+                  "dob"             : "",
+                  "emailId"         : "",
+                  "aadharCard"      : "",
+                  "color"           : 3,
+                  "cast"            : "",
+                  "favourite"       : false,
+                })
+                axios
+                  .get('/api/voters/get/')
+                  .then((res)=>{
+                      this.setState({
+                        allPosts : res.data,
+                      },()=>{
+                    });         
+                  })
+                  .catch((error)=>{
+                    console.log("error = ",error);
+                  }); 
+            })
             .catch((error)=>{
               console.log("error = ",error);
               this.setState({show: false})
@@ -283,6 +293,7 @@ componentDidMount(){
         Cell:row =>(
             <div className="text-center">
               <i className="actionIcon fa fa-pencil" data-toggle="modal" data-target="#voterModalUpdate" onClick={()=> this.handleEdit(row.original)}></i>&nbsp;&nbsp;
+              <i className="actionIcon fa fa-user" data-toggle="modal" data-target="#voterModalView" onClick={()=> this.handleEdit(row.original)}></i>&nbsp;&nbsp;
               {/*<button className="pull-right btn btn-primary col-lg-8 col-md-8 col-sm-12 col-xs-12" onClick={this.resetPassword.bind(this)}>Reset Password</button>*/}
             </div>
           )
@@ -313,7 +324,7 @@ componentDidMount(){
           <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All voters appeare in below table)</i></h4>
         </div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-{/*        <div class="progress md-progress primary-color-dark">
+        {/*<div class="progress md-progress primary-color-dark">
             <div class="indeterminate"></div>
         </div>
         <canvas id="barChart"></canvas>*/}
@@ -335,7 +346,7 @@ componentDidMount(){
               <div className="modal-header userHeader">
                 <button type="button" className="close" data-dismiss="modal">X
                 </button>
-                <h4 className="modal-title" id="exampleModalLabel">Update User</h4>
+                <h4 className="modal-title" id="exampleModalLabel">Update Voter</h4>
               </div>
               <div className="modal-body">
                 <div className="hideModal">
@@ -459,7 +470,7 @@ componentDidMount(){
                                             <i className="fa fa-envelope-square"></i>
                                           </div> 
                                           <input type="date" className="formFloatingLabels form-control newinputbox" 
-                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange}  value={this.state.dob}
+                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" value={this.state.dob}
                                           placeholder="Enter Date of Birth"/>
                                         </div>   
                                       </span>
@@ -492,7 +503,7 @@ componentDidMount(){
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
                                             <i className="fa fa-envelope-square"></i>
-                                          </div> 
+                                          </div>
                                           <input type="text" className="formFloatingLabels form-control newinputbox" 
                                           ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
                                           placeholder="Enter Caste"/>
@@ -506,11 +517,11 @@ componentDidMount(){
                                     <label className="formLable col-lg-12 col-md-12">Color<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                          <input type="button" name="color" value="1" className={this.state.color == "1" ? "btn btn-success pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
-                                          <input type="button" name="color" value="2" className={this.state.color == "2" ? "btn btn-primary pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
-                                          <input type="button" name="color" value="3" className={this.state.color == "3" ? "btn btn-info pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
-                                          <input type="button" name="color" value="4" className={this.state.color == "4" ? "btn btn-warning pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
-                                          <input type="button" name="color" value="5" className={this.state.color == "5" ? "btn btn-danger pad15":"btn btn-default pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={1} className={this.state.color === 1 ? "btn btn-success btn-lg pad15":"btn btn-success pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={2} className={this.state.color === 2 ? "btn btn-primary btn-lg pad15":"btn btn-primary pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={3} className={this.state.color === 3 ? "btn btn-info btn-lg pad15":"btn btn-info pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={4} className={this.state.color === 4 ? "btn btn-warning btn-lg pad15":"btn btn-warning pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={5} className={this.state.color === 5 ? "btn btn-danger btn-lg pad15":"btn btn-danger pad15"} onClick={this.handleChangeBtn}/>
                                         </div>
                                       </span>
                                       {this.state.formerrors.color &&(
@@ -635,8 +646,367 @@ componentDidMount(){
             </div>   
           </div>
         </div>
+
+        <div className="modal fade" id="voterModalView" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-lg " role="document">
+            <div className="modal-content modalContent ummodallftmg ummodalmfdrt col-lg-12 ">
+              <div className="modal-header userHeader">
+                <button type="button" className="close" data-dismiss="modal">X
+                </button>
+                <h4 className="modal-title" id="exampleModalLabel">Voter Profile View</h4>
+              </div>
+              <div className="modal-body">
+                <div className="hideModal">
+                  <div className="">
+                    <div className="">
+                      <div className="">                                        
+                        <section className="">                                          
+                          <div className="box-body">
+                            <div className="">
+                              <form id="signUpUser">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                  <div className="col-lg-9 col-md-9 col-xs-12 col-sm-12 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Booth Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="info-box-text UMname inputText has-content" ref="boothName">लक्षतीर्थ वसाहत - महर्षी विठ्ठल रामजी उर्फ आण्‍णासो शिंदे विद्यालय इमारत पु.बा.खो.1</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="info-box-text UMname inputText has-content" ref="boothName">Lakshirtarth Settlement - Maharshi Vitthal Ramji alias Ananaso Shinde School Building</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                  <img src="/images/user.jpg" width="55%"/>
+                                    {/*<label className="formLable col-lg-12 col-md-12">Cast</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">cast {this.state.info.cast}</span>
+                                    </span>*/}
+                                  </div>
+                                </div>
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Voter ID</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">idNumber{this.state.info.idNumber}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mIdNumber{this.state.info.mIdNumber}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Full Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">विठ्ठल रामजी शिंदे {this.state.info.mFullName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">Vitthal Ramaji Shinde {this.state.info.fullName}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Mobile Number</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                    </span>
+                                  </div>                                  
+                                </div>
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Constituency Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">constituencyName {this.state.info.constituencyName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mConstituencyName {this.state.info.mConstituencyName}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Age</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">age {this.state.info.age}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mAge {this.state.info.mAge}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Gender</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">gender {this.state.info.gender}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mGender {this.state.info.mGender}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">House Number</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">houseNumber {this.state.info.houseNumber}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mHouseNumber {this.state.info.mHouseNumber}</span>
+                                    </span>
+                                  </div>                                  
+                                </div>  
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Part No</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">partNo {this.state.info.partNo}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mPartNo {this.state.info.mPartNo}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Part Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">partName {this.state.info.partName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mPartName {this.state.info.mPartName}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Pin Code</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">pinCode {this.state.info.pinCode}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mPinCode {this.state.info.mPinCode}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Relation</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">relation {this.state.info.relation}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mRelation {this.state.info.mRelation}</span>
+                                    </span>
+                                  </div>                                  
+                                </div>
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Relative Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">relativeName {this.state.info.relativeName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mRelativeName {this.state.info.mRelativeName}</span>
+                                    </span>
+                                  </div>
+                                  {/*<div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Voter Created At</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">voterCreatedAt {this.state.info.voterCreatedAt}</span>
+                                    </span>
+                                  </div>*/}                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Pin Code</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">pinCode {this.state.info.pinCode}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mPinCode {this.state.info.mPinCode}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Relation</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">relation {this.state.info.relation}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">mRelation {this.state.info.mRelation}</span>
+                                    </span>
+                                  </div>   
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Cast</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">cast {this.state.info.cast}</span>
+                                    </span>
+                                  </div>                               
+                                </div>
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Changed Address</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">changeAddress {this.state.info.changeAddress}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Area Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">areaName {this.state.info.areaName}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Other Info</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">otherInfo {this.state.info.otherInfo}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Date of Birth</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">dob {this.state.info.dob}</span>
+                                    </span>
+                                  </div>                                  
+                                </div> 
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Email Id</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">emailId {this.state.info.emailId}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Aadhar Card</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">aadharCard {this.state.info.aadharCard}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Color<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                          <input type="button" name="color" value={1} className={this.state.info.color === 1 ? "btn btn-success btn-lg pad15":"btn btn-success pad15"}/>
+                                          <input type="button" name="color" value={2} className={this.state.info.color === 2 ? "btn btn-primary btn-lg pad15":"btn btn-primary pad15"}/>
+                                          <input type="button" name="color" value={3} className={this.state.info.color === 3 ? "btn btn-info btn-lg pad15":"btn btn-info pad15"}/>
+                                          <input type="button" name="color" value={4} className={this.state.info.color === 4 ? "btn btn-warning btn-lg pad15":"btn btn-warning pad15"}/>
+                                          <input type="button" name="color" value={5} className={this.state.info.color === 5 ? "btn btn-danger btn-lg pad15":"btn btn-danger pad15"}/>
+                                        </div>
+                                      </span>
+                                  </div>
+                                </div>                                
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.info.favourite==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-favourite" checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="favourite" checked={this.state.info.favourite===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Alive/Dead<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.info.dead==false ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="dead" checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="alive" checked={this.state.info.dead===false} />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">visited<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.info.visited==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-visited" checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="visited" checked={this.state.info.visited===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Voted<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.info.voted==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-voted" checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="voted" checked={this.state.info.voted===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                  </div>
+                                </div>   
+                              </form>
+                            </div>  
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>   
+          </div>
+        </div>
       </div>
 	  );
 	}
 }
 export default VoterMgmt;
+
+
+    // "" : "",
+    // "" : "",
+    // "" : "",
+    // "" : "",
+    // "" : "",
+    // "" : "",
+    // "color" : 2,
+    // "" : "",
+    // "" : false,
+    // "" : false,
+    // "visited" : true,
+    // "voted" : false,
