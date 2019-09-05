@@ -86,6 +86,8 @@ class VoterMgmt extends Component {
         console.log("error = ",error);
         // alert("Something went wrong! Please check Get URL.");
       });  
+    var ab = localStorage.getItem('admin_ID');
+        console.log("ab = ",ab);
   }
 
   handleChangeBtn(event){
@@ -258,14 +260,25 @@ class VoterMgmt extends Component {
   }
 
   handleEdit(row){
-    console.log("row",row._id);
+    console.log("row",row);
     // var userData=row.profile;
     this.setState({
-      // firstName:userData.firstName,
-      // lastName:userData.lastName,
-    //   mobileNumber:userData.mobileNumber,
-    //   emailId:userData.emailId,
-      voter_id:row._id,
+      "mobileNumber"    : row.mobileNumber,
+      "whatsAppNumber"  : row.whatsAppNumber,
+      "dead"            : row.dead,
+      "visited"         : row.visited,
+      "voted"           : row.voted,
+      "changeAddress"   : row.changeAddress,
+      "areaName"        : row.areaName,
+      "otherInfo"       : row.otherInfo,
+      "dob"             : row.dob,
+      "emailId"         : row.emailId,
+      "aadharCard"      : row.aadharCard,
+      "color"           : row.color,
+      "cast"            : row.cast,
+      "favourite"       : row.favourite,
+      info              :row,
+      voter_id          :row._id,
     })
   }
 	render(){
@@ -664,14 +677,14 @@ class VoterMgmt extends Component {
                           <div className="box-body">
                             <div className="">
                               <form id="signUpUser">
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
                                   <div className="col-lg-9 col-md-9 col-xs-12 col-sm-12 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Booth Name</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="info-box-text UMname inputText has-content" ref="boothName">लक्षतीर्थ वसाहत - महर्षी विठ्ठल रामजी उर्फ आण्‍णासो शिंदे विद्यालय इमारत पु.बा.खो.1</span>
+                                      <span className="info-box-text UMname inputText has-content" ref="boothName">{this.state.info.mBoothName}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="info-box-text UMname inputText has-content" ref="boothName">Lakshirtarth Settlement - Maharshi Vitthal Ramji alias Ananaso Shinde School Building</span>
+                                      <span className="info-box-text UMname inputText has-content" ref="boothName">{this.state.info.boothName}</span>
                                     </span>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
@@ -682,128 +695,67 @@ class VoterMgmt extends Component {
                                     </span>*/}
                                   </div>
                                 </div>
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+ 
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Constituency Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mConstituencyName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.constituencyName}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-9 col-md-9 col-xs-12 col-sm-12 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Part Name</label>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mPartName}</span>
+                                    </span>
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.partName}</span>
+                                    </span>
+                                  </div>                                  
+                                </div>
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Voter ID</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">idNumber{this.state.info.idNumber}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mIdNumber}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mIdNumber{this.state.info.mIdNumber}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.idNumber}</span>
                                     </span>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Full Name</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">विठ्ठल रामजी शिंदे {this.state.info.mFullName}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mFullName}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">Vitthal Ramaji Shinde {this.state.info.fullName}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.fullName}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Mobile Number</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mobileNumber}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">9561116995</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.whatsAppNumber}</span>
                                     </span>
                                   </div>                                  
                                 </div>
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Constituency Name</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">constituencyName {this.state.info.constituencyName}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mConstituencyName {this.state.info.mConstituencyName}</span>
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Age</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">age {this.state.info.age}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mAge {this.state.info.mAge}</span>
-                                    </span>
-                                  </div>                                  
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Gender</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">gender {this.state.info.gender}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mGender {this.state.info.mGender}</span>
-                                    </span>
-                                  </div>                                  
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">House Number</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">houseNumber {this.state.info.houseNumber}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mHouseNumber {this.state.info.mHouseNumber}</span>
-                                    </span>
-                                  </div>                                  
-                                </div>  
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Part No</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">partNo {this.state.info.partNo}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mPartNo {this.state.info.mPartNo}</span>
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Part Name</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">partName {this.state.info.partName}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mPartName {this.state.info.mPartName}</span>
-                                    </span>
-                                  </div>                                  
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Pin Code</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">pinCode {this.state.info.pinCode}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mPinCode {this.state.info.mPinCode}</span>
-                                    </span>
-                                  </div>                                  
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Relation</label>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">relation {this.state.info.relation}</span>
-                                    </span>
-                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mRelation {this.state.info.mRelation}</span>
-                                    </span>
-                                  </div>                                  
-                                </div>
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Relative Name</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">relativeName {this.state.info.relativeName}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mRelativeName}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mRelativeName {this.state.info.mRelativeName}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.relativeName}</span>
                                     </span>
                                   </div>
                                   {/*<div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
@@ -815,65 +767,103 @@ class VoterMgmt extends Component {
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Pin Code</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">pinCode {this.state.info.pinCode}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mPinCode}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mPinCode {this.state.info.mPinCode}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.pinCode}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Relation</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">relation {this.state.info.relation}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mRelation}</span>
                                     </span>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">mRelation {this.state.info.mRelation}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.relation}</span>
                                     </span>
                                   </div>   
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Cast</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">cast {this.state.info.cast}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.cast}</span>
                                     </span>
                                   </div>                               
                                 </div>
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Part No</label>
+                                    {/*<span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mPartNo}</span>
+                                    </span>*/}
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.partNo}</span>
+                                    </span>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Age</label>
+                                    {/*<span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mAge}</span>
+                                    </span>*/}
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.age}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Gender</label>
+                                   {/* <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mGender}</span>
+                                    </span>*/}
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.gender}</span>
+                                    </span>
+                                  </div>                                  
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">House Number</label>
+                                    {/*<span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.mHouseNumber}</span>
+                                    </span>*/}
+                                    <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.houseNumber}</span>
+                                    </span>
+                                  </div>                                  
+                                </div> 
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Changed Address</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">changeAddress {this.state.info.changeAddress}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.changeAddress}</span>
                                     </span>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Area Name</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">areaName {this.state.info.areaName}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.areaName}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Other Info</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">otherInfo {this.state.info.otherInfo}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.otherInfo}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Date of Birth</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">dob {this.state.info.dob}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.dob}</span>
                                     </span>
                                   </div>                                  
                                 </div> 
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr ">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Email Id</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">emailId {this.state.info.emailId}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.emailId}</span>
                                     </span>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Aadhar Card</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                      <span className="UMname inputText has-content" ref="fullName">aadharCard {this.state.info.aadharCard}</span>
+                                      <span className="UMname inputText has-content" ref="fullName">{this.state.info.aadharCard}</span>
                                     </span>
                                   </div>                                  
                                   <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
@@ -889,7 +879,7 @@ class VoterMgmt extends Component {
                                       </span>
                                   </div>
                                 </div>                                
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
