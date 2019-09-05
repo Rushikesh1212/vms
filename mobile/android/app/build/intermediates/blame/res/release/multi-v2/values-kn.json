@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/iassureit/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kn/values-kn.xml",
+            "outputFile": "/home/iassureit/Documents/Abhimanyu/vms/mobile/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kn/values-kn.xml",
             "map": [
                 {
                     "source": "/home/iassureit/.gradle/caches/transforms-2/files-2.1/d60cd8cd2d95e3a71b3780c4983cf68d/res/values-kn/values-kn.xml",

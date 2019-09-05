@@ -169,8 +169,8 @@ export default  class SearchList extends Component {
                   {
                     list.map((data,index)=>{
                       return(
-                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('UserProfile')}>
-                          <View style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:2,borderColor:'#333', blurRadius:90}} key={index}>
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('UserProfile')} key={index}>
+                          <View style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:2,borderColor:'#333', blurRadius:90}} >
                             <Text style={{flex:0.1}}> {data.no}/{index+1}</Text>
                             <Text style={{flex:0.7,paddingLeft:30,backgroundColor:'transparent'}}>{data.name}</Text>
                             <Text style={{flex:0.2}}>{data.cardno}</Text>

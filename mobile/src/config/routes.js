@@ -22,10 +22,10 @@ import List3 from '../components/List/List3.js';
 import Dashboard from '../components/Dashboard/Dashboard.js';
 
 import  SearchList from '../components/SearchList/SearchList.js';
-import  Notification from '../components/Notification/Notification.js';
+import  Distribution from '../components/Distribution/Distribution.js';
 
-import PackagePlanList from '../components/PackagePlan/PackagePlanList.js';
-import PackagePlanInfo from '../components/PackagePlan/PackagePlanInfo.js';
+// import Voter from '../components/VoterList/PackagePlanList.js';
+import Voter from '../components/VoterList/Voter.js';
 import Menu from '../layouts/Menu/Menu.js';
 
 let SlideFromRight = (index, position, width)=>{
@@ -128,19 +128,19 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  PackagePlanList: {
-    screen: PackagePlanList,
+  Voter: {
+    screen: Voter,
     navigationOptions: {
       header: null
     }
   },
   
-  PackagePlanInfo: {
-    screen: PackagePlanInfo,
-    navigationOptions: {
-      header: null
-    }
-  },
+  // PackagePlanInfo: {
+  //   screen: PackagePlanInfo,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
   
   ForgotPassword: {
     screen: ForgotPassword,
@@ -170,8 +170,8 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  Notification: {
-    screen: Notification,
+  Distribution: {
+    screen: Distribution,
     navigationOptions: {
       header: null
     }

@@ -18,8 +18,12 @@ import List3 from "../List/List3.js";
 import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
 
 import SearchList from "../SearchList/SearchList.js";
-import LogIn from "../LogIn/LogIn.js";
 import UserProfile from "../UserProfile/UserProfile.js";
+import Voter from "../VoterList/Voter.js";
+import BoothList from "../VoterList/BoothList.js";
+import AllVoterList from "../VoterList/AllVoterList.js";
+import Distribution from "../Distribution/Distribution.js";
+import Analysis from "../Analysis/Analysis.js";
 
 
 const window = Dimensions.get('window');
@@ -84,8 +88,36 @@ const Dashboard1 = createStackNavigator({
     }
   },
 
-  LogIn: {
-    screen: LogIn,
+  Voter: {
+    screen: Voter,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  BoothList: {
+    screen: BoothList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  AllVoterList: {
+    screen: AllVoterList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  Distribution: {
+    screen: Distribution,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  Analysis: {
+    screen: Analysis,
     navigationOptions: {
       header: null
     }

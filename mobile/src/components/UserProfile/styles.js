@@ -204,5 +204,9 @@ export default StyleSheet.create({
     width:'74%',
     justifyContent:'center'
   },
-
+    newLabelText:{
+    fontFamily: "Montserrat-Bold",
+    flex:0.6,
+    color:"#111",
+  }
 });

@@ -42,6 +42,7 @@
     "react-native-snap-carousel": "^3.8.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-swipe-gestures": "^1.0.3",
+    "react-native-switch-toggle": "^1.1.0",
     "react-native-tab-view": "^2.10.0",
     "react-native-typography": "^1.4.1",
     "react-native-vector-icons": "^6.6.0",
