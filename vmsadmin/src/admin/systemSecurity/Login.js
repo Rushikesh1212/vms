@@ -52,7 +52,7 @@ class Login extends Component {
         // localStorage.setItem("admin_email",response.data.email);
         // localStorage.setItem("admin_fullName",response.data.fullName);
 
-        console.log("localStorage =",localStorage);
+        console.log("localStorage =",localStorage.getItem("admin_ID"));
         // browserHistory.replace('/');
         this.props.history.push("/");
         window.location.reload();
@@ -112,7 +112,8 @@ class Login extends Component {
     var winHeight = window.innerHeight;
     var divHeight = 490 +'px';
       console.log("-------------------------------",this.state.loggedIn)
-    
+        console.log("localStorage =",localStorage.getItem("admin_ID"));
+      
    
 
 
