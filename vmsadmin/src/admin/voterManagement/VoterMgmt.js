@@ -483,7 +483,7 @@ class VoterMgmt extends Component {
                                             <i className="fa fa-envelope-square"></i>
                                           </div> 
                                           <input type="date" className="formFloatingLabels form-control newinputbox" 
-                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" value={this.state.dob}
+                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" onKeyDown={e=>{e.preventDefault()}} value={this.state.dob}
                                           placeholder="Enter Date of Birth"/>
                                         </div>   
                                       </span>
@@ -687,8 +687,8 @@ class VoterMgmt extends Component {
                                       <span className="info-box-text UMname inputText has-content" ref="boothName">{this.state.info.boothName}</span>
                                     </span>
                                   </div>
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                  <img src="/images/user.jpg" width="55%"/>
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent" style={{right:0,position:'absolute'}}>
+                                  <img src="/images/user.jpg" width="90%"/>
                                     {/*<label className="formLable col-lg-12 col-md-12">Cast</label>
                                     <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                       <span className="UMname inputText has-content" ref="fullName">cast {this.state.info.cast}</span>

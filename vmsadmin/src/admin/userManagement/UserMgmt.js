@@ -176,37 +176,33 @@ class UserMgmt extends Component {
 	}
 
   handleEdit(row){
-    console.log("row",row._id);
-    var userData=row.profile;
+    var userData = row.profile;
     this.setState({
       firstName:userData.firstName,
       lastName:userData.lastName,
       mobileNumber:userData.mobileNumber,
       emailId:userData.emailId,
       userId:row._id,
-  })
+    })
   }
 
-  resetPassword(event){
-    event.preventDefault();
-        // .get('/api/users/get/list')
-        //                   .then(
-        //                     (res)=>{
-        //                       this.setState({
-        //                         allPosts : res.data,
-        //                       },()=>{
-        //                       });         
-        //                     }
-        //                   )
-        //                   .catch((error)=>{
-
-        //                     console.log("error = ",error);
-        //                      }); 
-
+  resetPassword(row){
+    console.log("row...",row._id);
+    var userData = row.profile;
+    var id = row._id;
+      axios
+        .patch('/api/users/patch/one/resetPassword/'+id)
+        .then((res)=>{
+          console.log("resp...",res.data);      
+          swal("Great", "Password of "+userData.firstName+" "+userData.lastName+" has been reset successfully", "success");
+        })
+        .catch((error)=>{
+          console.log("error = ",error);
+        }); 
   }
 
 	render(){
-	const data = this.state.allPosts;
+    const data = this.state.allPosts;
       console.log(data);
 	const columns = [
       {
@@ -232,7 +228,7 @@ class UserMgmt extends Component {
         Cell:row =>(
             <div className="text-center">
               <i className="actionIcon fa fa-pencil" data-toggle="modal" data-target="#userModalUpdate" onClick={()=> this.handleEdit(row.original)}></i>&nbsp;&nbsp;
-              <button className="pull-right btn btn-primary col-lg-8 col-md-8 col-sm-12 col-xs-12" onClick={this.resetPassword.bind(this)}>Reset Password</button>
+              <button className="pull-right btn btn-primary col-lg-8 col-md-8 col-sm-12 col-xs-12" onClick={()=> this.resetPassword(row.original)}>Reset Password</button>
             </div>
           )
       }]
@@ -350,23 +346,37 @@ class UserMgmt extends Component {
                                         </div>
                                        
                                         <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
-                                            <label className="formLable col-lg-12 col-md-12">Mobile Number <label className="requiredsign">*</label></label>
+                                          <label className="formLable col-lg-12 col-md-12">Mobile Number <label className="requiredsign">*</label></label>
                                             <span className="blocking-span ">
-                                             <div className="input-group inputBox-main  new_inputbx " >
-                                               <div className="input-group-addon remove_brdr inputIcon">
-                                                <i className="fa fa-mobile"></i>
-                                               </div>  
-                                               <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
-                                                 className= "form-control UMname inputText form-control  has-content"
+                                               <div className="input-group inputBox-main  new_inputbx " >
+                                                 <div className="input-group-addon remove_brdr inputIcon">
+                                                  <i className="fa fa-mobile"></i>
+                                                 </div>  
+                                                 <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
+                                                  className= "form-control UMname inputText form-control  has-content"
                                                   ref="mobNumber" name="mobileNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
-                                                   onChange={this.handleChange} value={this.state.mobileNumber}/>
-                                                    
-                                             </div>   
+                                                  onChange={this.handleChange} value={this.state.mobileNumber}/>
+                                               </div>   
                                             </span>
                                             {this.state.formerrors.mobNumber &&(
-                                                    <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
-                                                  )}
-
+                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
+                                            )}
+                                        </div> 
+                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
+                                          <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
+                                            <span className="blocking-span ">
+                                               <div className="input-group inputBox-main  new_inputbx " >
+                                                 <div className="input-group-addon remove_brdr inputIcon">
+                                                  <i className="fa fa-mobile"></i>
+                                                 </div>  
+                                                  <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                                  ref="signupEmail" name="emailId" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.emailId}
+                                                  placeholder="Email"/>
+                                               </div>   
+                                            </span>
+                                            {this.state.formerrors.mobNumber &&(
+                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
+                                            )}
                                         </div>
                                         
                                       </div>
