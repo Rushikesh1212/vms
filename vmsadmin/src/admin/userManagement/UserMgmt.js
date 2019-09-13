@@ -187,6 +187,7 @@ class UserMgmt extends Component {
   }
 
   resetPassword(row){
+
     console.log("row...",row._id);
     var userData = row.profile;
     var id = row._id;
@@ -199,6 +200,7 @@ class UserMgmt extends Component {
         .catch((error)=>{
           console.log("error = ",error);
         }); 
+
   }
 
 	render(){

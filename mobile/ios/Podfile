@@ -27,7 +27,6 @@ target 'vms' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
 
 
@@ -46,6 +45,7 @@ target 'vms' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'react-native-camera-kit', :path => '../node_modules/react-native-camera-kit'
+
 
 
   target 'vmsTests' do

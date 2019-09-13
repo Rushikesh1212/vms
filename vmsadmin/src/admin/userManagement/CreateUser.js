@@ -119,7 +119,7 @@ class CreateUser extends Component {
            const formValues = {
               "firstName"       : this.state.firstName,
               "lastName"        : this.state.lastName,
-              "emailId"         : this.state.emailId,
+              "email"         : this.state.emailId,
               "mobileNumber"    : this.state.mobileNumber,
               "userId"          : this.state.userId,
               "role"            : "User",
