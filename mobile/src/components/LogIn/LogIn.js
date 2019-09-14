@@ -80,7 +80,23 @@ export default class LogIn extends ValidationComponent{
   };
 
   login = ()=>{
-    this.props.navigation.navigate('CarouselPage')
+        // this.props.navigation.navigate('CarouselPage')
+    var login = {
+      userName: this.state.email,
+      pwd     : this.state.password
+    }
+    axios.post('/api/users/post/userLogin',login)
+      .then(response=>{
+        console.log(response)
+        AsyncStorage.multiSet([
+          ['user_id',response.data.user_ID],
+          ['token',response.data.token],
+        ])
+        this.props.navigation.navigate('CarouselPage')
+      })
+      .catch(error=>{
+        console.log(error)
+      })
   }
 
   
@@ -134,7 +150,6 @@ export default class LogIn extends ValidationComponent{
         maxlength: '\nPassword length must be lower than {1}.'
       }
     };
-    console.log('emai error',this.state.emailError)
     const { navigate,dispatch } = this.props.navigation;
     return (
 
@@ -161,8 +176,8 @@ export default class LogIn extends ValidationComponent{
                   <View style={[styles.inputWrapper]}>
                     <View style={styles.inputTextWrapper}>
                       <TextField
-                          label                 = "Email"
-                          onChangeText          = {(email) => {this.setState({ email },()=>{this.validInputField('email', 'emailError');})}}
+                          label                 = "User Name"
+                          onChangeText          = {(email) => {this.setState({email})}}
                           lineWidth             = {1}
                           tintColor             = {colors.button}
                           inputContainerPadding = {0}

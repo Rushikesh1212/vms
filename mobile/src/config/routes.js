@@ -1,32 +1,27 @@
-import { createSwitchNavigator, createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator,createMaterialTopTabNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 import { Animated, Easing } from 'react-native';
 
 import AuthLoadingScreen from '../layouts/AuthLoadingScreen/AuthLoadingScreen.js';
 
 import LogIn from '../components/LogIn/LogIn.js';
-import SignUp from '../components/SignUp/SignUp.js';
-import SignUpOTP from '../components/SignUpOTP/SignUpOTP.js';
-import ForgotPassword from '../components/ForgotPassword/ForgotPassword.js';
-import ForgotPasswordOTP from '../components/ForgotPasswordOTP/ForgotPasswordOTP.js';
-import ResetPassword from '../components/ResetPassword/ResetPassword.js';
-
-import UserProfile   from '../components/UserProfile/UserProfile.js';
-
-
 
 import CarouselPage from '../components/CarouselPage/CarouselPage.js';
 
 import List1 from '../components/List/List1.js';
 import List2 from '../components/List/List2.js';
 import List3 from '../components/List/List3.js';
-import Dashboard from '../components/Dashboard/Dashboard.js';
+// import Dashboard from '../components/Dashboard/Dashboard.js';
 
-import  SearchList from '../components/SearchList/SearchList.js';
-import  Distribution from '../components/Distribution/Distribution.js';
-
-// import Voter from '../components/VoterList/PackagePlanList.js';
-import Voter from '../components/VoterList/Voter.js';
 import Menu from '../layouts/Menu/Menu.js';
+// import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
+import SearchList from "../components/SearchList/SearchList.js";
+import UserProfile from "../components/UserProfile/UserProfile.js";
+import Voter from "../components/VoterList/Voter.js";
+import BoothList from "../components/VoterList/BoothList.js";
+import AgeList from "../components/VoterList/AgeList.js";
+import AllVoterList from "../components/VoterList/AllVoterList.js";
+import Distribution from "../components/Distribution/Distribution.js";
+import Analysis from "../components/Analysis/Analysis.js";
 
 let SlideFromRight = (index, position, width)=>{
   const translateX = position.interpolate({
@@ -76,46 +71,51 @@ const TransitionConfiguration = () =>{
   }
 }
 
+const Dashboard = createMaterialTopTabNavigator(
+  {
+    "List 1": {screen:List1},
+    "List 2": {screen:List2},
+    "List 3": {screen:List3}
+  },
+  {
+    tabBarPosition: 'top',
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarOptions:{
+      activeTintColor:'#000',
+      inactiveTintColor:'#666',
+      showIcon: true,
+      showLabel:true,
+      tabStyle: {
+        paddingVertical : 0,
+        marginTop: -20,
+      },
+      labelStyle: {
+        textAlign: 'center',
+        fontWeight: 'bold'
+      },
+      indicatorStyle: {
+        borderBottom:2,
+        color: '#337ab7'
+      },
+      style:{
+        backgroundColor:'#fff',
+        color:'#000',
+      }
+    },
+  }
+)
 
 const HomeStack = createStackNavigator({
-
-  LogIn: {
-    screen: LogIn,
-    navigationOptions: {
-      header: null
-    }
-  },
-  
   CarouselPage: {
     screen: CarouselPage,
     navigationOptions: {
       header: null
     }
   },
-  
+
   Dashboard: {
     screen: Dashboard,
-    navigationOptions: {
-      header: null
-    }
-  },
-
-  List1: {
-    screen: List1,
-    navigationOptions: {
-      header: null
-    }
-  },
-
-  List2: {
-    screen: List2,
-    navigationOptions: {
-      header: null
-    }
-  },
-  
-  List3: {
-    screen: List3,
     navigationOptions: {
       header: null
     }
@@ -127,42 +127,49 @@ const HomeStack = createStackNavigator({
       header: null
     }
   },
-  
+
   Voter: {
     screen: Voter,
     navigationOptions: {
       header: null
     }
   },
-  
-  // PackagePlanInfo: {
-  //   screen: PackagePlanInfo,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
-  
-  ForgotPassword: {
-    screen: ForgotPassword,
+
+  BoothList: {
+    screen: BoothList,
     navigationOptions: {
       header: null
     }
   },
 
-  ForgotPasswordOTP: {
-    screen: ForgotPasswordOTP,
+  AgeList: {
+    screen: AgeList,
     navigationOptions: {
       header: null
     }
   },
-  
-  ResetPassword: {
-    screen: ResetPassword,
+
+  AllVoterList: {
+    screen: AllVoterList,
     navigationOptions: {
       header: null
     }
   },
-  
+
+  Distribution: {
+    screen: Distribution,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  Analysis: {
+    screen: Analysis,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   UserProfile: {
     screen: UserProfile,
     navigationOptions: {
@@ -170,16 +177,36 @@ const HomeStack = createStackNavigator({
     }
   },
   
-  Distribution: {
-    screen: Distribution,
+  LogIn: {
+    screen: LogIn,
     navigationOptions: {
       header: null
     }
-  },
- 
+  }
 },{
   transitionConfig: TransitionConfiguration
 });
+
+
+// const HomeStack = createStackNavigator({
+  
+//   CarouselPage: {
+//     screen: CarouselPage,
+//     navigationOptions: {
+//       header: null
+//     }
+//   },
+  
+//   Dashboard: {
+//     screen: Dashboard,
+//     navigationOptions: {
+//       header: null
+//     }
+//   },
+ 
+// },{
+//   transitionConfig: TransitionConfiguration
+// });
 
 const drawer = createDrawerNavigator({
   Home : {
@@ -189,17 +216,22 @@ const drawer = createDrawerNavigator({
   contentComponent: Menu
 });
 
-// const AuthStack = createStackNavigator({
+const AuthStack = createStackNavigator({
  
-
+  LogIn: {
+    screen: LogIn,
+    navigationOptions: {
+      header: null
+    }
+  }
   
-// });
+});
 
 export default createAppContainer(createSwitchNavigator(
   {
     AuthLoading : AuthLoadingScreen,
     App         : drawer,
-    // Auth        : AuthStack,
+    Auth        : AuthStack,
   },
   {
     initialRouteName: 'AuthLoading',

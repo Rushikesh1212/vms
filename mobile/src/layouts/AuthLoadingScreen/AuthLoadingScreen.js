@@ -16,13 +16,17 @@ export default class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    // const userToken = Meteor.userId();
-    // const userToken = await AsyncStorage.getItem('userToken');
-    // console.log("userToken = ",userToken);
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    // this.props.navigation.navigate(userToken ? 'Auth' : 'App');
-    this.props.navigation.navigate('App');
+    var token ;
+        var user_id ;
+         const userToken = await AsyncStorage.getItem('token');
+        AsyncStorage.multiGet(['token','user_id'])
+          .then((data)=>{
+          // console.log('user',data)
+          token = data[0][1]
+          user_id = data[1][1]
+        })
+        console.log('userToken',userToken)
+    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   // Render any loading content that you like here

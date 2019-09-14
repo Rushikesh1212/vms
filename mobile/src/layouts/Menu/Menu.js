@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Alert,
   ImageBackground,
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native';
 import { Icon, Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
@@ -46,8 +47,11 @@ export default  class Menu extends React.Component {
     this.props.navigation.closeDrawer();
   }
   handleLogout = () =>{
+       var tokenremove = AsyncStorage.removeItem("token");
+    console.log("tokenremove==>",tokenremove);
     this.props.navigation.navigate("LogIn");
     this.props.navigation.closeDrawer();
+
   }
   render(){
 

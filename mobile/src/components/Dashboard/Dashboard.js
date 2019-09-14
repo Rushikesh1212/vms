@@ -21,6 +21,7 @@ import SearchList from "../SearchList/SearchList.js";
 import UserProfile from "../UserProfile/UserProfile.js";
 import Voter from "../VoterList/Voter.js";
 import BoothList from "../VoterList/BoothList.js";
+import AgeList from "../VoterList/AgeList.js";
 import AllVoterList from "../VoterList/AllVoterList.js";
 import Distribution from "../Distribution/Distribution.js";
 import Analysis from "../Analysis/Analysis.js";
@@ -97,6 +98,13 @@ const Dashboard1 = createStackNavigator({
 
   BoothList: {
     screen: BoothList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  AgeList: {
+    screen: AgeList,
     navigationOptions: {
       header: null
     }

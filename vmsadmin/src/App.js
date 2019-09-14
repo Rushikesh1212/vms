@@ -6,10 +6,15 @@ import './lib/router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+<<<<<<< Updated upstream
 
 axios.defaults.baseURL = 'http://vmsapi.ranjitsinhshinde.in/';
 // axios.defaults.baseURL = 'http://localhost:5014';
 
+=======
+axios.defaults.baseURL = 'http://vmsapi.ranjitsinhshinde.in/';
+// axios.defaults.baseURL = 'http://localhost:5012';
+>>>>>>> Stashed changes
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
  class App extends Component {

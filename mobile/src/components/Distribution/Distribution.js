@@ -91,11 +91,11 @@ export default  class Distribution extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                             <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                                <Text style={styles.title}>Caste by Surname</Text>
+                                <Text style={styles.title}>Caste Master</Text>
                             </View>
                 </TouchableOpacity>
               </View>
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
+              {/*<View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
                 <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Caste by Voter</Text>
@@ -106,16 +106,16 @@ export default  class Distribution extends Component {
                               <Text style={styles.title}>Area By Address</Text>
                           </View>
                 </TouchableOpacity>
-              </View>              
+              </View>  */}            
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+{/*                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Area By Voter</Text>
                           </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                </TouchableOpacity>*/}
+                <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Caste Master</Text>
+                              <Text style={styles.title}>Caste by Surname</Text>
                           </View>
                 </TouchableOpacity>
               </View>       

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import HomeStack from "./config/routes.js";
-// import AuthStack  from "./config/routes.js";
+import AuthStack  from "./config/routes.js";
 import settings from "./config/settings.js";
 import SplashScreen from 'react-native-splash-screen';
 import axios                from 'axios';
@@ -16,7 +16,7 @@ import {
 import { createAppContainer } from 'react-navigation';
 
 const HomeStackContainer = createAppContainer(HomeStack);
-// const AuthStackContainer = createAppContainer(AuthStack);
+const AuthStackContainer = createAppContainer(AuthStack);
 
 
 // Meteor.connect(settings.METEOR_URL);

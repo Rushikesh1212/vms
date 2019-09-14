@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import Drawer from 'react-native-drawer';
 import axios from "../../config/axios.js";
 
+import Loading from '../../layouts/Loading/Loading.js';
 
 import styles from "./styles.js";
 
@@ -27,6 +28,14 @@ export default  class BoothList extends Component {
     };
   }
   componentDidMount(){
+    axios.get('/api/voters/distinctBooth')
+      .then(res=>{
+        // console.log('res',res.data)
+        this.setState({data:res.data})
+      })
+      .catch(err=>{
+        console.log('err',err)
+      })
   };
   componentWillUnmount() {
     // BackHandler.removeEventListener('hardwareBackPress',this.androidBackHandler.bind(this));
@@ -79,7 +88,7 @@ export default  class BoothList extends Component {
             >
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
-              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
+{/*              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
                 <View style={{flex:0.3,paddingTop:5}}>
                   <Text style={{color:"#f1f1f1"}}>Select Gaon</Text>
                 </View>
@@ -95,50 +104,40 @@ export default  class BoothList extends Component {
                           <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                 </View>
-              </View>
+              </View>*/}
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
                 <View style={{flex:0.3,paddingTop:5}}>
                   <Text style={{color:"#f1f1f1"}}>Select Booth</Text>
                 </View>
-                <View style={{flex:0.7,height: 25,paddingBottom:10, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
-                        <Picker
-                          selectedValue={this.state.gaon}
-                          style={{height: 25}}
-                          onValueChange={(itemValue, itemIndex) =>
-                            this.setState({gaon: itemValue})
-                          }
-                          >
-                          <Picker.Item label="Booth" value="java" />
-                          <Picker.Item label="JavaScript" value="js" />
-                        </Picker>
+                <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
+                        <TextInput
+                          style={{height: 35,borderColor: this.state.borderColor,borderBottomWidth: 1,paddingLeft:10}}
+                          placeholder="Booth"
+                          onChangeText = {this.updateNameSearch}
+                          value={this.state.boothName}
+                          onBlur={ () => this.setState({borderColor:'#666'}) }
+                          onFocus={ () => this.setState({borderColor:'#337ab7'}) }
+                        />
                 </View>
               </View>
 
               <View style={{paddingVertical:10, backgroundColor:"#eee",paddingHorizontal:15}}>
-                <TouchableOpacity style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
-                  <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>1- Z.P.P.S. Shingarawadi</Text>
-                  <Text style={styles.statText}>Total Female: 326</Text>
-                  <Text style={styles.statText}>Total Male: 222</Text>
-                  <Text style={styles.statText}>Total: 548</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5, marginTop:'3%'}}>
-                  <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>1- Z.P.P.S. Bhogaon Class 5</Text>
-                  <Text style={styles.statText}>Total Female: 326</Text>
-                  <Text style={styles.statText}>Total Male: 222</Text>
-                  <Text style={styles.statText}>Total: 548</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5,marginTop:'3%'}}>
-                  <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>1- Z.P.P.S. Bhogaon Class 6</Text>
-                  <Text style={styles.statText}>Total Female: 326</Text>
-                  <Text style={styles.statText}>Total Male: 222</Text>
-                  <Text style={styles.statText}>Total: 548</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5,marginTop:'3%'}}>
-                  <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>1- Z.P.P.S. Delub</Text>
-                  <Text style={styles.statText}>Total Female: 326</Text>
-                  <Text style={styles.statText}>Total Male: 222</Text>
-                  <Text style={styles.statText}>Total: 548</Text>
-                </TouchableOpacity>
+                {
+                  this.state.data ? 
+                    this.state.data.length > 0 ?
+                      this.state.data.map((booth,index)=>{
+                        return(
+                          <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('SearchList',{category:'boothName',boothName:booth})} style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
+                            <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>{index+1}- {booth}</Text>
+                            <Text style={styles.statText}>Total Female: 326</Text>
+                            <Text style={styles.statText}>Total Male: 222</Text>
+                            <Text style={styles.statText}>Total: 548</Text>
+                          </TouchableOpacity>
+                        )
+                      })
+                    : null
+                  : <Loading />
+                }
               </View>
             </ScrollView>
         </Drawer>

@@ -125,8 +125,8 @@ export default StyleSheet.create({
     paddingLeft:10
   },
   textInputContainer:{
-    backgroundColor:'transparent',
-    paddingLeft:5,
+    backgroundColor:'red',
+    padding:15,
     // fontFamily:"Montserrat-Regular",
     borderBottomColor: "transparent"
   },
@@ -137,7 +137,7 @@ export default StyleSheet.create({
   },
   textStyle:{
     fontFamily:"Montserrat-Regular",
-    backgroundColor:'transparent',
+    backgroundColor:'yellow',
     paddingTop:0,
     marginTop:-6,
     fontSize:14
@@ -208,5 +208,58 @@ export default StyleSheet.create({
     fontFamily: "Montserrat-Bold",
     flex:0.6,
     color:"#111",
-  }
+    marginTop:10
+  },
+  newLabelRow:{
+    flexDirection:'row',
+    borderBottomWidth:1,
+    borderColor:"#111",
+    paddingVertical:8,
+    paddingLeft:10
+  },
+  editableInput:{
+    height: 35,
+    borderColor:"#111",
+    // backgroundColor:"yellow",
+    borderBottomWidth: 2,
+    paddingLeft:20,
+    color:"#111",
+    // flex:0.6
+  },
+  colorBall1:{
+    height:20,
+    width:20,
+    borderRadius:10,
+    marginLeft:5,
+    backgroundColor:'#5cb85c'
+  },
+  colorBall2:{
+    height:20,
+    width:20,
+    borderRadius:10,
+    marginLeft:5,
+    backgroundColor:'#337ab7'
+  },
+  colorBall3:{
+    height:20,
+    width:20,
+    borderRadius:10,
+    marginLeft:5,
+    backgroundColor:'#5bc0de'
+  },
+  colorBall4:{
+    height:20,
+    width:20,
+    borderRadius:10,
+    marginLeft:5,
+    backgroundColor:'#f0ad4e'
+  },
+  colorBall5:{
+    height:20,
+    width:20,
+    borderRadius:10,
+    marginLeft:5,
+    backgroundColor:'#d9534f'
+  },
+  topIcons:{ paddingTop:8,alignSelf:'flex-end',marginLeft:8}
 });

@@ -19,14 +19,14 @@ import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
 
 
  const window = Dimensions.get('window');
-export default  class AllVoterList extends Component {
+export default  class AgeList extends Component {
 
   constructor(props){
     super(props);
     this.state = {
       gaon: 'Select Gaon',
       data: '',
-      searchCategory:'Name'
+      ageCategory:'18-30'
     };
   }
   componentDidMount(){
@@ -107,7 +107,21 @@ export default  class AllVoterList extends Component {
     this._drawer.open()
   }
 
-  
+  ageList(itemValue,itemIndex){
+    this.setState({ageCategory:itemValue})
+    var range = itemValue.split('-')
+    var values = {
+      voterAgeFrom: range[0],
+      voterAgeTo: range[1]
+    }
+    axios.post('/api/search/voters',values)
+      .then(res=>{
+        this.setState({data:res.data})
+      })
+      .catch(error=>{
+        console.log('error',error)
+      })
+  }
   render(){
 
     const { navigate, goBack, state } = this.props.navigation;
@@ -124,7 +138,7 @@ export default  class AllVoterList extends Component {
             >
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
-              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
+{/*              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
                 <View style={{flex:0.3,paddingTop:15}}>
                   <Text style={{color:"#f1f1f1"}}>Enter Booth</Text>
                 </View>
@@ -138,37 +152,27 @@ export default  class AllVoterList extends Component {
                           onFocus={ () => this.setState({borderColor:'#337ab7'}) }
                         />
                 </View>
-              </View>
+              </View>*/}
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
-                <View style={{flex:0.3,paddingTop:5}}>
-                  <Text style={{color:"#f1f1f1"}}>Search By</Text>
+                <View style={{flex:0.5,paddingTop:5}}>
+                  <Text style={{color:"#f1f1f1"}}>Select Age Category</Text>
                 </View>
-                <View style={{flex:0.7,height: 25,paddingBottom:10, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
+                <View style={{flex:0.5,height: 25,paddingBottom:10, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
                         <Picker
-                          selectedValue={this.state.searchCategory}
+                          selectedValue={this.state.ageCategory}
                           style={{height: 25}}
                           onValueChange={(itemValue, itemIndex) =>
-                            this.setState({searchCategory: itemValue})
+                            this.ageList(itemValue,itemIndex)
                           }
                           >
-                          <Picker.Item label="Name" value="Name" />
-                          <Picker.Item label="Aadhar Card" value="Aadhar" />
-                          <Picker.Item label="Booth" value="Booth" />
+                          <Picker.Item label="18-30" value="18-30" />
+                          <Picker.Item label="30-50" value="30-50" />
+                          <Picker.Item label="50-70" value="50-70" />
+                          <Picker.Item label="70-90" value="70-90" />
                         </Picker>
                 </View>
               </View>
-              <View style={{flexDirection:'row',paddingRight:10,paddingLeft:5,paddingBottom:8}}>
-                <View style={{flex:0.8}}>
-                        <TextInput
-                        style={{height: 40,paddingLeft:5,borderColor: this.state.cardBorderColor,borderBottomWidth: 2}}
-                        placeholder={this.state.searchCategory}
-                        onChangeText={(searchText) => this.setState({searchText})}
-                        value={this.state.searchText}
-                        onBlur={ () => this.setState({cardBorderColor:'#666'}) }
-                        onFocus={ () => this.setState({cardBorderColor:'#337ab7'}) }
-                      />
-                </View>
-              </View>
+
               <View style={{paddingVertical:5, backgroundColor:"#eee",paddingHorizontal:5}}>
                 {
                   this.state.data ? 

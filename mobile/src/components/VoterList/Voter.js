@@ -100,101 +100,106 @@ export default  class Voter extends Component {
                 </TouchableOpacity>
               </View>
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+{/*                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Alphabetical List</Text>
                           </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                </TouchableOpacity>*/}
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Surname List</Text>
                           </View>
                 </TouchableOpacity>
-              </View>              
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Address List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+              </View>              
+              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                              <Text style={styles.title}>Duplicate List</Text>
+                          </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AgeList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Age List</Text>
                           </View>
                 </TouchableOpacity>
               </View>
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'favourite'})}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Duplicate Voters</Text>
+                              <Text style={styles.title}>Effective Voters</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Family List</Text>
                           </View>
                 </TouchableOpacity>
               </View>
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+{/*              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Area Wise Voters</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Effective Voters</Text>
                           </View>
                 </TouchableOpacity>
-              </View>
+              </View>*/}
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Caste List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'dead'})}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Dead Voters</Text>
                           </View>
                 </TouchableOpacity>
               </View>
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Changed Address List</Text>
+                              <Text style={styles.title}>Gaon List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Phone No List</Text>
                           </View>
                 </TouchableOpacity>
               </View>
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Color List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'visited'})}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Visited Voters</Text>
                           </View>
                 </TouchableOpacity>
               </View>
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+{/*              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>House No Wise</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Gaon List</Text>
                           </View>
                 </TouchableOpacity>
-              </View>
+              </View>*/}
 
             </ScrollView>
         </Drawer>
