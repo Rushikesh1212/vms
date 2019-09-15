@@ -31,17 +31,15 @@ class CreateUser extends Component {
       lastname          : "",
       signupEmail       : "",
       mobNumber         : "",
-      
-      formerrors :{
-          firstName:"",
-          lastName:"",
-          emailId:"",
-          mobileNumber:"",
-         role         : "User",
-      },
-      userId:"",
-  
-
+      booth             : "",
+      userId            : "",
+      formerrors        :{
+                          firstName    :"",
+                          lastName     :"",
+                          emailId      :"",
+                          mobileNumber :"",
+                          role         : "User",
+                        },
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -119,7 +117,7 @@ class CreateUser extends Component {
            const formValues = {
               "firstName"       : this.state.firstName,
               "lastName"        : this.state.lastName,
-              "email"         : this.state.emailId,
+              "email"           : this.state.emailId,
               "mobileNumber"    : this.state.mobileNumber,
               "userId"          : this.state.userId,
               "role"            : "User",
@@ -193,16 +191,14 @@ class CreateUser extends Component {
                     <div className="hideModal">
                       <div className="">
                         <div className="">
-                            <div className="">                                        
-                              <section className="">                                          
-                                      <div className="box-body">
-                                          <div className="">
-
-                                            <form id="signUpUser">
-                                      <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr ">
-
-                                       <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
-                                            <label className="formLable col-lg-12 col-md-12">First Name <label className="requiredsign">*</label></label>
+                          <div className="">                                        
+                            <section className="">                                          
+                              <div className="box-body">
+                                <div className="">
+                                  <form id="signUpUser">
+                                    <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr ">
+                                      <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
+                                          <label className="formLable col-lg-12 col-md-12">First Name <label className="requiredsign">*</label></label>
                                             <span className="blocking-span">
                                              <div className="input-group inputBox-main  new_inputbx " >
                                                <div className="input-group-addon remove_brdr inputIcon">
@@ -279,18 +275,33 @@ class CreateUser extends Component {
                                              </div>   
                                             </span>
                                             {this.state.formerrors.mobNumber &&(
-                                                    <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
-                                                  )}
+                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
+                                            )}
 
                                         </div>
-                                        
+                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
+                                          <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
+                                            <span className="blocking-span ">
+                                               <div className="input-group inputBox-main  new_inputbx " >
+                                                 <div className="input-group-addon remove_brdr inputIcon">
+                                                  <i className="fa fa-mobile"></i>
+                                                 </div>  
+                                                  <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                                  ref="booth" name="booth" id="booth" data-text="booth" onChange={this.handleChange} value={this.state.booth}
+                                                  placeholder="Booth Name"/>
+                                               </div>   
+                                            </span>
+                                            {this.state.formerrors.booth &&(
+                                              <span className="text-danger">{ this.state.formerrors.booth}</span> 
+                                            )}
+                                        </div>
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                                         <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createUser.bind(this)} id="CreateUserModal" >Create</button>
                                        </div>    
                                   </form>
-                                          </div>  
-                                      </div>
+                                </div>  
+                              </div>
                                   
                             </section>
                           </div>

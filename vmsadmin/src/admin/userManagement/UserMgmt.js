@@ -35,6 +35,8 @@ class UserMgmt extends Component {
         lastname          : "",
         signupEmail       : "",
         mobNumber         : "",
+        booth             : "",
+        status            : "",
         action            : "Submit",
         userId            : "",
         formerrors        :{
@@ -121,6 +123,7 @@ class UserMgmt extends Component {
           "emailId"         : this.state.emailId,
           "mobileNumber"    : this.state.mobileNumber,
           "userId"          : this.state.userId,
+          // "booth"           : this.state.booth,
          }
          console.log("formValues",formValues);
             if(this.state.firstName!="" && this.state.lastName !="" && this.state.emailId && this.state.mobileNumber ){
@@ -147,9 +150,8 @@ class UserMgmt extends Component {
                             }
                           )
                           .catch((error)=>{
-
                             console.log("error = ",error);
-                             }); 
+                          }); 
                 })
               .catch((error)=>{
                 console.log("error = ",error);
@@ -187,8 +189,6 @@ class UserMgmt extends Component {
   }
 
   resetPassword(row){
-
-    console.log("row...",row._id);
     var userData = row.profile;
     var id = row._id;
       axios
@@ -200,13 +200,46 @@ class UserMgmt extends Component {
         .catch((error)=>{
           console.log("error = ",error);
         }); 
+  }  
 
+  activeInactive(row){
+    var userData = row.profile;
+    var id = row._id;
+    if(row.profile.status=="Active"){
+      var status = "Inactive";
+    }else{
+      var status = "Active";
+    }
+    var patchStatus = {userId: id,userStatus: status}
+    console.log("status...",patchStatus);
+      axios
+        .patch('/api/users/patch/userStatus',patchStatus)
+        .then((res)=>{
+          console.log("resp...",res.data);      
+          swal("Status Changed", "Status of "+userData.firstName+" "+userData.lastName+" is now "+status, "success");
+          axios
+            .get('/api/users/get/list')
+            .then(
+              (res)=>{
+                this.setState({
+                  allPosts : res.data,
+                },()=>{
+                });         
+              }
+            )
+            .catch((error)=>{
+              console.log("error = ",error);
+            });
+        })
+        .catch((error)=>{
+          console.log("error = ",error);
+        }); 
   }
 
 	render(){
     const data = this.state.allPosts;
-      console.log(data);
-	const columns = [
+    console.log(data);
+	  const columns = [
       {
           Header: "Sr. No.",
           id: "row",
@@ -230,7 +263,10 @@ class UserMgmt extends Component {
         Cell:row =>(
             <div className="text-center">
               <i className="actionIcon fa fa-pencil" data-toggle="modal" data-target="#userModalUpdate" onClick={()=> this.handleEdit(row.original)}></i>&nbsp;&nbsp;
-              <button className="pull-right btn btn-primary col-lg-8 col-md-8 col-sm-12 col-xs-12" onClick={()=> this.resetPassword(row.original)}>Reset Password</button>
+            <div className="text-center">
+              <button className="pull-center btn btn-info" onClick={()=> this.activeInactive(row.original)}>{row.original.profile.status}</button>
+              <button className="pull-right btn btn-primary " onClick={()=> this.resetPassword(row.original)}>Reset Password</button>
+            </div>
             </div>
           )
       }]
@@ -371,23 +407,41 @@ class UserMgmt extends Component {
                                                  <div className="input-group-addon remove_brdr inputIcon">
                                                   <i className="fa fa-mobile"></i>
                                                  </div>  
-                                                  <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                                  ref="signupEmail" name="emailId" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.emailId}
-                                                  placeholder="Email"/>
+                                                  <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                                  ref="booth" name="booth" id="booth" data-text="booth" onChange={this.handleChange} value={this.state.booth}
+                                                  placeholder="Booth Name"/>
                                                </div>   
                                             </span>
-                                            {this.state.formerrors.mobNumber &&(
-                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
+                                            {this.state.formerrors.booth &&(
+                                              <span className="text-danger">{ this.state.formerrors.booth}</span> 
                                             )}
                                         </div>
+                                        {/*<div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
+                                          <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
+                                            <span className="blocking-span ">
+                                              <div className="input-group inputBox-main  new_inputbx " >
+                                                <div className="input-group-addon remove_brdr inputIcon">
+                                                <i className="fa fa-mobile"></i>
+                                              </div>  
+                                              <select className="form-control templateType" name="status" id="status" onChange={this.handleChange} value={this.state.status}>
+                                                <option value="Not Selected"> --Select-- </option>
+                                                <option> Active </option>
+                                                <option> Inactive </option>
+                                              </select> 
+                                              </div>   
+                                            </span>
+                                            {this.state.formerrors.status &&(
+                                              <span className="text-danger">{ this.state.formerrors.status}</span> 
+                                            )}
+                                        </div>*/}
                                         
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                                         <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit"  onClick={this.updateData.bind(this)} id="CreateUserModal">Update</button>
                                        </div>    
                                   </form>
-                                          </div>  
-                                      </div>
+                                </div>  
+                              </div>
                                   
                             </section>
                           </div>
