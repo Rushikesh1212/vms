@@ -40,7 +40,7 @@ class VoterMgmt extends Component {
         signupEmail       : "",
         mobNumber         : "",
         action            : "Submit",
-        toggleEventHandle   : "",
+        toggleEventHandle : "",
         toggleStatus      : "off",
         formerrors        :{
                             firstName:"",
@@ -70,24 +70,7 @@ class VoterMgmt extends Component {
       .catch((error)=>{
         console.log("error = ",error);
         // alert("Something went wrong! Please check Get URL.");
-      });     
-
-    axios
-      .get('/api/voters/get/one/'+this.state.voter_id)
-      .then(
-        (res)=>{
-          console.log('res',res.data);
-          this.setState({
-            info : res.data,
-          });         
-        }
-      )
-      .catch((error)=>{
-        console.log("error = ",error);
-        // alert("Something went wrong! Please check Get URL.");
-      });  
-    var ab = localStorage.getItem('admin_ID');
-        console.log("ab = ",ab);
+      });
   }
 
   handleChangeBtn(event){
@@ -277,8 +260,8 @@ class VoterMgmt extends Component {
       "color"           : row.color,
       "cast"            : row.cast,
       "favourite"       : row.favourite,
-      info              :row,
-      voter_id          :row._id,
+      info              : row,
+      voter_id          : row._id,
     })
   }
 	render(){
@@ -319,7 +302,7 @@ class VoterMgmt extends Component {
 						<h4 className="usrmgnttitle weighttitle">Click to add the new single voter:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
 					</div>
 					<div className="col-lg-4 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
-						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#userModal">Add New Voter</button>
+						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#voterModal">Add New Voter</button>
 						<CreateVoter voterList={this.voterList.bind(this)}/>
 					</div>
 				</div>        

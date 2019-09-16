@@ -10,6 +10,7 @@ import SignUp             from '../systemSecurity/SignUp.js';
 import Header             from '../common/header/Header.js'
 import Footer             from '../common/footer/Footer.js'
 import Dashboard          from '../dashboard/Dashboard.js'
+import AdminContent       from '../dashboard/DashboardNew.js'
 import Leftsidebar        from '../common/leftSidebar/Leftsidebar.js'
 import UserMgmt           from '../userManagement/UserMgmt.js';
 import VoterMgmt          from '../voterManagement/VoterMgmt.js';
@@ -100,7 +101,8 @@ componentDidMount(){
                       <Route path="/userManagement/:id" component={UserMgmt} exact />
                       <Route path="/voterManagement" component={VoterMgmt} exact />
                       <Route path="/csvUpload" component={csvUpload} exact />
-                      <Route path="/dashboard" component={Dashboard} exact />
+                      {/*<Route path="/dashboard" component={Dashboard} exact />*/}
+                      <Route path="/dashboard" component={AdminContent} exact />
                       <Route path="/" component={Dashboard} exact />
                     </Switch>        
                   </div>

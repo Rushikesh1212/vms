@@ -1,4 +1,3 @@
-
 import React, { Component }       from 'react';
 import InputMask                  from 'react-input-mask';
 import $                          from "jquery";
@@ -26,27 +25,58 @@ class CreateVoter extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editUser          : "",
       show              : true,
       office            : null,
       allPosts          : null,
-      firstname         : "",
-      lastname          : "",
       signupEmail       : "",
-      mobNumber         : "",
-      
-      formerrors :{
-         firstname    : "",
-         lastname     : "",
-         signupEmail  : "",
-         mobNumber    : "",
-         role         : "Voter",
-      },
+      "age"             : null,
+      "boothName"       : "",
+      "constituencyName": "",
+      "firstName"       : "",
+      "middleName"      : "",
+      "lastName"        : "",
+      "fullName"        : "",
+      "gender"          : "",
+      "houseNumber"     : "",
+      "idNumber"        : "",
+      "partNo"          : null,
+      "partName"        : "",
+      "pinCode"         : null,
+      "relation"        : "",
+      "relativeName"    : "",
+      "mobileNumber"    : "",
+      "whatsAppNumber"  : "",
+      "dead"            : false,
+      "visited"         : true,
+      "voted"           : false,
+      "changeAddress"   : "",
+      "areaName"        : "",
+      "otherInfo"       : "",
+      "dob"             : "",
+      "emailId"         : "",
+      "aadharCard"      : "",
+      "color"           : null,
+      "cast"            : "",
+      "favourite"       : false,
+      allPosts          : [],
+      info              : [],
+      info              : [],
+      formerrors        : {
+                           firstname    : "",
+                           lastname     : "",
+                           signupEmail  : "",
+                           mobNumber    : "",
+                           role         : "Voter",
+                          },
 
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeBtn = this.handleChangeBtn.bind(this);
+    this.toggleEventHandle = this.toggleEventHandle.bind(this);
   }
 
- handleChange(event){
+  handleChange(event){
     const datatype = event.target.getAttribute('data-text');
     const {name,value} = event.target;
     let formerrors = this.state.formerrors;
@@ -83,176 +113,601 @@ class CreateVoter extends Component {
     } );
   }
 
+  toggleEventHandle(event){
+    var name = $(event.target).attr('name');
+      console.log("name = ",name);
+      if(name=="favourite"){
+        this.setState({
+          favourite : true,
+        })
+      }else if(name=="non-favourite"){
+        this.setState({
+          favourite : false,
+        })
+      }else if(name=="alive"){
+        this.setState({
+          dead : false,
+        })
+      }else if(name=="dead"){
+        this.setState({
+          dead : true,
+        })
+      }else if(name=="visited"){
+        this.setState({
+          visited : true,
+        })
+      }else if(name=="non-visited"){
+        this.setState({
+          visited : false,
+        })
+      }else if(name=="voted"){
+        this.setState({
+          voted : true,
+        })
+      }else if(name=="non-voted"){
+        this.setState({
+          voted : false,
+        })
+      }
+      
+        // if(status=="off"){
+        //   swal("Competition has been Shown","","success");
+        // }else{
+        //   swal("Competition has been hidden","","success");
+        // }
+  }
+  handleChangeBtn(event){
+    event.preventDefault();
+    var color = event.target.getAttribute("value");
+    console.log("color = ",color, typeof color);
+    this.setState({
+      color : parseInt(color),
+    }); 
+  }
 
-    componentDidMount() {
+  componentDidMount() {
 
      
-    }  
+  }  
 
-    createVoter(event){
-      event.preventDefault();
-      const formValues = {
-          "firstName"       : this.state.firstname,
-          "lastName"        : this.state.lastname,
-          "email"           : this.state.signupEmail,
-          "mobileNumber"    : this.state.mobNumber,
-          "role"            : "Voter",
-        }
-
-        if(this.state.firstname!="" && this.state.lastname !="" && this.state.signupEmail && this.state.mobNumber ){
-           axios.post('/api/users/post', formValues)
-                .then( (res)=>{
-                    console.log("response = ",res);
-                    if(res.data.message === "NEW-USER-CREATED"){
-                      swal("User added successfully", "", "success");
-                      $('body').removeClass("modal-open");
-                      this.setState({
-                        firstname         : "",
-                        lastname          : "",
-                        signupEmail       : "",
-                        mobNumber         : "",
-                      })
-                      axios
-                          .get('/api/users/get/list')
-                          .then(
-                            (res)=>{
-                              console.log('res', res.data);
-                              const postsdata = res.data;
-                              // console.log('postsdata',postsdata);
-                              this.setState({
-                                allPosts : postsdata,
-                              },()=>{
-                                this.props.userList(this.state.allPosts)
-                              });         
-                            }
-                          )
-                          .catch((error)=>{
-                            console.log("error = ",error);
-                            // alert("Something went wrong! Please check Get URL.");
-                          }); 
-                     }
-                     else if(res.data.message === "USER-ALREADY-EXIST"){
-                        swal("User already exists", "", "warning");
-                     } 
-                })
-              .catch((error)=>{
-                console.log("error = ",error);
-                this.setState({show: false})
-              });
-        }else{
-          swal("Please enter mandatory fields", "", "warning");
-          console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-        }
+  createVoter(event){
+    console.log("dk");
+    var voterDetails = {
+      "age"             : this.state.age,
+      "boothName"       : this.state.boothName,
+      "constituencyName": this.state.constituencyName,
+      // "firstName"       : this.state.firstName,
+      // "middleName"      : this.state.middleName,
+      // "lastName"        : this.state.lastName,
+      "fullName"        : this.state.fullName,
+      "gender"          : this.state.gender,
+      "houseNumber"     : this.state.houseNumber,
+      "idNumber"        : this.state.idNumber,
+      "partNo"          : this.state.partNo,
+      "partName"        : this.state.partName,
+      "pinCode"         : this.state.pinCode,
+      "relation"        : this.state.relation,
+      "relativeName"    : this.state.relativeName,
+      "mobileNumber"    : this.state.mobileNumber,
+      "whatsAppNumber"  : this.state.whatsAppNumber,
+      "dead"            : this.state.dead,
+      "visited"         : this.state.visited,
+      "voted"           : this.state.voted,
+      "changeAddress"   : this.state.changeAddress,
+      "areaName"        : this.state.areaName,
+      "otherInfo"       : this.state.otherInfo,
+      "dob"             : this.state.dob,
+      "emailId"         : this.state.emailId,
+      "aadharCard"      : this.state.aadharCard,
+      "color"           : this.state.color,
+      "cast"            : this.state.cast,
+      "favourite"       : this.state.favourite,
     }
+    console.log("dk1 == ",voterDetails);
+        axios
+          .post('/api/voters/post/',voterDetails)
+          .then((res)=>{
+              console.log("123456 = ",res.data);
+                swal("Voter added successfully", "", "success");
+                // $('body').removeClass("modal-open");
+                this.setState({
+                  "age"             : null,
+                  "boothName"       : "",
+                  "constituencyName": "",
+                  "firstName"       : "",
+                  "middleName"      : "",
+                  "lastName"        : "",
+                  "fullName"        : "",
+                  "gender"          : "",
+                  "houseNumber"     : "",
+                  "idNumber"        : "",
+                  "partNo"          : null,
+                  "partName"        : "",
+                  "pinCode"         : null,
+                  "relation"        : "",
+                  "relativeName"    : "",
+                  "mobileNumber"    : "",
+                  "whatsAppNumber"  : "",
+                  "dead"            : false,
+                  "visited"         : true,
+                  "voted"           : false,
+                  "changeAddress"   : "",
+                  "areaName"        : "",
+                  "otherInfo"       : "",
+                  "dob"             : "",
+                  "emailId"         : "",
+                  "aadharCard"      : "",
+                  "color"           : 3,
+                  "cast"            : "",
+                  "favourite"       : false,
+                })
+                axios
+                  .get('/api/voters/get/')
+                  .then((res)=>{
+                      this.setState({
+                        allPosts : res.data,
+                      },()=>{
+                    });         
+                  })
+                  .catch((error)=>{
+                    console.log("error = ",error);
+                  }); 
+            })
+            .catch((error)=>{
+              console.log("error = ",error);
+              swal("Oops", "Voter not added", "error");
+              this.setState({show: false})
+            });
+  }
 
     render() {
       const {formerrors} = this.state;
       return (
-            <div>
-              <div className="modal fade" id="userModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg " role="document">
-                  <div className="modal-content modalContent ummodallftmg ummodalmfdrt col-lg-12 ">
-                    <div className="modal-header userHeader">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 className="modal-title" id="exampleModalLabel">Add New Voter</h4>
-                    </div>
-                   <div className="modal-body">
-                    <div className="hideModal">
+        <div>
+          <div className="modal fade" id="voterModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-lg " role="document">
+              <div className="modal-content modalContent ummodallftmg ummodalmfdrt col-lg-12 ">
+                <div className="modal-header userHeader">
+                  <button type="button" className="close" data-dismiss="modal">X
+                  </button>
+                  <h4 className="modal-title" id="exampleModalLabel">Voter Profile View</h4>
+                </div>
+                <div className="modal-body">
+                  <div className="hideModal">
+                    <div className="">
                       <div className="">
-                        <div className="">
-                          <div className="">                                        
-                            <section className="">                                          
-                              <div className="box-body">
-                                <div className="">
-                                  <form id="signUpUser">
-                                    <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr ">
-                                       <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
-                                            <label className="formLable col-lg-12 col-md-12">First Name <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span">
-                                             <div className="input-group inputBox-main  new_inputbx " >
-                                               <div className="input-group-addon remove_brdr inputIcon">
-                                               <i className="fa fa-user-circle fa "></i>
-                                              </div>  
-                                                <input type="text" style={{textTransform:'capitalize'}}
-                                                 className="form-control UMname inputText form-control  has-content"
-                                                  id="firstname" ref="firstname" name="firstname" data-text="firstname" placeholder="First Name"  onChange={this.handleChange} 
-                                                  value={this.state.firstname}/>
-                                             </div>   
-                                            </span>
-                                            {this.state.formerrors.firstname &&(
-                                              <span className="text-danger">{this.state.formerrors.firstname}</span> 
-                                            )}
+                        <div className="">                                        
+                          <section className="">                                          
+                            <div className="box-body">
+                              <div className="">
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
+                                    <div className="col-lg-9 col-md-9 col-xs-12 col-sm-12 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Booth Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="boothName" name="boothName" id="boothName" data-text="boothName" onChange={this.handleChange}  value={this.state.boothName}
+                                          placeholder="Booth Name"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent" style={{right:0,position:'absolute'}}>
+                                    <img src="/images/user.jpg" width="90%"/>
+                                    </div>
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Constituency Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="constituencyName" name="constituencyName" id="constituencyName" data-text="constituencyName" onChange={this.handleChange}  value={this.state.constituencyName}
+                                          placeholder="Constituency Name"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Part Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="partName" name="partName" id="partName" data-text="partName" onChange={this.handleChange}  value={this.state.partName}
+                                          placeholder="Part Name"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Voter ID</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="idNumber" name="idNumber" id="idNumber" data-text="idNumber" onChange={this.handleChange}  value={this.state.idNumber}
+                                          placeholder="Voter ID"/>
+                                        </div>                                     
+                                      </span>                                    
+                                    </div>
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Full Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="fullName" name="fullName" id="fullName" data-text="fullName" onChange={this.handleChange}  value={this.state.fullName}
+                                          placeholder="Full Name"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Mobile Number</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
+                                          className= "form-control UMname inputText form-control  has-content"
+                                          ref="mobileNumber" name="mobileNumber" id="mobileNumber" data-text="mobileNumber" placeholder="Mobile Number"
+                                          onChange={this.handleChange} value={this.state.mobileNumber}/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
+                                          className= "form-control UMname inputText form-control  has-content"
+                                          ref="whatsAppNumber" name="whatsAppNumber" id="whatsAppNumber" data-text="whatsAppNumber" placeholder="WhatsApp Number"
+                                          onChange={this.handleChange} value={this.state.whatsAppNumber}/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Relative Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="relativeName" name="relativeName" id="relativeName" data-text="relativeName" onChange={this.handleChange}  value={this.state.relativeName}
+                                          placeholder="Relative Name"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Pin Code</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="pinCode" name="pinCode" id="pinCode" data-text="pinCode" onChange={this.handleChange} value={this.state.pinCode}
+                                          placeholder="Pin Code"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Relation</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="relation" name="relation" id="relation" data-text="relation" onChange={this.handleChange}  value={this.state.relation}
+                                          placeholder="Relation"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>   
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Cast</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
+                                          placeholder="Enter Caste"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                               
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Part No</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="partNo" name="partNo" id="partNo" data-text="partNo" onChange={this.handleChange}  value={this.state.partNo}
+                                          placeholder="Enter Caste"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Age</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="age" name="age" id="age" data-text="age" onChange={this.handleChange}  value={this.state.age}
+                                          placeholder="Age"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Gender</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="gender" name="gender" id="gender" data-text="gender" onChange={this.handleChange}  value={this.state.gender}
+                                          placeholder="Gender"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">House Number</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="houseNumber" name="houseNumber" id="houseNumber" data-text="houseNumber" onChange={this.handleChange}  value={this.state.houseNumber}
+                                          placeholder="House No."/>
                                         </div>
-                                        <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
-                                            <label className="formLable col-lg-12 col-md-12">Last Name <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span ">
-                                            <div className="input-group inputBox-main  new_inputbx " >
-                                               <div className="input-group-addon remove_brdr inputIcon">
-                                                <i className="fa fa-user-circle fa "></i>
-                                              </div>  
-                                               <input type="text"className="form-control UMname inputText form-control  has-content" 
-                                               id="lastname" ref="lastname" name="lastname" data-text="lastname" onChange={this.handleChange} 
-                                               value={this.state.lastname} placeholder="Last Name" />
-                                            </div>   
-                                            </span>
-                                            {this.state.formerrors.lastname &&(
-                                              <span className="text-danger">{this.state.formerrors.lastname}</span> 
-                                            )}
+                                      </span>
+                                    </div>                                  
+                                  </div> 
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Changed Address</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="changeAddress" name="changeAddress" id="changeAddress" data-text="changeAddress" onChange={this.handleChange}  value={this.state.changeAddress}
+                                          placeholder="Enter Address"/>
                                         </div>
-                                      </div>
-                                      <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 createusr">
-                                       <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                         <label className="formLable col-lg-12 col-md-12">Email ID <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
-                                            <div className="input-group inputBox-main   " >
-                                             <div className="input-group-addon remove_brdr inputIcon">
-                                              <i className="fa fa-envelope-square"></i>
-                                            </div> 
-                                              <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                              ref="signupEmail" name="signupEmail" id="signupEmail" data-text="signupEmail" onChange={this.handleChange}  value={this.state.signupEmail}
-                                              placeholder="Email"/>
-                                           </div>   
-                                            </span>
-                                            {this.state.formerrors.signupEmail &&(
-                                              <span className="text-danger">{this.state.formerrors.signupEmail}</span> 
-                                            )}
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Area Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="areaName" name="areaName" id="areaName" data-text="areaName" onChange={this.handleChange} value={this.state.areaName}
+                                          placeholder="Enter Area Name"/>
                                         </div>
-                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
-                                            <label className="formLable col-lg-12 col-md-12">Mobile Number <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span ">
-                                             <div className="input-group inputBox-main  new_inputbx " >
-                                               <div className="input-group-addon remove_brdr inputIcon">
-                                                <i className="fa fa-mobile"></i>
-                                               </div>  
-                                               <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
-                                                className= "form-control UMname inputText form-control  has-content"
-                                                ref="mobNumber" name="mobNumber" id="mobNumber" data-text="mobNumber" placeholder="Mobile No"
-                                                onChange={this.handleChange} value={this.state.mobNumber}/>
-                                             </div>   
-                                            </span>
-                                            {this.state.formerrors.mobNumber &&(
-                                              <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
-                                            )}
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Other Info</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="otherInfo" name="otherInfo" id="otherInfo" data-text="otherInfo" onChange={this.handleChange} value={this.state.otherInfo}
+                                          placeholder="Enter Other Info"/>
                                         </div>
-                                      </div>
-                                      <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
-                                        <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createVoter.bind(this)} id="CreateUserModal" >Register</button>
-                                      </div>    
-                                  </form>
-                                </div>  
-                              </div>
-                            </section>
-                          </div>
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Date of Birth</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="date" className="formFloatingLabels form-control newinputbox" 
+                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" onKeyDown={e=>{e.preventDefault()}} value={this.state.dob}
+                                          placeholder="Enter Date of Birth"/>
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.constituencyName &&(
+                                        <span className="text-danger">{this.state.formerrors.constituencyName}</span> 
+                                      )}
+                                    </div>                                  
+                                  </div> 
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Email ID</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="emailId" name="emailId" id="emailId" data-text="emailId" onChange={this.handleChange}  value={this.state.emailId}
+                                          placeholder="Enter Email Id"/>
+                                        </div>
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Aadhar Card</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <InputMask mask="9999-9999-9999" pattern="^(0|[1-9][0-9-]*)$" 
+                                          className= "form-control UMname inputText form-control  has-content"
+                                          ref="aadharCard" name="aadharCard" id="aadharCard" data-text="aadharCard" placeholder="Enter AadharCard Number"
+                                          onChange={this.handleChange} value={this.state.aadharCard}/>
+                                        </div>
+                                      </span>
+                                    </div>                                  
+                                  <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Color<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                          <input type="button" name="color" value={1} className={this.state.color === 1 ? "btn btn-success btn-lg pad15":"btn btn-success pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={2} className={this.state.color === 2 ? "btn btn-primary btn-lg pad15":"btn btn-primary pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={3} className={this.state.color === 3 ? "btn btn-info btn-lg pad15":"btn btn-info pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={4} className={this.state.color === 4 ? "btn btn-warning btn-lg pad15":"btn btn-warning pad15"} onClick={this.handleChangeBtn}/>
+                                          <input type="button" name="color" value={5} className={this.state.color === 5 ? "btn btn-danger btn-lg pad15":"btn btn-danger pad15"} onClick={this.handleChangeBtn}/>
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.color &&(
+                                        <span className="text-danger">{this.state.formerrors.color}</span> 
+                                      )}
+                                  </div>
+                                </div>                                
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.favourite==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-favourite" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="favourite" onClick={this.toggleEventHandle.bind(this)} checked={this.state.favourite===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.favourite &&(
+                                        <span className="text-danger">{this.state.formerrors.favourite}</span> 
+                                      )}
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Alive/Dead<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.dead==false ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="dead" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="alive" onClick={this.toggleEventHandle.bind(this)} checked={this.state.dead===false} />
+                                            <div className="slider round">
+                                              <span className="on">Alive</span><span className="off">Dead</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.dead &&(
+                                        <span className="text-danger">{this.state.formerrors.dead}</span> 
+                                      )}
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">visited<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.visited==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-visited" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="visited" onClick={this.toggleEventHandle.bind(this)} checked={this.state.visited===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.visited &&(
+                                        <span className="text-danger">{this.state.formerrors.visited}</span> 
+                                      )}
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
+                                    <label className="formLable col-lg-12 col-md-12">Voted<label className="requiredsign">*</label></label>
+                                      <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
+                                        <div className="input-group inputBox-main" >
+                                        {this.state.voted==true ?
+                                          <label className="switch" title="Click mark as a voted">
+                                            <input type="checkbox" id="togBtn" name="non-voted" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                          :
+                                          <label className="switch" title="Click to mark as a non-voted">
+                                            <input type="checkbox" id="togBtn" name="voted" onClick={this.toggleEventHandle.bind(this)} checked={this.state.voted===true} />
+                                            <div className="slider round">
+                                              <span className="on">Yes</span><span className="off">No</span>
+                                            </div>
+                                          </label>
+                                        }
+                                        </div>
+                                      </span>
+                                      {this.state.formerrors.voted &&(
+                                        <span className="text-danger">{this.state.formerrors.voted}</span> 
+                                      )}
+                                  </div>
+                                  <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                    <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" onClick={this.createVoter.bind(this)} >Submit</button>
+                                  </div>
+                                </div>   
+                              </div>  
+                            </div>
+                          </section>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>   
-              </div>
+                </div>
+              </div>   
             </div>
           </div>
+        </div>
         );
     } 
 }

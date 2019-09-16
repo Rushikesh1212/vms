@@ -296,13 +296,26 @@ border-radius: 2px 0px 0px 2px;
 }
 
 #dashbordid{
-  position: absolute;
-  width: 82%;
-  right: 0px;
-  transition: all 0.8s;
-  top:50px;
-  /* background-color: #eee; */
-  }
-.marTop15{
-    margin-top:10px;
+    position: absolute;
+    width: 82%;
+    right: 0px;
+    transition: all 0.8s;
+    top:50px;
+    background-color: #eee; 
+}
+.newCssBar{
+    /*padding: 35px 12.5px;*/
+    background: #fff;
+    /*width: 110%;*/
+    height: 300px;
+}
+.newCssPie{
+    padding: 35px 12.5px;
+    background: #fff;
+    width: 110%;
+    height: 300px;
+}
+.tableClrPdg{
+    background: #ffffff;
+    margin-top: 30px;
 }

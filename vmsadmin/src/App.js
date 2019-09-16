@@ -6,8 +6,8 @@ import './lib/router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-axios.defaults.baseURL = 'http://vmsapi.ranjitsinhshinde.in/';
-// axios.defaults.baseURL = 'http://localhost:5014';
+// axios.defaults.baseURL = 'http://vmsapi.ranjitsinhshinde.in/';
+axios.defaults.baseURL = 'http://localhost:5014';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 class App extends Component {

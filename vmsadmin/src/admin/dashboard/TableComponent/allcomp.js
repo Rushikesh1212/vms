@@ -23,9 +23,9 @@
               <div className="row"><i className="fa fa-cog"></i></div>
               
             </div>
-            <div className="col-lg-7 marTop15">
-                <div>TOTAL USERS</div>
-                <div className="per"><strong>100</strong></div>
+            <div className="col-lg-7  ">
+                <div>CPU TRAFFIC</div>
+                <div className="per"><strong>90</strong><small>%</small></div>
             </div>
             
           </div>
@@ -41,8 +41,8 @@
               
             </div>
             <div className="col-lg-7  ">
-                <div>TOTAL PROPERTIES</div>
-                <div className="per"><strong>200</strong></div>
+                <div>LIKES</div>
+                <div className="per"><strong>41,410</strong></div>
             </div>
           </div>
         </div>
@@ -55,8 +55,8 @@
               
             </div>
             <div className="col-lg-7  ">
-                <div>BUY/RENT TRANSACTIONS</div>
-                <div className="per"><strong>500</strong></div>
+                <div>SALES</div>
+                <div className="per"><strong>760</strong></div>
             </div>
           </div>
         </div>
@@ -69,8 +69,8 @@
               
             </div>
             <div className="col-lg-7  ">
-                <div>TOTAL REVENUE</div>
-                <div className="per"><strong>1,50,00,000</strong></div>
+                <div>NEW MEMBERS</div>
+                <div className="per"><strong>2,000</strong></div>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
                     <div className="text-center" ><strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong></div>
                   <div className="col-lg-12 ">
                     <div className="row">
-                      <div ><img src="image/g1.png" width="100%"/></div>
+                      <div ><img src="/images/g1.png" className="graphImg"/></div>
                     </div>
                     
                   </div>        
