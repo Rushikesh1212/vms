@@ -85,7 +85,7 @@ export default  class List1 extends Component {
                     <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>
                               
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('SearchList')}>
 {/*                                        <ImageOverlay
                                         source={require('../../images/Morzine-Restaurants.jpg')}
                                         height={145}
@@ -93,21 +93,24 @@ export default  class List1 extends Component {
                                         overlayAlpha={0.6}
                                         containerStyle={{width:'100%'}}
                                         contentPosition="top">*/}
-                                            <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                                            <Icon name="search" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                                            <View style={{alignSelf:'center'}}>
                                                 <Text style={styles.title}>Search</Text>
                                             </View>
                                         {/*</ImageOverlay>*/}
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('Voter')}>
-                                              <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('Voter')}>
+                                              <Icon name="address-card" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                                              <View style={{alignSelf:'center'}}>
                                                   <Text style={styles.title}>Voter List</Text>
                                               </View>
                                   </TouchableOpacity>
                                 </View>
                                 <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('Distribution')}>
-                                            <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                                                <Text style={styles.title}>Distribution</Text>
+                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('Distribution')}>
+                                            <Icon name="color-lens" type="material-icons" size={50}  color="#337ab7" style={{}}/>
+                                            <View style={{alignSelf:'center',}}>
+                                                <Text style={styles.title}>Color-Wise Distribution</Text>
                                             </View>
                                   </TouchableOpacity>
                                 </View>

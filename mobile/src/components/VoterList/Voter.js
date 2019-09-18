@@ -80,7 +80,7 @@ export default  class Voter extends Component {
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
               <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('BoothList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('BoothList')}>
 {/*                                        <ImageOverlay
                       source={require('../../images/Morzine-Restaurants.jpg')}
                       height={145}
@@ -88,13 +88,15 @@ export default  class Voter extends Component {
                       overlayAlpha={0.6}
                       containerStyle={{width:'100%'}}
                       contentPosition="top">*/}
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                            <Icon name="th-list" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                            <View style={{alignSelf:'center'}}>
                               <Text style={styles.title}>Booth List</Text>
                           </View>
                       {/*</ImageOverlay>*/}
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                            <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+                            <Icon name="address-card" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                            <View style={{alignSelf:'center'}}>
                                 <Text style={styles.title}>All Voter List</Text>
                             </View>
                 </TouchableOpacity>
@@ -105,19 +107,21 @@ export default  class Voter extends Component {
                               <Text style={styles.title}>Alphabetical List</Text>
                           </View>
                 </TouchableOpacity>*/}
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('SurnameList')}>
+                            <Icon name="list-alt" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center',}}>
                               <Text style={styles.title}>Surname List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Address List</Text>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AgeList')}>
+                            <Icon name="sort-numeric-asc" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center',}}>
+                              <Text style={styles.title}>Age List</Text>
                           </View>
                 </TouchableOpacity>
               </View>              
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+{/*              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
+               <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'duplicate'})}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Duplicate List</Text>
                           </View>
@@ -127,63 +131,51 @@ export default  class Voter extends Component {
                               <Text style={styles.title}>Age List</Text>
                           </View>
                 </TouchableOpacity>
-              </View>
+              </View>*/}
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'favourite'})}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'favourite'})}>
+                            <Icon name="favorite" type="fontisto" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center'}}>
                               <Text style={styles.title}>Effective Voters</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+                            <Icon name="users" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center',}}>
                               <Text style={styles.title}>Family List</Text>
                           </View>
                 </TouchableOpacity>
               </View>
-{/*              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Area Wise Voters</Text>
-                          </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Effective Voters</Text>
-                          </View>
-                </TouchableOpacity>
-              </View>*/}
+
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+{/*                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
                           <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
                               <Text style={styles.title}>Caste List</Text>
                           </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'dead'})}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                </TouchableOpacity>*/}
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'dead'})}>
+                            <Icon name="user-times" type="font-awesome" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center',}}>
                               <Text style={styles.title}>Dead Voters</Text>
                           </View>
                 </TouchableOpacity>
-              </View>
-              <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                              <Text style={styles.title}>Gaon List</Text>
-                          </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+                            <Icon name="contact-phone" type="material-icons" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center'}}>
                               <Text style={styles.title}>Phone No List</Text>
                           </View>
                 </TouchableOpacity>
               </View>
               <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList')}>
+                            <Icon name="color-lens" type="material-icons" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center'}}>
                               <Text style={styles.title}>Color List</Text>
                           </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'visited'})}>
-                          <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,paddingVertical:20}} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'visited'})}>
+                            <Icon name="user-check" type="feather" size={50}  color="#337ab7" style={{}}/>
+                          <View style={{alignSelf:'center'}}>
                               <Text style={styles.title}>Visited Voters</Text>
                           </View>
                 </TouchableOpacity>

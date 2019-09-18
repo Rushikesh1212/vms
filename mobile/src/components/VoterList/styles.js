@@ -149,32 +149,18 @@ export default StyleSheet.create({
     fontFamily:"Montserrat-SemiBold",
   },
   statText:{
-    fontSize:18
+    fontSize:18,
+    fontFamily:"Montserrat-Regular"
+  },
+  head: { 
+    height: 40, 
+    backgroundColor: '#f1f8ff',
+    paddingHorizontal:0
+  },
+  text:{
+    fontFamily:"Montserrat-SemiBold",
+    alignSelf:'center',
+    paddingVertical:10
   }
-  // containerPlan:{
-  //    backgroundColor:'transparent',
-  //   padding:0,
-  //   margin:0,
-  //   paddingTop:0,
-  //   // position:'absolute',
-
-  //   // marginTop:-10,
-  //   // marginBottom:-10,
-  //   ...Platform.select({
-  //     ios:{
-  //        height: 85 ,
-  //   // paddingTop:25,
-  //   // position:'absolute',
-  //   backgroundColor:'transparent',
-  //   // marginTop: 0 : 0,
-
-  //     },
-  //     android : {
-
-  //       backgroundColor:'transparent',
-  //       // alignItems:'center'
-  //     }
-  //   }) 
-  // }
-
+  
 });

@@ -19,8 +19,10 @@ import UserProfile from "../components/UserProfile/UserProfile.js";
 import Voter from "../components/VoterList/Voter.js";
 import BoothList from "../components/VoterList/BoothList.js";
 import AgeList from "../components/VoterList/AgeList.js";
+import SurnameList from "../components/VoterList/SurnameList.js";
 import AllVoterList from "../components/VoterList/AllVoterList.js";
 import Distribution from "../components/Distribution/Distribution.js";
+import DisColorWise from "../components/Distribution/DisColorWise.js";
 import Analysis from "../components/Analysis/Analysis.js";
 
 let SlideFromRight = (index, position, width)=>{
@@ -149,6 +151,13 @@ const HomeStack = createStackNavigator({
     }
   },
 
+  SurnameList: {
+    screen: SurnameList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   AllVoterList: {
     screen: AllVoterList,
     navigationOptions: {
@@ -158,6 +167,13 @@ const HomeStack = createStackNavigator({
 
   Distribution: {
     screen: Distribution,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  DisColorWise: {
+    screen: DisColorWise,
     navigationOptions: {
       header: null
     }

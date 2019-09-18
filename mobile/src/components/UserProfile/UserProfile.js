@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,AsyncStorage} from "react-native";
+import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,AsyncStorage,Linking} from "react-native";
 import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
@@ -38,14 +38,24 @@ export default  class UserProfile extends Component {
   componentWillMount(){
   }
   componentDidMount(){
-    var user_id = this.props.navigation.getParam('user_id','No id')
-    this.setState({voter_id:user_id})
+    var user_id ;
+    var token
+    AsyncStorage.multiGet(['token','user_id'])
+          .then((data)=>{
+          // console.log('user',data)
+          token = data[0][1]
+          user_id = data[1][1]
+          this.setState({user_id:user_id})
+        })
+    var voter_id = this.props.navigation.getParam('user_id','No id')
+    this.setState({voter_id:voter_id, user_id:user_id})
     // console.log('user_id',user_id)
-    axios.get('api/voters/get/one/'+user_id)
+    axios.get('api/voters/get/one/'+voter_id)
       .then(response=>{
         // console.log('response',response)
         this.setState({
           data              : response.data,
+          fullName          : response.data.fullName,
           mobileNumber      : response.data.mobileNumber,
           whatsAppNumber    : response.data.whatsAppNumber,
           dead              : response.data.dead,
@@ -59,7 +69,7 @@ export default  class UserProfile extends Component {
           emailId           : response.data.emailId,
           aadharCard        : response.data.aadharCard,
           cast              : response.data.cast,
-          favourite         : response.data.favourite
+          featured          : response.data.featured
         })
         this.onVisitToggle()
         this.onDeadToggle()
@@ -129,17 +139,31 @@ export default  class UserProfile extends Component {
   updateColor(no){
     this.setState({color:no})
   }
-  favouriteVoter(){
-    if(this.state.favourite == null){
-      this.setState({favourite:true})
-    }else{
-      this.setState({favourite:!this.state.favourite})
+  featuredVoter(){
+      var featured
+      this.setState({featured:!this.state.featured})
+      featured = {
+        voterId : this.state.voter_id,
+        userId  : this.state.user_id,
+        featured: !this.state.featured
     }
+    console.log('featured',featured)
+    axios.post('/api/voters/updateFeatured',featured)
+      .then(res=>{
+        // console.log('res',res)
+        if(this.state.featured == true){
+          Alert.alert("","Voter Featured")
+        }else{
+          Alert.alert("","Voter removed from Featured")
+        }
+      })
+      .catch(err=>{
+        console.log('err',err)
+      })
   }
   updateVoter(){
-    var userId = '5d790d5c70d8966274bbe3fa'
     var updateValues = {
-      userId            : userId,
+      userId            : this.state.user_id,
       voter_id          : this.state.voter_id,
       mobileNumber      : this.state.mobileNumber,
       whatsAppNumber    : this.state.whatsAppNumber,
@@ -154,9 +178,9 @@ export default  class UserProfile extends Component {
       aadharCard        : this.state.aadharCard,
       color             : this.state.color,
       cast              : this.state.cast,
-      favourite         : this.state.favourite,
+      featured          : this.state.featured,
     }
-    console.log('updateValues',updateValues)
+    // console.log('updateValues',updateValues)
     axios.patch('api/voters/patch',updateValues)
       .then(response=>{
         // console.log('response',response)
@@ -167,15 +191,16 @@ export default  class UserProfile extends Component {
         Alert.alert('Something went wrong')
       })
   }
-  
+  sendWhatspp(){
+    console.log('sendWhatspp')
+    var message = 'Hello '+this.state.fullName+', your Information has been updated'
+    Linking.openURL('whatsapp://send?text='+message+'&phone=91' + this.state.whatsAppNumber)
+  }
   render(){
 
     const { navigate, goBack, state } = this.props.navigation;
 
     const colorBall = [{No:1,color:'#5cb85c'},{No:2,color:'#337ab7'},{No:3,color:'#5bc0de'},{No:4,color:'#f0ad4e'},{No:5,color:'#d9534f'},]
-    console.log('visited',this.state.visited)
-    console.log('voted',this.state.voted)
-    console.log('dead',this.state.dead)
     // const menu = <MenuBar navigate={navigate} />;
    
     // var navigationView = <NotificationCommon closeDrawer={this.closeDrawer} notificationData={[]} navigation={this.props.navigation}/>
@@ -196,11 +221,11 @@ export default  class UserProfile extends Component {
 {/*                    <TouchableOpacity style={{ paddingTop:8}}>
                         <Icon name="account-edit" type="material-community" size={30}  color="#333" />
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.topIcons}>
+                    <TouchableOpacity style={styles.topIcons} onPress={this.sendWhatspp.bind(this)}>
                         <Icon name="whatsapp" type="font-awesome" size={30}  color={"#5cb85c"} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.topIcons} onPress={this.favouriteVoter.bind(this)}>
-                        <Icon name="star" type="font-awesome" size={30}  color={this.state.favourite == true ? "#FFA500" : "#aaa"} />
+                    <TouchableOpacity style={styles.topIcons} onPress={this.featuredVoter.bind(this)}>
+                        <Icon name="star" type="font-awesome" size={30}  color={this.state.featured == true ? "#FFA500" : "#aaa"} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.topIcons} onPress={this.updateVoter.bind(this)}>
                         <Icon name="save" type="entypo" size={30}  color="#333" />

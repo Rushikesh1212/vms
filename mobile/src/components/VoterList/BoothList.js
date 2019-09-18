@@ -71,6 +71,22 @@ export default  class BoothList extends Component {
     this._drawer.open()
   }
 
+  updateNameSearch = boothName => {
+    this.setState({ boothName });
+    // console.log('searchText',voterName)
+    var boothName = {
+      boothName
+    }
+    // console.log('searchValue',voterName)
+    // axios.post('/api/search/voters/',voterName)
+    //   .then(response=>{
+    //     // console.log('response. for search',response)
+    //     this.setState({data:response.data})
+    //   })
+    //   .catch(error=>{
+    //     // console.log('error',error)
+    //   })
+  }
   
   render(){
 
@@ -127,11 +143,11 @@ export default  class BoothList extends Component {
                     this.state.data.length > 0 ?
                       this.state.data.map((booth,index)=>{
                         return(
-                          <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('SearchList',{category:'boothName',boothName:booth})} style={{paddingVertical:20,paddingHorizontal:15,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
-                            <Text style={{fontSize:22, color:"#111",fontWeight:'bold'}}>{index+1}- {booth}</Text>
-                            <Text style={styles.statText}>Total Female: 326</Text>
-                            <Text style={styles.statText}>Total Male: 222</Text>
-                            <Text style={styles.statText}>Total: 548</Text>
+                          <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'boothName',boothName:booth.boothName})} style={{paddingVertical:20,paddingHorizontal:15,marginBottom:10,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
+                            <Text style={{fontSize:20, color:"#111",fontFamily:'Montserrat-Bold'}}>{index+1}- {booth.boothName}</Text>
+                            <Text style={styles.statText}>Total Female: {booth.female}</Text>
+                            <Text style={styles.statText}>Total Male: {booth.male}</Text>
+                            <Text style={styles.statText}>Total: {booth.total}</Text>
                           </TouchableOpacity>
                         )
                       })

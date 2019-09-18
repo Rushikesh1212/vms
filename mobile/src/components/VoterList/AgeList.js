@@ -30,39 +30,11 @@ export default  class AgeList extends Component {
     };
   }
   componentDidMount(){
-    var category = this.props.navigation.getParam('category','')
-    var boothName = this.props.navigation.getParam('boothName','')
-    console.log('category',category)
-    // console.log('boothName',boothName)
-    if(category==''){
-      axios.get('api/voters/get')
-        .then(response=>{
-          // console.log(response.data.length)
-          this.setState({data:response.data})
-        })
-        .catch(error=>{
-          console.log(error)
-        })
-    }else{
-      var searchCategory
-      if(category=='visited'){
-        searchCategory={
-          visited:true
-        }
-      }else if(category == 'dead'){
-        searchCategory={
-          dead:true
-        }  
-      }else if(category == 'boothName'){
-        searchCategory={
-          boothName:boothName
-        }
-      }else if(category == 'favourite'){
-        searchCategory={
-          favourite:true
-        }
+      var ageCategory = {
+        voterAgeFrom: '18',
+        voterAgeTo: '30'
       }
-      axios.post('/api/search/voters/',searchCategory)
+      axios.post('/api/search/voters/',ageCategory)
         .then(response=>{
           // console.log('response. for search',response)
           this.setState({data:response.data})
@@ -70,8 +42,6 @@ export default  class AgeList extends Component {
         .catch(error=>{
           // console.log('error',error)
         })
-      console.log('searchCategory',searchCategory)
-    }
   };
   componentWillUnmount() {
     // BackHandler.removeEventListener('hardwareBackPress',this.androidBackHandler.bind(this));
@@ -183,10 +153,10 @@ export default  class AgeList extends Component {
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1}}>{index+1}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.fullName}</Text>
-                              <Text style={{fontSize:18, color:"#111",flex:0.2}}>F81</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.2}}>{voter.gender}{voter.age}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                              <Text style={{color:"#111",flex:0.2}}>Booth:</Text>
+                              <Text style={{color:"#111",flex:0.15}}>Booth: </Text>
                               <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline"}}>{voter.boothName}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}><Icon name="phone" style={{marginTop:5}} type="font-awesome" size={15}  color="#333" /><Text style={{color:"#111",marginLeft:5}}>{voter.mobileNumber == "" ? "No phone number": voter.mobileNumber}</Text></View>             

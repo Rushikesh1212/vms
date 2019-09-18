@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert} from "react-native";
-import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
+import { Header, Button, Icon,Card,Avatar,CheckBox} from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
 
@@ -76,7 +76,7 @@ export default  class Distribution extends Component {
 {/*            <HeaderDy goBack={goBack} headerTitle="Notifications" />*/}
             <ScrollView  keyboardShouldPersistTaps="handled" >
               <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('DisColorWise')}>
 {/*                                        <ImageOverlay
                       source={require('../../images/Morzine-Restaurants.jpg')}
                       height={145}

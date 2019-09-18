@@ -32,7 +32,7 @@ export default  class AllVoterList extends Component {
   componentDidMount(){
     var category = this.props.navigation.getParam('category','')
     var boothName = this.props.navigation.getParam('boothName','')
-    console.log('category',category)
+    // console.log('category',category)
     // console.log('boothName',boothName)
     if(category==''){
       axios.get('api/voters/get')
@@ -43,6 +43,26 @@ export default  class AllVoterList extends Component {
         .catch(error=>{
           console.log(error)
         })
+    }else if(category == 'boothName'){
+        var booth={
+          boothName:boothName
+        }
+        axios.post('/api/voters/boothVoters',booth)
+          .then(res=>{
+            // console.log('res',res)
+            this.setState({data:res.data})
+          })
+          .catch(err=>{
+            console.log('err',err)
+          })
+    }else if(category == 'duplicate'){
+        axios.get('/api/voters/duplicateVoters')
+          .then(res=>{
+            console.log('res',res)
+          })
+          .catch(err=>{
+            console.log('err',err)
+          })
     }else{
       var searchCategory
       if(category=='visited'){
@@ -53,13 +73,9 @@ export default  class AllVoterList extends Component {
         searchCategory={
           dead:true
         }  
-      }else if(category == 'boothName'){
-        searchCategory={
-          boothName:boothName
-        }
       }else if(category == 'favourite'){
         searchCategory={
-          favourite:true
+          featured:true
         }
       }
       axios.post('/api/search/voters/',searchCategory)
@@ -70,7 +86,6 @@ export default  class AllVoterList extends Component {
         .catch(error=>{
           // console.log('error',error)
         })
-      console.log('searchCategory',searchCategory)
     }
   };
   componentWillUnmount() {
@@ -107,10 +122,74 @@ export default  class AllVoterList extends Component {
     this._drawer.open()
   }
 
+  handleSearch = voterName => {
+    this.setState({ voterName });
+    var category = this.props.navigation.getParam('category','')
+    console.log('searchText',this.state.searchCategory)
+    var searchValue;
+    if(category == 'favourite'){
+      searchValue = {
+        "featured"    :true,
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :"",
+        "aadharCard"  :this.state.searchCategory == 'Aadhar Card' ? voterName : "",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :"",
+        "idNumber"    :this.state.searchCategory == 'Card No' ? voterName : "",
+        "voterAgeFrom":"",
+        "voterName"   :this.state.searchCategory == 'Name' ? voterName : ""
+      }
+    }else if(category == 'dead'){
+      searchValue = {
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :true,
+        "aadharCard"  :this.state.searchCategory == 'Aadhar Card' ? voterName : "",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :"",
+        "idNumber"    :this.state.searchCategory == 'Card No' ? voterName : "",
+        "voterAgeFrom":"",
+        "voterName"   :this.state.searchCategory == 'Name' ? voterName : ""
+      }
+    }else if(category == 'visited'){
+      searchValue = {
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :true,
+        "dead"        :'',
+        "aadharCard"  :this.state.searchCategory == 'Aadhar Card' ? voterName : "",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :"",
+        "idNumber"    :this.state.searchCategory == 'Card No' ? voterName : "",
+        "voterAgeFrom":"",
+        "voterName"   :this.state.searchCategory == 'Name' ? voterName : ""
+      }
+    }
+    console.log('searchValue',searchValue)
+    axios.post('/api/search/voters/',searchValue)
+      .then(response=>{
+        // console.log('response. for search',response)
+        this.setState({data:response.data})
+      })
+      .catch(error=>{
+        console.log('error',error)
+      })
+  }
   
   render(){
 
     const { navigate, goBack, state } = this.props.navigation;
+    var category = this.props.navigation.getParam('category','')
+    var boothName = this.props.navigation.getParam('boothName','')
+
     // console.log('subscriptionList in render',this.state.data)
     // const menu = <MenuBar navigate={navigate} />;
    
@@ -126,17 +205,22 @@ export default  class AllVoterList extends Component {
             <ScrollView  keyboardShouldPersistTaps="handled" >
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
                 <View style={{flex:0.3,paddingTop:15}}>
-                  <Text style={{color:"#f1f1f1"}}>Enter Booth</Text>
+                  <Text style={{color:"#f1f1f1"}}>Booth Name</Text>
                 </View>
-                <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
+                <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",}}>
+                  {
+                    boothName == "" ? 
                         <TextInput
                           style={{height: 35,borderColor: this.state.borderColor,borderBottomWidth: 2,paddingLeft:10}}
                           placeholder="Booth"
                           onChangeText = {this.updateNameSearch}
                           value={this.state.name}
                           onBlur={ () => this.setState({borderColor:'#666'}) }
-                          onFocus={ () => this.setState({borderColor:'#337ab7'}) }
+                          onFocus={ () => this.setState({borderColor:'#000'}) }
                         />
+                      :
+                        <Text style={{fontSize:15,fontWeight:'bold',color:'#111'}}>{boothName}</Text>
+                  }
                 </View>
               </View>
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
@@ -152,8 +236,8 @@ export default  class AllVoterList extends Component {
                           }
                           >
                           <Picker.Item label="Name" value="Name" />
-                          <Picker.Item label="Aadhar Card" value="Aadhar" />
-                          <Picker.Item label="Booth" value="Booth" />
+                          <Picker.Item label="Aadhar Card" value="Aadhar Card" />
+                          <Picker.Item label="Card No" value="Card No" />
                         </Picker>
                 </View>
               </View>
@@ -162,7 +246,7 @@ export default  class AllVoterList extends Component {
                         <TextInput
                         style={{height: 40,paddingLeft:5,borderColor: this.state.cardBorderColor,borderBottomWidth: 2}}
                         placeholder={this.state.searchCategory}
-                        onChangeText={(searchText) => this.setState({searchText})}
+                        onChangeText={this.handleSearch}
                         value={this.state.searchText}
                         onBlur={ () => this.setState({cardBorderColor:'#666'}) }
                         onFocus={ () => this.setState({cardBorderColor:'#337ab7'}) }
@@ -179,17 +263,17 @@ export default  class AllVoterList extends Component {
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1}}>{index+1}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.fullName}</Text>
-                              <Text style={{fontSize:18, color:"#111",flex:0.2}}>F81</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.2}}>{voter.gender}{voter.age}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                              <Text style={{color:"#111",flex:0.2}}>Booth:</Text>
+                              <Text style={{color:"#111",flex:0.15}}>Booth: </Text>
                               <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline"}}>{voter.boothName}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}><Icon name="phone" style={{marginTop:5}} type="font-awesome" size={15}  color="#333" /><Text style={{color:"#111",marginLeft:5}}>{voter.mobileNumber == "" ? "No phone number": voter.mobileNumber}</Text></View>             
                           </TouchableOpacity>
                         )
                       })
-                    : null
+                    : <Text>No Voter Found</Text>
                   : <Loading />
                 }
               </View>
