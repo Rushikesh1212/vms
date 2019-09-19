@@ -103,7 +103,7 @@ componentDidMount(){
                       <Route path="/csvUpload" component={csvUpload} exact />
                       {/*<Route path="/dashboard" component={Dashboard} exact />*/}
                       <Route path="/dashboard" component={AdminContent} exact />
-                      <Route path="/" component={Dashboard} exact />
+                      <Route path="/" component={AdminContent} exact />
                     </Switch>        
                   </div>
                 </div>
