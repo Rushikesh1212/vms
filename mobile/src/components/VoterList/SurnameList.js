@@ -27,21 +27,33 @@ export default  class SurnameList extends Component {
       gaon: 'Select Gaon',
       data: '',
       searchCategory:'Name',
-      tableHead: ['Surname','Total Voter'],
-      tableData: []
+      boothData:[],
+      gaonList:[],
     };
   }
   componentDidMount(){
-    axios.get('api/voters/surnameList')
+
+    axios.get('api/voters/villagelist')
       .then(res=>{
-        console.log(res.data)
-        const data = []
-        for(var i = 0; i < res.data.length; i++){
-          // data.push(`${res.data[i]._id}`,`${res.data[i].total}`)
-          data.push([res.data[i]._id,res.data[i].total,4])
+        this.setState({gaonList:res.data})
+        var village = {
+          villageName: res.data[0]
         }
-        this.setState({tableData:data})
-        // console.log('data',data)
+        axios.post('/api/voters/boothbyvillage',village)
+          .then(res=>{
+            this.setState({boothData:res.data,boothName:res.data[0]._id})
+            var booth = {boothName:res.data[0]._id}
+            axios.post('api/voters/surnameList',booth)
+              .then(res=>{
+                this.setState({data:res.data})
+              })
+              .catch(err=>{
+                console.log('err',err)
+              })
+          })
+          .catch(err=>{
+            console.log(err)
+          })
       })
       .catch(err=>{
         console.log('err',err)
@@ -80,7 +92,19 @@ export default  class SurnameList extends Component {
   openControlPanel = () => {
     this._drawer.open()
   }
-
+  boothChange(boothName){
+    this.setState({boothName:boothName})
+      var booth = {
+        "boothName":boothName
+      }
+    axios.post('api/voters/surnameList',booth)
+      .then(res=>{
+        this.setState({data:res.data})
+      })
+      .catch(err=>{
+        console.log('err',err)
+      })
+  }
   updateNameSearch = voterName => {
     this.setState({ voterName });
     // console.log('searchText',voterName)
@@ -92,10 +116,19 @@ export default  class SurnameList extends Component {
   _alertIndex(index) {
     Alert.alert(`This is row ${index + 1}`);
   }
+  gaonChange(gaonName){
+    this.setState({gaonName:gaonName})
+    var village = {
+      villageName:gaonName
+    }
+    axios.post('/api/voters/boothbyvillage',village)
+      .then(res=>{
+        this.setState({boothData:res.data})
+      })
+  }
   render(){
 
     const { navigate, goBack, state } = this.props.navigation;
-    // console.log('subscriptionList in render',this.state.data)
     // const menu = <MenuBar navigate={navigate} />;
    const element = (data, index) => (
       <TouchableOpacity onPress={() => this._alertIndex(index)}>
@@ -104,8 +137,6 @@ export default  class SurnameList extends Component {
         </View>
       </TouchableOpacity>
     );
-    // var navigationView = <NotificationCommon closeDrawer={this.closeDrawer} notificationData={[]} navigation={this.props.navigation}/>
-
     return(
         <Drawer
             ref={(ref) => this._drawer = ref}
@@ -114,69 +145,77 @@ export default  class SurnameList extends Component {
             >
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
-              {/*<View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
+                <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
+                      <View style={{flex:0.3,paddingTop:15}}>
+                        <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-Regular"}}>Select Gaon</Text>
+                      </View>
+                     <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
+                              {
+                                this.state.gaonList.length > 0 ?
+                                  <Picker
+                                  selectedValue={this.state.gaonName}
+                                  style={{height: 25,fontFamily:"Montserrat-Regular"}}
+                                  onValueChange={(itemValue, itemIndex) =>
+                                    this.gaonChange(itemValue)
+                                  }
+                                  >
+                                    {
+                                      this.state.gaonList.map(gaon=>{
+                                        return <Picker.Item label={gaon} value={gaon} />
+                                      })
+                                    }
+                                  </Picker>
+                                : null
+                              }
+                      </View>
+                    </View>
+                <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
                 <View style={{flex:0.3,paddingTop:15}}>
                   <Text style={{color:"#f1f1f1"}}>Booth Name</Text>
                 </View>
-                <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",}}>
-                        <TextInput
-                          style={{height: 35,borderColor: this.state.borderColor,borderBottomWidth: 2,paddingLeft:10}}
-                          placeholder="Booth"
-                          onChangeText = {this.updateNameSearch}
-                          value={this.state.name}
-                          onBlur={ () => this.setState({borderColor:'#666'}) }
-                          onFocus={ () => this.setState({borderColor:'#000'}) }
-                        />
-                </View>
-              </View>*/}
-              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
-                <View style={{flex:0.3,paddingTop:5}}>
-                  <Text style={{color:"#f1f1f1"}}>Search By</Text>
-                </View>
-                <View style={{flex:0.7,height: 25,paddingBottom:10, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
-                        <Picker
-                          selectedValue={this.state.searchCategory}
-                          style={{height: 25}}
-                          onValueChange={(itemValue, itemIndex) =>
-                            this.setState({searchCategory: itemValue})
-                          }
-                          >
-                          <Picker.Item label="Name" value="Name" />
-                          <Picker.Item label="Aadhar Card" value="Aadhar Card" />
-                          <Picker.Item label="Card No" value="Card No" />
-                        </Picker>
+                <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
+                        {
+                          this.state.boothData.length > 0 ?
+                            <Picker
+                            selectedValue={this.state.boothName}
+                            style={{height: 25}}
+                            onValueChange={(itemValue, itemIndex) =>
+                              this.boothChange(itemValue)
+                            }
+                            >
+                              {
+                                this.state.boothData.map(booth=>{
+                                  return <Picker.Item label={booth._id} value={booth._id} />
+                                })
+                              }
+                          </Picker>
+                        : null
+                      }
                 </View>
               </View>
-              <View style={{flexDirection:'row',paddingRight:10,paddingLeft:5,paddingBottom:8}}>
-                <View style={{flex:0.8}}>
-                        <TextInput
-                        style={{height: 40,paddingLeft:5,borderColor: this.state.cardBorderColor,borderBottomWidth: 2}}
-                        placeholder={this.state.searchCategory}
-                        onChangeText={(searchText) => this.setState({searchText})}
-                        value={this.state.searchText}
-                        onBlur={ () => this.setState({cardBorderColor:'#666'}) }
-                        onFocus={ () => this.setState({cardBorderColor:'#337ab7'}) }
-                      />
-                </View>
-              </View>
-              <View style={{paddingVertical:5, backgroundColor:"#eee",paddingHorizontal:5}}>
-                          <View style={{backgroundColor:"#fff"}}>
-                            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                              <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
-                              <Rows data={this.state.tableData} textStyle={styles.text}/>
-                              {/*{
-                                this.state.tableData.map((rowData, index) => (
-                                  <TableWrapper key={index} style={styles.row}>
-                                    {
-                                      rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 2 ? element(cellData, index) : cellData} textStyle={styles.text}/>
-                                      ))
-                                    }
-                                  </TableWrapper>
-                                ))
-                              }*/}
-                            </Table>
-                          </View>
+              <View style={{padding:10}}>
+              {
+                this.state.data && this.state.data.length > 0 ?
+                  <View style={{flexDirection:'row'}}>
+                    <View style={styles.headCol1}><Text style={styles.tableHeadText}>Surname</Text></View>
+                    <View style={styles.headCol2}><Text style={styles.tableHeadText}>Count</Text></View>
+                  </View>
+                :
+                null
+              }
+              {
+                this.state.data ?
+                  this.state.data.map((sur,index)=>{
+                    return(
+                        <TouchableOpacity style={{flexDirection:'row'}} key={index} onPress={()=>this.props.navigation.navigate("AllVoterList",{surname:sur._id,category:"surname",boothName:this.state.boothName})}>
+                          <View style={{height:50,flex:0.5,borderWidth:1,borderColor:"#333",justifyContent:"center"}}><Text style={styles.tableBodyText}>{sur._id}</Text></View>
+                          <View style={{height:50,flex:0.5,borderWidth:1,borderColor:"#333",justifyContent:"center"}}><Text style={styles.tableBodyText}>{sur.count}</Text></View>
+                        </TouchableOpacity>
+                    )
+                  }) 
+                :
+                <Loading />
+              }
               </View>
             </ScrollView>
         </Drawer>

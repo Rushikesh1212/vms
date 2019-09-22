@@ -269,4 +269,10 @@ export default StyleSheet.create({
     fontSize:13,
     fontFamily:"Montserrat-Regular",
   },
+    tableHeadText:{alignSelf:"center",fontFamily:"Montserrat-Bold",color:"#000"},
+  tableBodyText:{alignSelf:"center",fontFamily:"Montserrat-Regular",color:"#000"},
+  headCol1:{height:50,flex:0.1,borderWidth:1,borderBottomWidth:0,borderRightWidth:0,borderColor:"black",justifyContent:"center"},
+  headCol2:{height:50,flex:0.6,borderWidth:1,borderBottomWidth:0,borderRightWidth:0,borderColor:"black",justifyContent:"center"},
+  headCol3:{height:50,flex:0.3,borderWidth:1,borderBottomWidth:0,borderColor:"black",justifyContent:'center'}
+
 });

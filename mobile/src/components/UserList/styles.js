@@ -25,13 +25,25 @@ export default StyleSheet.create({
     width:'100%',
     position:'absolute',
     bottom:0,
-    height:0,
+    height:50,
     flexDirection:'row',
-    backgroundColor:'#fff',
-    paddingHorizontal:0,
+    backgroundColor:'#5cb85c',
+    paddingHorizontal:20,
     borderTopWidth:1,
-    borderTopColor:'#eee',
-    justifyContent:'center'
+    borderTopColor:'#ccc',
+    elevation: 15,
+    justifyContent:'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    borderTopLeftRadius:10,
+    borderTopRightRadius:10
+  },
+  footerText:{
+    alignSelf:"center",
+    fontFamily:'Montserrat-Bold',
+    color:"#fff"
   },
     userTitleTxt:{
     fontSize: 22,
@@ -224,6 +236,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     paddingLeft:20,
     color:"#111",
+    fontFamily:"Montserrat-SemiBold"
     // flex:0.6
   },
   colorBall1:{
@@ -261,5 +274,5 @@ export default StyleSheet.create({
     marginLeft:5,
     backgroundColor:'#d9534f'
   },
-  topIcons:{ paddingTop:8,alignSelf:'flex-end',marginLeft:8}
+  topIcons:{ paddingTop:8,alignSelf:'flex-end',marginLeft:30}
 });

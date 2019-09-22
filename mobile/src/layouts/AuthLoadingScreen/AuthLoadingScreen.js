@@ -25,7 +25,7 @@ export default class AuthLoadingScreen extends React.Component {
           token = data[0][1]
           user_id = data[1][1]
         })
-        console.log('userToken',userToken)
+        // console.log('userToken',userToken)
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 

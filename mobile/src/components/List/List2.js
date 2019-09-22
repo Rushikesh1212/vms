@@ -3,7 +3,14 @@ import { AppRegistry,StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity
 import { Header, Button, Icon,Card,Avatar,Tooltip} from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
-
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from 'react-native-chart-kit'
 import SideMenu from 'react-native-side-menu';
 import PropTypes from "prop-types";
 import Drawer from 'react-native-drawer';
@@ -23,13 +30,19 @@ import Collapsible from 'react-native-collapsible';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import AlertPro from "react-native-alert-pro";
 import Modal from "react-native-modal";
+import Loading from '../../layouts/Loading/Loading.js';
 
 // import QRCodeS/canner from 'react-native-qrcode-scanner';
 
 
-
+const screenWidth = Dimensions.get('window').width
 const window = Dimensions.get('window');
-
+const chartConfig =   {
+    backgroundColor: '#fff',
+    backgroundGradientFrom: '#fff',
+    backgroundGradientTo: '#fff',
+    color: (opacity = 1) => `rgba(${0}, ${0}, ${0}, ${opacity})`
+  }
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 260;
  
@@ -55,6 +68,72 @@ export default class List2 extends Component {
   }
 
   componentDidMount(){
+    axios.get('/api/reports/get/dashboardTab')
+      .then(res=>{
+        this.setState({dashboardData:res.data})
+      })
+      .catch(err=>{
+        console.log('err at list2', err)
+      })
+
+    axios.get('/api/reports/get/colorlist')
+      .then(res=>{
+        const pieData = [
+          {
+            name: 'OUR',
+            color: '#5cb85c',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:1,
+            count:0
+          },
+          {
+            name: 'KNOWN',
+            color: '#337ab7',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:2,
+            count:0
+          },
+          {
+            name: 'UNKNOWN',
+            color: '#5bc0de',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:3,
+            count:0
+          },
+          {
+            name: 'DOUBT',
+            color: '#f0ad4e',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:4,
+            count:0
+          },
+          {
+            name: 'OPP',
+            color: '#d9534f',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:5,
+            count:0
+          },
+        ];
+        pieData.map((pie)=>{
+            res.data.map((data)=>{
+              if(data._id == pie._id){
+                pie.count = data.count
+              }
+          })
+          return pieData
+        })
+      console.log('pieData',pieData)
+        this.setState({chartData:pieData})
+      })
+      .catch(err=>{
+        console.log('err',err)
+      })
     // BackHandler.addEventListener('hardwareBackPress',this.androidBackHandler.bind(this));
   }
   componentWillUnmount() {
@@ -92,51 +171,135 @@ export default class List2 extends Component {
   }
 
 handleCollapse=(state)=>{
-  // console.log('index',index)
-  // let {isCollapsed} = this.state
-  // let newState = !isCollapsed[index];
-  // isCollapsed[index] = newState;
-  // console.log('newState',newState)
-  // this.setState({
-  //   isCollapsed : isCollapsed
-  // })
-  // console.log('isCollapsed',this.state.isCollapsed)
   this.setState({[state] : !this.state[state]})
-
 }
 
 
   
   render(){
     const { navigate, goBack, state } = this.props.navigation;
+    const pieData = [
+          {
+            name: 'OUR',
+            color: '#5cb85c',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:1,
+            count:0
+          },
+          {
+            name: 'KNOWN',
+            color: '#337ab7',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:2,
+            count:0
+          },
+          {
+            name: 'UNKNOWN',
+            color: '#5bc0de',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:3,
+            count:0
+          },
+          {
+            name: 'DOUBT',
+            color: '#f0ad4e',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:4,
+            count:0
+          },
+          {
+            name: 'OPP',
+            color: '#d9534f',
+            legendFontColor: '#111',
+            legendFontSize: 15,
+            _id:5,
+            count:0
+          },
+        ];
+        console.log('render')
     const menu = <Menu navigate={navigate} isOpen={this.state.isOpen}/>;
       return (
 
       <React.Fragment> 
                 <View style={{ flex: 1,borderWidth:0,padding:0,backgroundColor:'#fff'}}>
+                  {
+                    this.state.dashboardData ? 
                   <View style={{flex:1,}}>
                     <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>                     
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('Analysis')}>
-                                            <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                                                <Text style={styles.title}>Analysis</Text>
+                                  <TouchableOpacity style={styles.box} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                                            <View style={{alignSelf:'center',paddingHorizontal:20,}}>
+                                                <Text style={styles.titleNo}>{this.state.dashboardData.totalVoters}</Text>
+                                            </View>
+                                            <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                <Text style={styles.title}>Total Voters</Text>
                                             </View>
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={{flex:0.48,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
-                                              <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                                                  <Text style={styles.title}>Utility</Text>
+                                  <TouchableOpacity style={styles.box}>
+                                              <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                  <Text style={styles.titleNo}>{this.state.dashboardData.updatedVoters}</Text>
+                                              </View>
+                                              <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                  <Text style={styles.title}>Updated Voters</Text>
                                               </View>
                                   </TouchableOpacity>
                                 </View>
+                                <View style={{flex:1,paddingTop:20,paddingHorizontal:10,marginBottom:15}}>
+                                  {
+                                    this.state.chartData ?
+                                      this.state.chartData.length > 0 ? 
+                                      <PieChart
+                                        data={this.state.chartData}
+                                        width={screenWidth}
+                                        height={220}
+                                        chartConfig={chartConfig}
+                                        accessor="count"
+                                        backgroundColor="transparent"
+                                        paddingLeft="15"
+                                        absolute
+                                      />
+                                    : 
+                                    <PieChart
+                                        data={this.state.pieData}
+                                        width={screenWidth}
+                                        height={220}
+                                        chartConfig={chartConfig}
+                                        accessor="count"
+                                        backgroundColor="transparent"
+                                        paddingLeft="15"
+                                        absolute
+                                      />
+                                    :
+                                    <Loading />
+                                  }
+                                </View>
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={{flex:1,borderColor:'#000',borderWidth:1,}} onPress={()=>this.props.navigation.navigate('SearchList')}>
-                                            <View style={{alignSelf:'center',paddingHorizontal:20,paddingVertical:15,}}>
-                                                <Text style={styles.title}>Last Day Management</Text>
+                                  <TouchableOpacity style={styles.box} onPress={()=>this.props.navigation.navigate('UserList')}>
+                                            <View style={{alignSelf:'center',paddingHorizontal:20,}}>
+                                                <Text style={styles.titleNo}>{this.state.dashboardData.totalUsers}</Text>
                                             </View>
+                                            <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                <Text style={styles.title}>Total Users</Text>
+                                            </View>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity style={styles.box}>
+                                              <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                  <Text style={styles.titleNo}>{this.state.dashboardData.activeUesr}</Text>
+                                              </View>
+                                              <View style={{alignSelf:'center',paddingHorizontal:20}}>
+                                                  <Text style={styles.title}>Active Users</Text>
+                                              </View>
                                   </TouchableOpacity>
                                 </View>
                     </ScrollView>
-                </View>        
+                  </View>  
+                  :
+                  null      
+                  }
               </View>
       </React.Fragment> 
     )

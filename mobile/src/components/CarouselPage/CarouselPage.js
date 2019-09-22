@@ -56,7 +56,7 @@ render(){
 
           <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled" >
             <HeaderBar navigate={navigate}
-              navigattion = {this.props.navigation}
+              navigation = {this.props.navigation}
               headerTitle="Team Congress"
               toggle={()=>this.toggle.bind(this)} 
               openControlPanel={()=>this.openControlPanel.bind(this)}

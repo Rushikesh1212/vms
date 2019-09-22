@@ -14,11 +14,6 @@ import {
 import { Icon, Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dropdown } from 'react-native-material-dropdown';
-// import Meteor, { createContainer } from "react-native-meteor";
-// import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
-// import ImagePicker from 'react-native-image-picker';
-// import { RNS3 } from 'react-native-aws3';
-
 import styles from './styles.js';
 import {colors} from '../../config/styles.js';
 
@@ -27,6 +22,7 @@ export default  class Menu extends React.Component {
   constructor(props){
     super(props);
     this.state={
+      fullName:''
     };
 
   }
@@ -53,6 +49,18 @@ export default  class Menu extends React.Component {
     this.props.navigation.closeDrawer();
 
   }
+  showUser(){
+    var name  = "";
+    AsyncStorage.multiGet(['token','user_id','userName'])
+      .then((data)=>{
+        // console.log('user',data)
+        token = data[0][1]
+        user_id = data[1][1]
+        userName = data[2][1]
+        this.setState({fullName:userName})
+      })
+    return this.state.fullName
+  }
   render(){
 
     return (
@@ -75,7 +83,7 @@ export default  class Menu extends React.Component {
               
               <View style={{flex:0.7,alignItem:'flex-start',alignSelf:'flex-start',marginTop:5}}>
                 <Text style={{color:'#333',fontFamily:"Montserrat-SemiBold", fontSize:17,}}>
-                  Paul Walker
+                  {this.showUser()}
                 </Text>
 
                 <View style={{flex:0.5, marginRight:10}}>
@@ -108,37 +116,6 @@ export default  class Menu extends React.Component {
                 </Text>
               </View>
             </TouchableOpacity>
-              <TouchableOpacity onPress={()=>this.handleNavigation('UserProfile')}>
-              <View style={styles.menu}>
-                <Icon 
-                  size={19} 
-                  name='user-circle-o' 
-                  type='font-awesome' 
-                  color='#666' 
-                  containerStyle={styles.iconContainer}
-                />
-                <Text style={styles.menuText}>
-                  User Profile
-                </Text>
-              </View>
-            </TouchableOpacity>
-
-             <TouchableOpacity onPress={()=> this.handleNavigation('Notification')} >
-              <View style={styles.menu}>
-                <Icon 
-                  size={18} 
-                  name='bell' 
-                  type='entypo' 
-                  color='#666' 
-                  containerStyle={styles.iconContainer}
-                />
-                <Text style={styles.menuText}>
-                  Notifications
-                </Text>
-              </View>
-            </TouchableOpacity>       
-
-
             <TouchableOpacity onPress={this.handleLogout.bind(this)}>
               <View style={styles.menu}>
                 <Icon 
@@ -159,21 +136,3 @@ export default  class Menu extends React.Component {
     );
   }
 }
-
-// export default createContainer (props => {
-//   var ownerId = Meteor.userId();
-//   const bizHandle = Meteor.subscribe('businessDetailByUserId',ownerId);   
-//   const loading   = !bizHandle.ready();
-//   const businessData = Meteor.collection('businessDetail').findOne({'businessOwnerId':ownerId});
-
-//   const s3Handle    = Meteor.subscribe('s3Details');   
-//   const loading2    = !s3Handle.ready();
-//   var s3Data        = Meteor.collection("projectSettings").findOne({'type':'S3'});
-//   // console.log("container s3Data = ",s3Data);
-//   return {
-//     loading,
-//     businessData,
-//     s3Data
-//   };
-// }, Menu);
-

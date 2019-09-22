@@ -4,22 +4,24 @@ import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
 import { NavigationActions,createMaterialTopTabNavigator,createAppContainer,createStackNavigator } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
 import PropTypes from "prop-types";
-import styles from "../UserProfile/styles.js";
+import styles from "../VoterProfile/styles.js";
 import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
 import List1 from "../List/List1.js";
 import List2 from "../List/List2.js";
 import List3 from "../List/List3.js";
 import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
 import SearchList from "../SearchList/SearchList.js";
-import UserProfile from "../UserProfile/UserProfile.js";
+import VoterProfile from "../VoterProfile/VoterProfile.js";
 import Voter from "../VoterList/Voter.js";
 import BoothList from "../VoterList/BoothList.js";
 import AgeList from "../VoterList/AgeList.js";
 import SurnameList from "../VoterList/SurnameList.js";
+import ColorList from "../VoterList/ColorList.js";
 import AllVoterList from "../VoterList/AllVoterList.js";
 import Distribution from "../Distribution/Distribution.js";
 import DisColorWise from "../Distribution/DisColorWise.js";
 import Analysis from "../Analysis/Analysis.js";
+import UserList from "../UserList/UserList.js";
 
 
 const window = Dimensions.get('window');
@@ -101,6 +103,13 @@ const Dashboard1 = createStackNavigator({
       header: null
     }
   },
+  
+  ColorList: {
+    screen: ColorList,
+    navigationOptions: {
+      header: null
+    }
+  },
 
   AllVoterList: {
     screen: AllVoterList,
@@ -130,8 +139,15 @@ const Dashboard1 = createStackNavigator({
     }
   },
 
-  UserProfile: {
-    screen: UserProfile,
+  VoterProfile: {
+    screen: VoterProfile,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  UserList: {
+    screen: UserList,
     navigationOptions: {
       header: null
     }

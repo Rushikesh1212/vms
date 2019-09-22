@@ -80,6 +80,7 @@ export default class LogIn extends ValidationComponent{
   };
 
   login = ()=>{
+    this.setState({btnLoading:true})
         // this.props.navigation.navigate('CarouselPage')
     var login = {
       userName: this.state.email,
@@ -87,15 +88,18 @@ export default class LogIn extends ValidationComponent{
     }
     axios.post('/api/users/post/userLogin',login)
       .then(response=>{
-        console.log(response)
         AsyncStorage.multiSet([
           ['user_id',response.data.user_ID],
           ['token',response.data.token],
+          ['userName',response.data.userName]
         ])
         this.props.navigation.navigate('CarouselPage')
+        this.setState({btnLoading:false})
       })
       .catch(error=>{
         console.log(error)
+        Alert.alert("","Some error occured.Please try again")
+        this.setState({btnLoading:false})
       })
   }
 

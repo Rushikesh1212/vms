@@ -161,6 +161,22 @@ export default StyleSheet.create({
     fontFamily:"Montserrat-SemiBold",
     alignSelf:'center',
     paddingVertical:10
-  }
+  },
+    box:{
+    flex:0.48,
+    // borderColor:'#000',
+    // borderWidth:1,
+    paddingVertical:20,
+    borderRadius:8,
+    shadowColor: '#005270',
+    shadowOffset: { width: 5, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 3
+  },
+  tableHeadText:{alignSelf:"center",fontFamily:"Montserrat-Bold",color:"#000"},
+  tableBodyText:{alignSelf:"center",fontFamily:"Montserrat-Regular",color:"#000"},
+  headCol1:{height:50,flex:0.5,borderWidth:1,borderBottomWidth:0,borderRightWidth:0,borderColor:"black",justifyContent:"center"},
+  headCol2:{height:50,flex:0.5,borderWidth:1,borderBottomWidth:0,borderColor:"black",justifyContent:'center'}
   
 });

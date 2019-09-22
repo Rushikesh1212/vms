@@ -158,39 +158,53 @@ export default  class SearchList extends Component {
 
     return(
             <ScrollView  keyboardShouldPersistTaps="handled" >
-              <View style={{ flexDirection:'row',backgroundColor:'#fff',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
-                <View style={{flex:0.45}}>
-                        <TextInput
-                        style={{height: 40,borderColor: this.state.borderColor,borderBottomWidth: 2,paddingLeft:20}}
-                        placeholder="Name"
-                        onChangeText = {this.updateNameSearch}
-                        value={this.state.name}
-                        onBlur={ () => this.onBlur() }
-                        onFocus={ () => this.onFocus() }
-                      />
-                </View>
-                <View style={{flex:0.45}}>
-                        <TextInput
-                        style={{height: 40,paddingLeft:20,borderColor: this.state.cardBorderColor,borderBottomWidth: 2}}
-                        placeholder="Card No"
-                        onChangeText = {this.updateCardSearch}
-                        value={this.state.card}
-                        onBlur={ () => this.setState({cardBorderColor:'#666'}) }
-                        onFocus={ () => this.setState({cardBorderColor:'#337ab7'}) }
-                      />
+              <View style={{ backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:20,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
+                {/*<View style={{paddingTop:5}}>
+                  <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-SemiBold"}}>Search</Text>
+                </View>*/}
+                <View style={{flexDirection:'row'}}>
+                  <View style={{flex:0.5,flexDirection:'row',height: 30,paddingBottom:0, width: '100%', backgroundColor:"transparent"}}>
+                      <Text style={{flex:0.3,fontFamily:"Montserrat-SemiBold", color:"#f1f1f1",marginTop:5}}>Name</Text>   
+                      <View style={{flex:0.5,height:60}}>
+                       <TextInput
+                            style={{borderColor: this.state.borderColor,borderBottomWidth: 2,padding:0}}
+                            placeholder="Name"
+                            onChangeText = {this.updateNameSearch}
+                            value={this.state.name}
+                            onBlur={ () => this.setState({borderColor:'#666'}) }
+                            onFocus={ () => this.setState({borderColor:'#000'}) }
+                          /> 
+                      </View>
+                  </View>
+                  <View style={{flex:0.4,flexDirection:'row',height: 30,paddingBottom:0, width: '100%', backgroundColor:"transparent"}}>
+                      <Text style={{flex:0.3,fontFamily:"Montserrat-SemiBold", color:"#f1f1f1",marginTop:5}}>Card</Text>   
+                      <View style={{flex:0.7,height:60}}>
+                       <TextInput
+                            style={{borderColor: this.state.borderColor,borderBottomWidth: 2,padding:0}}
+                            placeholder="Card"
+                            onChangeText = {this.updateCardSearch}
+                            value={this.state.card}
+                            onBlur={ () => this.setState({borderColor:'#666'}) }
+                            onFocus={ () => this.setState({borderColor:'#000'}) }
+                          /> 
+                      </View>
+                  </View>
                 </View>
               </View>
               <View style={{width:'100%'}}>
+{/*                  <View style={{flexDirection:'row'}}>
+                    <View style={styles.headCol1}><Text style={styles.tableHeadText}>Sr.</Text></View>
+                    <View style={styles.headCol2}><Text style={styles.tableHeadText}>Name</Text></View>
+                    <View style={styles.headCol3}><Text style={styles.tableHeadText}>Card</Text></View>
+                  </View>*/}
                   { this.state.data ? 
                       this.state.data.length > 0 ? 
                         this.state.data.map((data,index)=>{
                           return(
-                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('UserProfile',{user_id:data._id})} key={index}>
-                              <View style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:2,borderColor:'#333', blurRadius:90}} >
-                                <Text style={{flex:0.1}}> {data.partNo}/{index+1}</Text>
-                                <Text style={{flex:0.6,paddingLeft:30,backgroundColor:'transparent'}}>{data.fullName}</Text>
-                                <Text style={{flex:0.3}}>{data.idNumber}</Text>
-                              </View>
+                            <TouchableOpacity style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:1,borderColor:'#333', blurRadius:90,}} onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:data._id})} key={index}>
+                                <Text style={{flex:0.1,fontFamily:'Montserrat-Regular',fontSize:10}}> {data.partNo}/{index+1}</Text>
+                                <Text style={{flex:0.6,fontFamily:'Montserrat-SemiBold',paddingLeft:30,backgroundColor:'transparent'}}>{data.fullName}</Text>
+                                <Text style={{flex:0.3,fontFamily:'Montserrat-SemiBold'}}>{data.idNumber}</Text>
                             </TouchableOpacity>
                           )
                         })

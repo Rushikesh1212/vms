@@ -15,15 +15,17 @@ import List3 from '../components/List/List3.js';
 import Menu from '../layouts/Menu/Menu.js';
 // import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
 import SearchList from "../components/SearchList/SearchList.js";
-import UserProfile from "../components/UserProfile/UserProfile.js";
+import VoterProfile from "../components/VoterProfile/VoterProfile.js";
 import Voter from "../components/VoterList/Voter.js";
 import BoothList from "../components/VoterList/BoothList.js";
 import AgeList from "../components/VoterList/AgeList.js";
 import SurnameList from "../components/VoterList/SurnameList.js";
+import ColorList from "../components/VoterList/ColorList.js";
 import AllVoterList from "../components/VoterList/AllVoterList.js";
 import Distribution from "../components/Distribution/Distribution.js";
 import DisColorWise from "../components/Distribution/DisColorWise.js";
 import Analysis from "../components/Analysis/Analysis.js";
+import UserList from "../components/UserList/UserList.js";
 
 let SlideFromRight = (index, position, width)=>{
   const translateX = position.interpolate({
@@ -158,6 +160,13 @@ const HomeStack = createStackNavigator({
     }
   },
 
+  ColorList: {
+    screen: ColorList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   AllVoterList: {
     screen: AllVoterList,
     navigationOptions: {
@@ -186,8 +195,8 @@ const HomeStack = createStackNavigator({
     }
   },
 
-  UserProfile: {
-    screen: UserProfile,
+  VoterProfile: {
+    screen: VoterProfile,
     navigationOptions: {
       header: null
     }
@@ -195,6 +204,13 @@ const HomeStack = createStackNavigator({
   
   LogIn: {
     screen: LogIn,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  UserList: {
+    screen: UserList,
     navigationOptions: {
       header: null
     }

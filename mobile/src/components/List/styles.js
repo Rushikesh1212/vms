@@ -7,7 +7,10 @@ const window = Dimensions.get('window');
 
 export default StyleSheet.create({
  title:{
-  fontFamily:"Montserrat-SemiBold",fontSize:17,color:'#000',textAlign:'left',marginTop:10
+  fontFamily:"Montserrat-SemiBold",fontSize:15,color:'#000',textAlign:'left',marginTop:10
+  },
+  titleNo:{
+  fontFamily:"Montserrat-Bold",fontSize:19,color:'#0275D8',textAlign:'left',marginTop:10
   },
   titleInfo:{
     fontFamily:"Montserrat-Bold",fontSize:20,color:'#333',textAlign:'left',
@@ -217,35 +220,6 @@ export default StyleSheet.create({
   },
   normalText: {
   },
-  // workspaceView:{
-  //   backgroundColor:'#fff',
-  //   // top:"5%",
-  //   // minHeight:500,
-  //   // minHeight:window.height-1000, 
-  //   position:'absolute',
-  //   zIndex:1,
-  //   // marginTop:"50%",
-  //   // marginBottom:35,
-  //   // margin:0,
-  //   // padding:0,
-  //   paddingTop:15,
-  //   paddingBottom:15,
-  //   borderTopRightRadius:20,
-  //   borderTopLeftRadius:20,
-  //   borderTopWidth:4,
-  //   borderLeftWidth:0,
-  //   borderRightWidth:0,
-  //   borderTopEndRadius:10,
-  //   borderBottomWidth:0,
-  //   borderLeftColor:'transparent',
-  //    borderRightColor:'transparent',
-  //     borderBottomColor:'transparent',
-  //   // borderLeftWidth:0,
-  //   // borderRightWidth:0,
-  //   //  borderBottomWidth:0,
-  //   // borderRadius:25
-    
-  // },
   borderOpen:{
     borderColor:'#34be34',
      borderLeftColor:'#fff',
@@ -326,14 +300,6 @@ export default StyleSheet.create({
   buttonTouchable: {
     padding: 16,
   },
-
-
-// container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     backgroundColor:'white'
-//   },
   button: {
     alignItems: 'center',
     backgroundColor: '#2c3539',
@@ -354,7 +320,43 @@ export default StyleSheet.create({
     alignSelf: 'center', 
     padding: 10, 
     marginTop: 16
+  },
+  box:{
+    flex:0.48,
+    // borderColor:'#000',
+    // borderWidth:1,
+    paddingVertical:20,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.20,
+    // shadowRadius: 1.41,
+    // elevation: 2,
+
+
+    // borderWidth:1,
+    // borderColor:"#aaa",
+    borderRadius:8,
+    shadowColor: '#005270',
+    shadowOffset: { width: 5, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 3
+  },
+  boxV:{
+    flex:1,
+    // borderColor:'#000',
+    // borderWidth:1,
+    borderRadius:8,
+    paddingVertical:20,
+    borderRadius:8,
+    shadowColor: '#005270',
+    shadowOffset: { width: 5, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 3
   }
-  
 
  });
