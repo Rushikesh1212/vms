@@ -192,7 +192,7 @@ class UserMgmt extends Component {
     var userData = row.profile;
     var id = row._id;
       axios
-        .patch('/api/users/patch/one/resetPassword/'+id)
+        .patch('/api/users/patch/one/resetpassword/'+id)
         .then((res)=>{
           console.log("resp...",res.data);      
           swal("Great", "Password of "+userData.firstName+" "+userData.lastName+" has been reset successfully", "success");
@@ -213,7 +213,7 @@ class UserMgmt extends Component {
     var patchStatus = {userId: id,userStatus: status}
     console.log("status...",patchStatus);
       axios
-        .patch('/api/users/patch/userStatus',patchStatus)
+        .patch('/api/users/patch/userstatus',patchStatus)
         .then((res)=>{
           console.log("resp...",res.data);      
           swal("Status Changed", "Status of "+userData.firstName+" "+userData.lastName+" is now "+status, "success");
@@ -400,41 +400,6 @@ class UserMgmt extends Component {
                                               <span className="text-danger">{ this.state.formerrors.mobNumber}</span> 
                                             )}
                                         </div> 
-                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
-                                          <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span ">
-                                               <div className="input-group inputBox-main  new_inputbx " >
-                                                 <div className="input-group-addon remove_brdr inputIcon">
-                                                  <i className="fa fa-mobile"></i>
-                                                 </div>  
-                                                  <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                                  ref="booth" name="booth" id="booth" data-text="booth" onChange={this.handleChange} value={this.state.booth}
-                                                  placeholder="Booth Name"/>
-                                               </div>   
-                                            </span>
-                                            {this.state.formerrors.booth &&(
-                                              <span className="text-danger">{ this.state.formerrors.booth}</span> 
-                                            )}
-                                        </div>
-                                        {/*<div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
-                                          <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
-                                            <span className="blocking-span ">
-                                              <div className="input-group inputBox-main  new_inputbx " >
-                                                <div className="input-group-addon remove_brdr inputIcon">
-                                                <i className="fa fa-mobile"></i>
-                                              </div>  
-                                              <select className="form-control templateType" name="status" id="status" onChange={this.handleChange} value={this.state.status}>
-                                                <option value="Not Selected"> --Select-- </option>
-                                                <option> Active </option>
-                                                <option> Inactive </option>
-                                              </select> 
-                                              </div>   
-                                            </span>
-                                            {this.state.formerrors.status &&(
-                                              <span className="text-danger">{ this.state.formerrors.status}</span> 
-                                            )}
-                                        </div>*/}
-                                        
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                                         <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit"  onClick={this.updateData.bind(this)} id="CreateUserModal">Update</button>

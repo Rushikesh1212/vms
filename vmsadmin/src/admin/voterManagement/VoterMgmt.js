@@ -24,12 +24,12 @@ class VoterMgmt extends Component {
         "changeAddress"   : "",
         "areaName"        : "",
         "otherInfo"       : "",
-        "dob"             : "2001-06-01",
+        "dob"             : "2001-10-21",
         "emailId"         : "",
         "aadharCard"      : "",
         "color"           : 3,
         "cast"            : "",
-        "favourite"       : false,
+        "featured"        : false,
         voter_id          : "",
         allPosts          : [],
         info              : [],
@@ -122,13 +122,13 @@ class VoterMgmt extends Component {
   toggleEventHandle(event){
     var name = $(event.target).attr('name');
       console.log("name = ",name);
-      if(name=="favourite"){
+      if(name=="featured"){
         this.setState({
-          favourite : true,
+          featured : true,
         })
-      }else if(name=="non-favourite"){
+      }else if(name=="non-featured"){
         this.setState({
-          favourite : false,
+          featured : false,
         })
       }else if(name=="alive"){
         this.setState({
@@ -193,7 +193,7 @@ class VoterMgmt extends Component {
         "aadharCard"      : this.state.aadharCard,
         "color"           : this.state.color,
         "cast"            : this.state.cast,
-        "favourite"       : this.state.favourite,
+        "featured"        : this.state.featured,
         "userId"          : localStorage.getItem('admin_ID'),
        }
        console.log("dk == ",formValues);
@@ -216,9 +216,9 @@ class VoterMgmt extends Component {
                   "dob"             : "",
                   "emailId"         : "",
                   "aadharCard"      : "",
-                  "color"           : 3,
+                  "color"           : 1,
                   "cast"            : "",
-                  "favourite"       : false,
+                  "featured"        : false,
                 })
                 axios
                   .get('/api/voters/get/')
@@ -259,7 +259,7 @@ class VoterMgmt extends Component {
       "aadharCard"      : row.aadharCard,
       "color"           : row.color,
       "cast"            : row.cast,
-      "favourite"       : row.favourite,
+      "featured"        : row.featured,
       info              : row,
       voter_id          : row._id,
     })
@@ -267,17 +267,19 @@ class VoterMgmt extends Component {
 	render(){
 	  const data = this.state.allPosts;
 	  const columns = [{
+        Header: 'Voting Card No.',
+        accessor: 'idNumber',
+      },{
         Header: 'Full Name',
         accessor: 'fullName',
-      },
-      // {
-      //   Header: 'Voting Card No.',
-      //   accessor: 'profile.emailId',
-      // },
-       // {
-      //   Header: 'Mobile Number',
-      //   accessor: 'profile.mobileNumber',
-      // }, {
+      },{
+        Header: 'Marathi Name',
+        accessor: 'mFullName',
+      },{
+        Header: 'Gender',
+        accessor: 'gender',
+      }, 
+      //{
       //   Header: 'Email ID',
       //   accessor: 'profile.emailId',
       // },{
@@ -527,19 +529,19 @@ class VoterMgmt extends Component {
                                 </div>                                
                                 <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Featured<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        {this.state.favourite==true ?
+                                        {this.state.featured==true ?
                                           <label className="switch" title="Click mark as a voted">
-                                            <input type="checkbox" id="togBtn" name="non-favourite" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <input type="checkbox" id="togBtn" name="non-featured" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>
                                           </label>
                                           :
                                           <label className="switch" title="Click to mark as a non-voted">
-                                            <input type="checkbox" id="togBtn" name="favourite" onClick={this.toggleEventHandle.bind(this)} checked={this.state.favourite===true} />
+                                            <input type="checkbox" id="togBtn" name="featured" onClick={this.toggleEventHandle.bind(this)} checked={this.state.featured===true} />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>
@@ -547,8 +549,8 @@ class VoterMgmt extends Component {
                                         }
                                         </div>
                                       </span>
-                                      {this.state.formerrors.favourite &&(
-                                        <span className="text-danger">{this.state.formerrors.favourite}</span> 
+                                      {this.state.formerrors.featured &&(
+                                        <span className="text-danger">{this.state.formerrors.featured}</span> 
                                       )}
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
@@ -864,19 +866,19 @@ class VoterMgmt extends Component {
                                 </div>                                
                                 <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Featured<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        {this.state.info.favourite==true ?
+                                        {this.state.info.featured==true ?
                                           <label className="switch" title="Click mark as a voted">
-                                            <input type="checkbox" id="togBtn" name="non-favourite" checked="checked" />
+                                            <input type="checkbox" id="togBtn" name="non-featured" checked="checked" />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>
                                           </label>
                                           :
                                           <label className="switch" title="Click to mark as a non-voted">
-                                            <input type="checkbox" id="togBtn" name="favourite" checked={this.state.info.favourite===true} />
+                                            <input type="checkbox" id="togBtn" name="featured" checked={this.state.info.featured===true} />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>

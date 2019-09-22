@@ -40,7 +40,7 @@ class Login extends Component {
         console.log("auth value",auth);
 
     axios
-      .post('/api/users/post/adminLogin',auth)
+      .post('/api/users/post/adminlogin',auth)
       .then((response)=> {
         console.log("-------userData------>>",response);
         // this.setState({

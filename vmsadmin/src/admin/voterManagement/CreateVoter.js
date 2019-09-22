@@ -30,35 +30,52 @@ class CreateVoter extends Component {
       office            : null,
       allPosts          : null,
       signupEmail       : "",
-      "age"             : null,
-      "boothName"       : "",
-      "constituencyName": "",
-      "firstName"       : "",
-      "middleName"      : "",
-      "lastName"        : "",
-      "fullName"        : "",
-      "gender"          : "",
-      "houseNumber"     : "",
-      "idNumber"        : "",
-      "partNo"          : null,
-      "partName"        : "",
-      "pinCode"         : null,
-      "relation"        : "",
-      "relativeName"    : "",
-      "mobileNumber"    : "",
-      "whatsAppNumber"  : "",
-      "dead"            : false,
-      "visited"         : true,
-      "voted"           : false,
-      "changeAddress"   : "",
-      "areaName"        : "",
-      "otherInfo"       : "",
-      "dob"             : "",
-      "emailId"         : "",
-      "aadharCard"      : "",
-      "color"           : null,
-      "cast"            : "",
-      "favourite"       : false,
+      age               : "",
+      boothName         : "",
+      constituencyName  : "",
+      firstName         : "",
+      middleName        : "",
+      lastName          : "",
+      fullName          : "",
+      gender            : "",
+      houseNumber       : "",
+      idNumber          : "",
+      partNo            : "",
+      partName          : "",
+      pinCode           : "",
+      relation          : "",
+      relativeName      : "",
+      villageName       : "",
+      mobileNumber      : "",
+      whatsAppNumber    : "",
+      dead              : false,
+      visited           : false,
+      voted             : false,
+      changeAddress     : "",
+      areaName          : "",
+      otherInfo         : "",
+      dob               : "",
+      emailId           : "",
+      aadharCard        : "",
+      color             : 1,
+      cast              : "",
+      featured          : false,
+      mAge              : "",
+      mBoothName        : "",
+      mConstituencyName : "",
+      mFirstName        : "",
+      mMiddleName       : "",
+      mLastName         : "",
+      mFullName         : "",
+      mGender           : "",
+      mHouseNumber      : "",
+      mIdNumber         : "",
+      mPartNo           : "",
+      mPartName         : "",
+      mPinCode          : "",
+      mRelation         : "",
+      mRelativeName     : "",
+      mVillageName      : "",
       allPosts          : [],
       info              : [],
       info              : [],
@@ -116,13 +133,13 @@ class CreateVoter extends Component {
   toggleEventHandle(event){
     var name = $(event.target).attr('name');
       console.log("name = ",name);
-      if(name=="favourite"){
+      if(name=="featured"){
         this.setState({
-          favourite : true,
+          featured : true,
         })
-      }else if(name=="non-favourite"){
+      }else if(name=="non-featured"){
         this.setState({
-          favourite : false,
+          featured : false,
         })
       }else if(name=="alive"){
         this.setState({
@@ -173,19 +190,19 @@ class CreateVoter extends Component {
   createVoter(event){
     console.log("dk");
     var voterDetails = {
-      "age"             : this.state.age,
+      "age"             : parseInt(this.state.age),
       "boothName"       : this.state.boothName,
       "constituencyName": this.state.constituencyName,
-      // "firstName"       : this.state.firstName,
-      // "middleName"      : this.state.middleName,
-      // "lastName"        : this.state.lastName,
+      "firstName"       : this.state.firstName,
+      "middleName"      : this.state.middleName,
+      "lastName"        : this.state.lastName,
       "fullName"        : this.state.fullName,
       "gender"          : this.state.gender,
       "houseNumber"     : this.state.houseNumber,
       "idNumber"        : this.state.idNumber,
-      "partNo"          : this.state.partNo,
+      "partNo"          : parseInt(this.state.partNo),
       "partName"        : this.state.partName,
-      "pinCode"         : this.state.pinCode,
+      "pinCode"         : parseInt(this.state.pinCode),
       "relation"        : this.state.relation,
       "relativeName"    : this.state.relativeName,
       "mobileNumber"    : this.state.mobileNumber,
@@ -199,13 +216,29 @@ class CreateVoter extends Component {
       "dob"             : this.state.dob,
       "emailId"         : this.state.emailId,
       "aadharCard"      : this.state.aadharCard,
-      "color"           : this.state.color,
+      "color"           : parseInt(this.state.color),
       "cast"            : this.state.cast,
-      "favourite"       : this.state.favourite,
+      "featured"        : this.state.featured,
+      mAge              : parseInt(this.state.age),
+      mBoothName        : "",
+      mConstituencyName : "",
+      mFirstName        : "",
+      mMiddleName       : "",
+      mLastName         : "",
+      mFullName         : "",
+      mGender           : "",
+      mHouseNumber      : "",
+      mIdNumber         : "",
+      mPartNo           : parseInt(this.state.partNo),
+      mPartName         : "",
+      mPinCode          : parseInt(this.state.pinCode),
+      mRelation         : "",
+      mRelativeName     : "",
+      mVillageName      : "",
     }
     console.log("dk1 == ",voterDetails);
         axios
-          .post('/api/voters/post/',voterDetails)
+          .post('/api/voters/post/addvoter',voterDetails)
           .then((res)=>{
               console.log("123456 = ",res.data);
                 swal("Voter added successfully", "", "success");
@@ -237,9 +270,9 @@ class CreateVoter extends Component {
                   "dob"             : "",
                   "emailId"         : "",
                   "aadharCard"      : "",
-                  "color"           : 3,
+                  "color"           : 1,
                   "cast"            : "",
-                  "favourite"       : false,
+                  "featured"        : false,
                 })
                 axios
                   .get('/api/voters/get/')
@@ -596,16 +629,16 @@ class CreateVoter extends Component {
                                     <label className="formLable col-lg-12 col-md-12">Favourite<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
-                                        {this.state.favourite==true ?
+                                        {this.state.featured==true ?
                                           <label className="switch" title="Click mark as a voted">
-                                            <input type="checkbox" id="togBtn" name="non-favourite" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
+                                            <input type="checkbox" id="togBtn" name="non-featured" onClick={this.toggleEventHandle.bind(this)} checked="checked" />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>
                                           </label>
                                           :
                                           <label className="switch" title="Click to mark as a non-voted">
-                                            <input type="checkbox" id="togBtn" name="favourite" onClick={this.toggleEventHandle.bind(this)} checked={this.state.favourite===true} />
+                                            <input type="checkbox" id="togBtn" name="featured" onClick={this.toggleEventHandle.bind(this)} checked={this.state.featured===true} />
                                             <div className="slider round">
                                               <span className="on">Yes</span><span className="off">No</span>
                                             </div>
@@ -613,8 +646,8 @@ class CreateVoter extends Component {
                                         }
                                         </div>
                                       </span>
-                                      {this.state.formerrors.favourite &&(
-                                        <span className="text-danger">{this.state.formerrors.favourite}</span> 
+                                      {this.state.formerrors.featured &&(
+                                        <span className="text-danger">{this.state.formerrors.featured}</span> 
                                       )}
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-xs-6 col-sm-6 inputContent">

@@ -19,6 +19,7 @@ class AdminContent extends Component{
       totalUsers      : "",
       totalVoters     : "",
       updatedVoters   : "",
+      userUpdatedVotersList : [],
       usersData       : [],
     };
   }
@@ -27,7 +28,7 @@ class AdminContent extends Component{
     $('.sidebar').css({display:'block',background: '#222d32'});
     
       axios
-        .get('/api/reports/get/dasboardTab')
+        .get('/api/reports/get/dashboardtab')
         .then((response)=>{
           console.log("dashboard............>",response.data);
 
@@ -64,7 +65,32 @@ class AdminContent extends Component{
         })
         .catch(function (error) {
           console.log(error);
+        })      
+
+        axios
+        .get('/api/reports/get/colorlist')
+        .then((response)=>{
+          console.log("colorlist............>",response.data);
+          
+
+ var twelveMonthGrossEarning =[{monthYear: "Our", earning: 98966},{monthYear: "Unknown", earning: 65230},{monthYear: "Known", earning: 56489},{monthYear: "Doubtfull", earning: 65573},{monthYear: "Opposit", earning: 42560}]
+
+            var twelveClrArray = ["#4B9D44","#3FB0D5","#286090","#EC982E","#C9392C"];
+            var chartArray = [["Code", "Total Cont", { role: "style" }],];  
+            for (var i = 0; i < twelveMonthGrossEarning.length; i++) {
+              var chartArr = [twelveMonthGrossEarning[i].monthYear , twelveMonthGrossEarning[i].earning , twelveClrArray[i]];
+              chartArray.push(chartArr)
+              // console.log('chartArray',chartArray );
+            }
+      
+            this.setState({
+                dataColumnChart : chartArray,          
+              })
         })
+        .catch(function (error) {
+          console.log(error);
+        })
+        
         this.userList();
   }
 
@@ -125,11 +151,29 @@ class AdminContent extends Component{
 
   userList(){
     axios
-      .get('/api/reports/votersUpdatedCount')
+      .get('/api/reports/votersupdatedcount')
       .then((response)=>{
         console.log("users............>",response.data);
          this.setState({
               usersData : response.data
+            });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  } 
+
+  userUpdatedVotersList(event){
+    event.preventDefault();
+    const Uid = event.target.getAttribute('name');
+        console.log("idd............>",Uid);
+    var userId = {userId:Uid}
+    axios
+      .post('/api/reports/votersupdatedbyuser',userId)
+      .then((response)=>{
+        console.log("userUpdatedVotersList............>",response.data[0].voters);
+         this.setState({
+              userUpdatedVotersList : response.data[0].voters
             });
       })
       .catch(function (error) {
@@ -177,7 +221,7 @@ class AdminContent extends Component{
               <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div className="info-box">
                   <span className="info-box-icon bg-red">
-                    <i className="fa fa-rupee" />
+                    <i className="fa fa-users" />
                   </span>
                   <div className="info-box-content">
                     <span className="text-center info-box-number">Total Users<small></small></span>
@@ -190,7 +234,7 @@ class AdminContent extends Component{
               <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div className="info-box">
                   <span className="info-box-icon bg-green">
-                    <i className="fa fa-bars"></i>
+                    <i className="fa fa-users"></i>
                   </span>
                   <div className="info-box-content">
                     <span className="text-center info-box-number">Active Users<small></small></span>
@@ -250,10 +294,10 @@ class AdminContent extends Component{
               </div>
             </div>
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboardDivider"></div>
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 row">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12  boxWrapDashboard graphWrapperTab">
                 <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg">
-                  <h4>Latest Active Subscriptions <i className="fnt12b"><Link to="/dashboard/salesTransactionReport">(See More)</Link></i></h4>
+                  <h4>List of Users <i className="fnt12b"> (Working){/*<Link to="/dashboard/salesTransactionReport">(See More)</Link>*/}</i></h4>
                   <table className="table table-striped  table-hover table-bordered todaysSalesReportForpdf reportTables" id="yearlyStudRegReport">
                   <thead>
                     <tr className="tableHeader tableHeader20">
@@ -266,11 +310,43 @@ class AdminContent extends Component{
                   <tbody>
                   {this.state.usersData.map((usersData,index)=>{
                     return(
+                    usersData.visitedCount!==0?
+                    <tr>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)}>{index+1}.</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)}>{usersData.userName}</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} className="text-center">{usersData.mobileNo}</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} className="text-center">{usersData.visitedCount}</td>
+                    </tr>:null
+                    );
+                    })
+                  }
+                    {/*<tr>
+                      <td colSpan="5" className="tableNoData">No record added yet...</td>
+                    </tr>*/}        
+                 </tbody>
+                </table>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12  boxWrapDashboard graphWrapperTab">
+                <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg">
+                  <h4>List of Voters {/*<i className="fnt12b"><Link to="/dashboard/salesTransactionReport">(See More)</Link></i>*/}</h4>
+                  <table className="table table-striped  table-hover table-bordered todaysSalesReportForpdf reportTables" id="yearlyStudRegReport">
+                  <thead>
+                    <tr className="tableHeader tableHeader20">
+                      <th> SR.No.</th>
+                      <th> Voter ID </th>
+                      <th className="text-center"> Name of Voter </th>
+                      <th className="text-center"> Mobile No. </th>
+                    </tr>                    
+                  </thead>
+                  <tbody>
+                  {this.state.userUpdatedVotersList.map((useUpVotLis,index)=>{
+                    return(
                     <tr>
                       <td>{index+1}.</td>
-                      <td>{usersData.userName}</td>
-                      <td className="text-center">{usersData.mobileNo}</td>
-                      <td className="text-center">{usersData.visitedCount}</td>
+                      <td>{useUpVotLis.voterId}</td>
+                      <td className="text-center">{useUpVotLis.fullName}</td>
+                      <td className="text-center">{useUpVotLis.mobileNumber}</td>
                     </tr>);
                     })
                   }
