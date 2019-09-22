@@ -46,21 +46,11 @@ class AdminContent extends Component{
               var pieArr = [subscrptionData[i].packageName , subscrptionData[i].count];
               pieArray.push(pieArr)
             }
- var twelveMonthGrossEarning =[{monthYear: "Our", earning: 98966},{monthYear: "Unknown", earning: 65230},{monthYear: "Known", earning: 56489},{monthYear: "Doubtfull", earning: 65573},{monthYear: "Opposit", earning: 42560}]
-            var twelveClrArray = ["#4B9D44","#3FB0D5","#286090","#EC982E","#C9392C"];
-            var chartArray = [["Code", "Total Cont", { role: "style" }],];  
-            for (var i = 0; i < twelveMonthGrossEarning.length; i++) {
-              var chartArr = [twelveMonthGrossEarning[i].monthYear , twelveMonthGrossEarning[i].earning , twelveClrArray[i]];
-              chartArray.push(chartArr)
-              // console.log('chartArray',chartArray );
-            }
-      
+    
             this.setState({
                 pieData : pieArray,          
-                dataColumnChart : chartArray,          
               },()=>{
               console.log('pieData', this.state.pieData);
-              console.log('dataColumnChart', this.state.dataColumnChart);
               })
         })
         .catch(function (error) {
@@ -71,14 +61,63 @@ class AdminContent extends Component{
         .get('/api/reports/get/colorlist')
         .then((response)=>{
           console.log("colorlist............>",response.data);
-          
+          var data=response.data;
+          var colorList=[];
+          for (var i =0; i<data.length; i++) {
+            switch(data[i]._id){
+              case 1:
+              var color ={
+                status: "our",
+                count: data[i].count,
+                color: "#4B9D44"
 
- var twelveMonthGrossEarning =[{monthYear: "Our", earning: 98966},{monthYear: "Unknown", earning: 65230},{monthYear: "Known", earning: 56489},{monthYear: "Doubtfull", earning: 65573},{monthYear: "Opposit", earning: 42560}]
+              }
+              colorList.push(color);
+              break;
 
+              case 2:
+              var color ={
+                status: "Unknown",
+                count: data[i].count,
+                color: "#3FB0D5"
+              }
+              colorList.push(color);
+              break;
+
+              case 3:
+              var color ={
+                status: "Known",
+                count: data[i].count,
+                color: "#286090"
+              }
+              colorList.push(color);
+              break;
+
+              case 4:
+              var color ={
+                status: "Doubtfull",
+                count: data[i].count,
+                color: "#EC982E"
+              }
+              colorList.push(color);
+              break;
+
+              case 5:
+              var color ={
+                status: "Opposit",
+                count: data[i].count,
+                color: "#C9392C"
+              }
+              colorList.push(color);
+              break;
+            }
+          }
+          console.log("colorList123",colorList);
+            var newColorList =colorList;
             var twelveClrArray = ["#4B9D44","#3FB0D5","#286090","#EC982E","#C9392C"];
             var chartArray = [["Code", "Total Cont", { role: "style" }],];  
-            for (var i = 0; i < twelveMonthGrossEarning.length; i++) {
-              var chartArr = [twelveMonthGrossEarning[i].monthYear , twelveMonthGrossEarning[i].earning , twelveClrArray[i]];
+            for (var i = 0; i < newColorList.length; i++) {
+              var chartArr = [newColorList[i].status , newColorList[i].count , newColorList[i].color ];
               chartArray.push(chartArr)
               // console.log('chartArray',chartArray );
             }
@@ -101,16 +140,10 @@ class AdminContent extends Component{
       pieHole: 0.6,
       slices: [
         {
-          color: "#6D78AD"
-        },
-        {
           color: "#5CCDA0"
         },
         {
-          color: "#DF7970"
-        },
-        {
-          color: "#e9a227"
+          color: "#6D78AD"
         }
       ],
       legend: {
@@ -166,14 +199,17 @@ class AdminContent extends Component{
   userUpdatedVotersList(event){
     event.preventDefault();
     const Uid = event.target.getAttribute('name');
-        console.log("idd............>",Uid);
+    $("."+Uid).addClass('clrRow');
+    $("."+Uid).siblings('tr').removeClass('clrRow');
+    console.log("idd............>",Uid);
     var userId = {userId:Uid}
     axios
       .post('/api/reports/votersupdatedbyuser',userId)
       .then((response)=>{
-        console.log("userUpdatedVotersList............>",response.data[0].voters);
+        console.log("userUpdatedVotersList............>",response.data[0]);
          this.setState({
-              userUpdatedVotersList : response.data[0].voters
+              userUpdatedVotersList : response.data[0],
+              userName : response.data[0].userName,
             });
       })
       .catch(function (error) {
@@ -296,7 +332,7 @@ class AdminContent extends Component{
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboardDivider"></div>
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12  boxWrapDashboard graphWrapperTab">
-                <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg">
+                <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg tblScroll">
                   <h4>List of Users <i className="fnt12b"> (Working){/*<Link to="/dashboard/salesTransactionReport">(See More)</Link>*/}</i></h4>
                   <table className="table table-striped  table-hover table-bordered todaysSalesReportForpdf reportTables" id="yearlyStudRegReport">
                   <thead>
@@ -310,13 +346,12 @@ class AdminContent extends Component{
                   <tbody>
                   {this.state.usersData.map((usersData,index)=>{
                     return(
-                    usersData.visitedCount!==0?
-                    <tr>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)}>{index+1}.</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)}>{usersData.userName}</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} className="text-center">{usersData.mobileNo}</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} className="text-center">{usersData.visitedCount}</td>
-                    </tr>:null
+                    <tr className={index==0?"hvrPtr "+usersData.userId+" clrRow":"hvrPtr "+usersData.userId}>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{index+1}.</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{usersData.userName}</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.mobileNo}</td>
+                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.visitedCount}</td>
+                    </tr>
                     );
                     })
                   }
@@ -328,8 +363,8 @@ class AdminContent extends Component{
                 </div>
               </div>
               <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12  boxWrapDashboard graphWrapperTab">
-                <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg">
-                  <h4>List of Voters {/*<i className="fnt12b"><Link to="/dashboard/salesTransactionReport">(See More)</Link></i>*/}</h4>
+                <div className="col-lg-12 col-md-12 col-sm-12 innerGraphWrap innerGraphWraptbl tableClrPdg tblScroll">
+                  <h4>List of Voters (User: {this.state.userName}){/*<i className="fnt12b"><Link to="/dashboard/salesTransactionReport">(See More)</Link></i>*/}</h4>
                   <table className="table table-striped  table-hover table-bordered todaysSalesReportForpdf reportTables" id="yearlyStudRegReport">
                   <thead>
                     <tr className="tableHeader tableHeader20">
@@ -340,15 +375,20 @@ class AdminContent extends Component{
                     </tr>                    
                   </thead>
                   <tbody>
-                  {this.state.userUpdatedVotersList.map((useUpVotLis,index)=>{
+                  {this.state.userUpdatedVotersList.voters && this.state.userUpdatedVotersList.voters.length>0 ?
+                    this.state.userUpdatedVotersList.voters.map((useUpVotLis,index)=>{
                     return(
-                    <tr>
+                    <tr className="hvrPtr">
                       <td>{index+1}.</td>
                       <td>{useUpVotLis.voterId}</td>
                       <td className="text-center">{useUpVotLis.fullName}</td>
                       <td className="text-center">{useUpVotLis.mobileNumber}</td>
                     </tr>);
                     })
+                    :
+                    <tr className="hvrPtr">
+                      <td className="text-center" colSpan="4">No data found</td>
+                    </tr>
                   }
                     {/*<tr>
                       <td colSpan="5" className="tableNoData">No record added yet...</td>

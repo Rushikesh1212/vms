@@ -8,7 +8,7 @@ import $ from "jquery";
 import Header from '../header/Header.js'
 import './Leftsidebar.css';
 
-var countDownDate = new Date("oct 15, 2019 07:00:00").getTime();
+var countDownDate = new Date("oct 21, 2019 07:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
