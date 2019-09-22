@@ -183,7 +183,7 @@ class VoterMgmt extends Component {
         "mobileNumber"    : this.state.mobileNumber,
         "whatsAppNumber"  : this.state.whatsAppNumber,
         "dead"            : this.state.dead,
-        "visited"         : this.state.visited,
+        "visited"         : /*this.state.visited*/true ,
         "voted"           : this.state.voted,
         "changeAddress"   : this.state.changeAddress,
         "areaName"        : this.state.areaName,
