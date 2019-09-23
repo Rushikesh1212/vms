@@ -251,10 +251,12 @@ class UserMgmt extends Component {
       },
       {
         Header: 'Name',
-        accessor: 'profile.fullName' // String-based value accessors!
+        accessor: 'profile.fullName', // String-based value accessors!
+        maxWidth: 200,
       }, {
         Header: 'Mobile Number',
         accessor: 'profile.mobileNumber',
+        maxWidth: 150,
       }, {
         Header: 'Email ID',
         accessor: 'profile.emailId',
@@ -263,10 +265,8 @@ class UserMgmt extends Component {
         Cell:row =>(
             <div className="text-center">
               <i className="actionIcon fa fa-pencil" data-toggle="modal" data-target="#userModalUpdate" onClick={()=> this.handleEdit(row.original)}></i>&nbsp;&nbsp;
-            <div className="text-center">
               <button className="pull-center btn btn-info" onClick={()=> this.activeInactive(row.original)}>{row.original.profile.status}</button>
               <button className="pull-right btn btn-primary " onClick={()=> this.resetPassword(row.original)}>Reset Password</button>
-            </div>
             </div>
           )
       }]

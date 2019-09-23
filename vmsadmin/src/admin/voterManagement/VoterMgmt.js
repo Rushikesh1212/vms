@@ -49,9 +49,12 @@ class VoterMgmt extends Component {
                             mobileNumber:"",
                             role: "User",
                            },
+      voterName           : "",
+      voterId             : "",                        
 		}
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeBtn = this.handleChangeBtn.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
 	}
 
   componentDidMount(){	
@@ -119,6 +122,46 @@ class VoterMgmt extends Component {
     });
   }
 
+  handleSearch(event){
+    event.preventDefault();
+   const {name,value} = event.target;
+   this.setState({
+      [name]:value
+    },()=>{
+      var formValues = {
+        voterName :this.state.voterName,
+        idNumber  :this.state.voterId,
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :"",
+        "aadharCard"  :"",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :"",
+        "voterAgeFrom":"",
+      }
+       axios
+      .post('/api/search/voters',formValues)
+      .then(
+        (res)=>{
+          console.log('res', res.data);
+          const postsdata = res.data;
+          // console.log('postsdata',postsdata);
+          this.setState({
+            allPosts : postsdata,
+          });         
+        }
+      )
+      .catch((error)=>{
+        console.log("error = ",error);
+        // alert("Something went wrong! Please check Get URL.");
+      });
+    });
+ 
+  }
+
   toggleEventHandle(event){
     var name = $(event.target).attr('name');
       console.log("name = ",name);
@@ -178,6 +221,7 @@ class VoterMgmt extends Component {
 
   updateData(event){
     event.preventDefault();
+    if(this.state.mobileNumber!=="" && this.state.dob!==""){
     const formValues = {
         "voter_id"        : this.state.voter_id,
         "mobileNumber"    : this.state.mobileNumber,
@@ -202,7 +246,6 @@ class VoterMgmt extends Component {
           .patch('/api/voters/patch/',formValues)
           .then((res)=>{
               console.log("response123 = ",res.data);
-                swal("User updated successfully", "", "success");
                 $('body').removeClass("modal-open");
                 this.setState({
                   "mobileNumber"    : "",
@@ -226,6 +269,12 @@ class VoterMgmt extends Component {
                       this.setState({
                         allPosts : res.data,
                       },()=>{
+                        // swal("User updated successfully", "", "success");
+                        swal("User updated successfully", "", "success")
+                        .then(function(){ 
+                              window.location.reload();
+                           }
+                        );
                     });         
                   })
                   .catch((error)=>{
@@ -236,10 +285,11 @@ class VoterMgmt extends Component {
               console.log("error = ",error);
               this.setState({show: false})
             });
-      // }else{
-      //   swal("Please enter mandatory fields", "", "warning");
-      //   console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-      // }
+
+      }else{
+        swal("Please enter mandatory fields", "", "warning");
+        console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+      }
   }
 
   handleEdit(row){
@@ -299,16 +349,16 @@ class VoterMgmt extends Component {
 	var adminRolesListDataList = this.state.adminRolesListData;
 	  return(
 			<div className="modal-bodyuser">
-		    <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
-					<div className="col-lg-8 col-md-6 col-sm-6 col-xs-12 paddingright">
+		    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2 margbottom30">
+					<div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 paddingright">
 						<h4 className="usrmgnttitle weighttitle">Click to add the new single voter:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
 					</div>
-					<div className="col-lg-4 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
+					<div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 "  id="createmodalcl">
 						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#voterModal">Add New Voter</button>
 						<CreateVoter voterList={this.voterList.bind(this)}/>
 					</div>
 				</div>        
-        <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
+        {/*<div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
           <div className="col-lg-offset-1 col-lg-7 col-md-6 col-sm-6 col-xs-12 paddingright">
             <h4 className="usrmgnttitle weighttitle">Click to add multiple voters:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
           </div>
@@ -317,9 +367,37 @@ class VoterMgmt extends Component {
             <label for="file-6"><h4><span class="glyphicon glyphicon-cloud-upload"></span></h4>
             </label>
           </div>
-        </div>
-        <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddingright">
-          <h4 className="usrmgnttitle weighttitle">List of Users: <i className="custTblHdng">(All voters appeare in below table)</i></h4>
+        </div>*/}
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
+              <label className="formLable col-lg-12 col-md-12">Search By Name</label>
+              <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                <div className="input-group inputBox-main" >
+                  <div className="input-group-addon remove_brdr inputIcon">
+                    <i className="fa fa-envelope-square"></i>
+                  </div>
+                  <input type="text" className="formFloatingLabels form-control newinputbox" 
+                  refs="voterName" name="voterName" id="voterName" data-text="voterName" onChange={this.handleSearch}  value={this.state.voterName}
+                  placeholder="Enter voter name..."/>
+                </div>                                      
+              </span>
+          </div> 
+          <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
+              <label className="formLable col-lg-12 col-md-12">Search By Voter Id</label>
+              <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                <div className="input-group inputBox-main" >
+                  <div className="input-group-addon remove_brdr inputIcon">
+                    <i className="fa fa-envelope-square"></i>
+                  </div>
+                  <input type="text" className="formFloatingLabels form-control newinputbox" 
+                  refs="voterId" name="voterId" id="voterId" data-text="voterId" onChange={this.handleSearch}  value={this.state.voterId}
+                  placeholder="Enter voter id..."/>
+                </div>                                      
+              </span>
+          </div>
+         </div>  
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingright">
+          <h4 className="usrmgnttitle weighttitle">List of Voters: <i className="custTblHdng">(All voters appeare in below table)</i></h4>
         </div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         {/*<div class="progress md-progress primary-color-dark">
@@ -329,7 +407,7 @@ class VoterMgmt extends Component {
   				<ReactTable
 				    data={data}
 				    columns={columns}
-				    filterable= {true}
+				    // filterable= {true}
 				    sortable= {true}
 				    showPagination= {true}
 				    pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
@@ -374,7 +452,7 @@ class VoterMgmt extends Component {
                                       )}
                                   </div>
                                   <div className=" col-lg-6 col-md-6 col-xs-6 col-sm-6 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">WhatsApp Number<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
                                       <span className="blocking-span ">
                                         <div className="input-group inputBox-main  new_inputbx " >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -393,7 +471,7 @@ class VoterMgmt extends Component {
                                 </div>
                                 <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Change Address<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Change Address</label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -409,7 +487,7 @@ class VoterMgmt extends Component {
                                       )}
                                   </div>
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Area Name<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Area Name</label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -427,7 +505,7 @@ class VoterMgmt extends Component {
                                 </div>
                                 <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Email Id<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Email Id</label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -443,7 +521,7 @@ class VoterMgmt extends Component {
                                       )}
                                   </div>
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Other Info<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Other Info</label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -477,7 +555,7 @@ class VoterMgmt extends Component {
                                       )}
                                   </div>
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                    <label className="formLable col-lg-12 col-md-12">Aadhar Card<label className="requiredsign">*</label></label>
+                                    <label className="formLable col-lg-12 col-md-12">Aadhar Card</label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">

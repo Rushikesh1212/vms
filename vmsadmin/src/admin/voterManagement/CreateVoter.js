@@ -314,8 +314,8 @@ class CreateVoter extends Component {
                             <div className="box-body">
                               <div className="">
                                   <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
-                                    <div className="col-lg-9 col-md-9 col-xs-12 col-sm-12 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Booth Name</label>
+                                    <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Booth Name<label className="requiredsign">*</label></label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -332,8 +332,8 @@ class CreateVoter extends Component {
                                     </div>
                                   </div>
                                   <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Constituency Name</label>
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Constituency Name<label className="requiredsign">*</label></label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -345,8 +345,23 @@ class CreateVoter extends Component {
                                         </div>                                      
                                       </span>
                                     </div>
+                                     <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Part No<label className="requiredsign">*</label></label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="partNo" name="partNo" id="partNo" data-text="partNo" onChange={this.handleChange}  value={this.state.partNo}
+                                          placeholder="Enter Caste"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
                                     <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Part Name</label>
+                                      <label className="formLable col-lg-12 col-md-12">Part Name<label className="requiredsign">*</label></label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -357,11 +372,9 @@ class CreateVoter extends Component {
                                           placeholder="Part Name"/>
                                         </div>                                      
                                       </span>
-                                    </div>                                  
-                                  </div>
-                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Voter ID</label>
+                                    </div>  
+                                    <div className="col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Voter ID<label className="requiredsign">*</label></label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
                                           <div className="input-group-addon remove_brdr inputIcon">
@@ -373,215 +386,109 @@ class CreateVoter extends Component {
                                         </div>                                     
                                       </span>                                    
                                     </div>
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Full Name</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="fullName" name="fullName" id="fullName" data-text="fullName" onChange={this.handleChange}  value={this.state.fullName}
-                                          placeholder="Full Name"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Mobile Number</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
-                                          className= "form-control UMname inputText form-control  has-content"
-                                          ref="mobileNumber" name="mobileNumber" id="mobileNumber" data-text="mobileNumber" placeholder="Mobile Number"
-                                          onChange={this.handleChange} value={this.state.mobileNumber}/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
-                                          className= "form-control UMname inputText form-control  has-content"
-                                          ref="whatsAppNumber" name="whatsAppNumber" id="whatsAppNumber" data-text="whatsAppNumber" placeholder="WhatsApp Number"
-                                          onChange={this.handleChange} value={this.state.whatsAppNumber}/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
                                   </div>
+                                    <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">First Name<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="firstName" name="firstName" id="firstName" data-text="firstName" onChange={this.handleChange}  value={this.state.firstName}
+                                            placeholder="First Name"/>
+                                          </div>                                      
+                                        </span>
+                                      </div> 
+
+                                       <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Middle Name<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="middleName" name="middleName" id="middleName" data-text="middleName" onChange={this.handleChange}  value={this.state.middleName}
+                                            placeholder="Middle Name"/>
+                                          </div>                                      
+                                        </span>
+                                      </div>  
+
+                                       <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Last Name<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="lastName" name="lastName" id="lastName" data-text="lastName" onChange={this.handleChange}  value={this.state.lastName}
+                                            placeholder="Last Name"/>
+                                          </div>                                      
+                                        </span>
+                                      </div>  
+                                    </div>  
+                                    <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Mobile Number<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
+                                            className= "form-control UMname inputText form-control  has-content"
+                                            ref="mobileNumber" name="mobileNumber" id="mobileNumber" data-text="mobileNumber" placeholder="Mobile Number"
+                                            onChange={this.handleChange} value={this.state.mobileNumber}/>
+                                          </div>                                      
+                                        </span>
+                                      </div>                                  
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">WhatsApp Number</label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <InputMask mask="9999999999" pattern="^(0|[1-9][0-9-]*)$" 
+                                            className= "form-control UMname inputText form-control  has-content"
+                                            ref="whatsAppNumber" name="whatsAppNumber" id="whatsAppNumber" data-text="whatsAppNumber" placeholder="WhatsApp Number"
+                                            onChange={this.handleChange} value={this.state.whatsAppNumber}/>
+                                          </div>                                      
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Relative Name<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="relativeName" name="relativeName" id="relativeName" data-text="relativeName" onChange={this.handleChange}  value={this.state.relativeName}
+                                            placeholder="Relative Name"/>
+                                          </div>                                      
+                                        </span>
+                                      </div>
+
+                                    </div>                                    
                                   <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Relative Name</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="relativeName" name="relativeName" id="relativeName" data-text="relativeName" onChange={this.handleChange}  value={this.state.relativeName}
-                                          placeholder="Relative Name"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Pin Code</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="pinCode" name="pinCode" id="pinCode" data-text="pinCode" onChange={this.handleChange} value={this.state.pinCode}
-                                          placeholder="Pin Code"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Relation</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="relation" name="relation" id="relation" data-text="relation" onChange={this.handleChange}  value={this.state.relation}
-                                          placeholder="Relation"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>   
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Cast</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
-                                          placeholder="Enter Caste"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                               
-                                  </div>
-                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Part No</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="partNo" name="partNo" id="partNo" data-text="partNo" onChange={this.handleChange}  value={this.state.partNo}
-                                          placeholder="Enter Caste"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Age</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="age" name="age" id="age" data-text="age" onChange={this.handleChange}  value={this.state.age}
-                                          placeholder="Age"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Gender</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="gender" name="gender" id="gender" data-text="gender" onChange={this.handleChange}  value={this.state.gender}
-                                          placeholder="Gender"/>
-                                        </div>                                      
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">House Number</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="houseNumber" name="houseNumber" id="houseNumber" data-text="houseNumber" onChange={this.handleChange}  value={this.state.houseNumber}
-                                          placeholder="House No."/>
-                                        </div>
-                                      </span>
-                                    </div>                                  
-                                  </div> 
-                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Changed Address</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                          ref="changeAddress" name="changeAddress" id="changeAddress" data-text="changeAddress" onChange={this.handleChange}  value={this.state.changeAddress}
-                                          placeholder="Enter Address"/>
-                                        </div>
-                                      </span>
-                                    </div>
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Area Name</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                          ref="areaName" name="areaName" id="areaName" data-text="areaName" onChange={this.handleChange} value={this.state.areaName}
-                                          placeholder="Enter Area Name"/>
-                                        </div>
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Other Info</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
-                                          ref="otherInfo" name="otherInfo" id="otherInfo" data-text="otherInfo" onChange={this.handleChange} value={this.state.otherInfo}
-                                          placeholder="Enter Other Info"/>
-                                        </div>
-                                      </span>
-                                    </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
-                                      <label className="formLable col-lg-12 col-md-12">Date of Birth</label>
-                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
-                                        <div className="input-group inputBox-main" >
-                                          <div className="input-group-addon remove_brdr inputIcon">
-                                            <i className="fa fa-envelope-square"></i>
-                                          </div>
-                                          <input type="date" className="formFloatingLabels form-control newinputbox" 
-                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" onKeyDown={e=>{e.preventDefault()}} value={this.state.dob}
-                                          placeholder="Enter Date of Birth"/>
-                                        </div>
-                                      </span>
-                                      {this.state.formerrors.constituencyName &&(
-                                        <span className="text-danger">{this.state.formerrors.constituencyName}</span> 
-                                      )}
-                                    </div>                                  
-                                  </div> 
-                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
-                                  <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                   <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Relation<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="relation" name="relation" id="relation" data-text="relation" onChange={this.handleChange}  value={this.state.relation}
+                                            placeholder="Relation"/>
+                                          </div>                                      
+                                        </span>
+                                    </div> 
+                                   <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
                                       <label className="formLable col-lg-12 col-md-12">Email ID</label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
@@ -594,7 +501,7 @@ class CreateVoter extends Component {
                                         </div>
                                       </span>
                                     </div>                                  
-                                    <div className="col-lg-3 col-md-3 col-xs-12 col-sm-6 inputContent">
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
                                       <label className="formLable col-lg-12 col-md-12">Aadhar Card</label>
                                       <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
                                         <div className="input-group inputBox-main" >
@@ -607,7 +514,139 @@ class CreateVoter extends Component {
                                           onChange={this.handleChange} value={this.state.aadharCard}/>
                                         </div>
                                       </span>
+                                    </div> 
+                                  </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr ">
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Date of Birth<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="date" className="formFloatingLabels form-control newinputbox" 
+                                            ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" onKeyDown={e=>{e.preventDefault()}} value={this.state.dob}
+                                            placeholder="Enter Date of Birth"/>
+                                          </div>
+                                        </span>
+                                        {this.state.formerrors.constituencyName &&(
+                                          <span className="text-danger">{this.state.formerrors.constituencyName}</span> 
+                                        )}
+                                      </div> 
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Age<label className="requiredsign">*</label></label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="age" name="age" id="age" data-text="age" onChange={this.handleChange}  value={this.state.age}
+                                          placeholder="Age"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>     
+                                      <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                        <label className="formLable col-lg-12 col-md-12">Cast<label className="requiredsign">*</label></label>
+                                        <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                          <div className="input-group inputBox-main" >
+                                            <div className="input-group-addon remove_brdr inputIcon">
+                                              <i className="fa fa-envelope-square"></i>
+                                            </div>
+                                            <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
+                                            placeholder="Enter Caste"/>
+                                          </div>                                      
+                                        </span>
+                                      </div>                               
+                                    </div>
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr">
+                                    
+                                                                     
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Gender<label className="requiredsign">*</label></label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="gender" name="gender" id="gender" data-text="gender" onChange={this.handleChange}  value={this.state.gender}
+                                          placeholder="Gender"/>
+                                        </div>                                      
+                                      </span>
                                     </div>                                  
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">House Number<label className="requiredsign">*</label></label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="houseNumber" name="houseNumber" id="houseNumber" data-text="houseNumber" onChange={this.handleChange}  value={this.state.houseNumber}
+                                          placeholder="House No."/>
+                                        </div>
+                                      </span>
+                                    </div> 
+                                     <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Pin Code<label className="requiredsign">*</label></label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
+                                          ref="pinCode" name="pinCode" id="pinCode" data-text="pinCode" onChange={this.handleChange} value={this.state.pinCode}
+                                          placeholder="Pin Code"/>
+                                        </div>                                      
+                                      </span>
+                                    </div>                                    
+                                  </div> 
+                                  <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom20 createusr "> 
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Changed Address</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="changeAddress" name="changeAddress" id="changeAddress" data-text="changeAddress" onChange={this.handleChange}  value={this.state.changeAddress}
+                                          placeholder="Enter Address"/>
+                                        </div>
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Area Name</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="areaName" name="areaName" id="areaName" data-text="areaName" onChange={this.handleChange} value={this.state.areaName}
+                                          placeholder="Enter Area Name"/>
+                                        </div>
+                                      </span>
+                                    </div>                                  
+                                    <div className="col-lg-4 col-md-4 col-xs-12 col-sm-6 inputContent">
+                                      <label className="formLable col-lg-12 col-md-12">Other Info</label>
+                                      <span className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blocking-span">
+                                        <div className="input-group inputBox-main" >
+                                          <div className="input-group-addon remove_brdr inputIcon">
+                                            <i className="fa fa-envelope-square"></i>
+                                          </div>
+                                          <input type="text" className="formFloatingLabels form-control  newinputbox" 
+                                          ref="otherInfo" name="otherInfo" id="otherInfo" data-text="otherInfo" onChange={this.handleChange} value={this.state.otherInfo}
+                                          placeholder="Enter Other Info"/>
+                                        </div>
+                                      </span>
+                                    </div>                                  
+                                
+                                  </div> 
+                                <div className="signuppp col-lg-12 col-md-12 col-sm-12 col-xs-12 margbottom30 createusr">
+                                                                   
                                   <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
                                     <label className="formLable col-lg-12 col-md-12">Color<label className="requiredsign">*</label></label>
                                       <span className="blocking-span col-lg-12 col-md-12 col-xs-12 col-sm-12 emailfixdomain">

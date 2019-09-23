@@ -104,7 +104,7 @@ class AdminContent extends Component{
 
               case 5:
               var color ={
-                status: "Opposit",
+                status: "Opposite",
                 count: data[i].count,
                 color: "#C9392C"
               }

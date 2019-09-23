@@ -279,7 +279,7 @@ class CreateUser extends Component {
                                             )}
 
                                         </div>
-                                        <div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
+                                        {/*<div className=" col-lg-6 col-md-6 col-xs-12 col-sm-6 inputContent">
                                           <label className="formLable col-lg-12 col-md-12">Booth <label className="requiredsign">*</label></label>
                                             <span className="blocking-span ">
                                                <div className="input-group inputBox-main  new_inputbx " >
@@ -294,7 +294,7 @@ class CreateUser extends Component {
                                             {this.state.formerrors.booth &&(
                                               <span className="text-danger">{ this.state.formerrors.booth}</span> 
                                             )}
-                                        </div>
+                                        </div>*/}
                                       </div>
                                       <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                                         <button className="col-lg-2 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn btnSubmit topMargin outlinebox" type="submit" onClick={this.createUser.bind(this)} id="CreateUserModal" >Create</button>
