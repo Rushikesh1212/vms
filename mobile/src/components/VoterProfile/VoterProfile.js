@@ -23,6 +23,7 @@ export default  class VoterProfile extends Component {
 
   constructor(props){
     super(props);
+    this.getUserId();
     this.state = {
       user: '',
       dob:"15-05-2018",
@@ -34,19 +35,15 @@ export default  class VoterProfile extends Component {
   }
   componentWillMount(){
   }
+  getUserId=async()=>{
+    var token ;
+    const user_id = await AsyncStorage.getItem('user_id');
+    console.log('user_id',user_id)
+    this.setState({user_id:user_id})
+
+  }
   componentDidMount(){
-    var user_id ;
-    var token
-    AsyncStorage.multiGet(['token','user_id'])
-          .then((data)=>{
-          // console.log('user',data)
-          token = data[0][1]
-          user_id = data[1][1]
-          this.setState({user_id:user_id})
-        })
     var voter_id = this.props.navigation.getParam('user_id','No id')
-    this.setState({voter_id:voter_id, user_id:user_id})
-    // console.log('user_id',user_id)
     axios.get('api/voters/get/one/'+voter_id)
       .then(response=>{
         // console.log('response',response)

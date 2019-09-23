@@ -88,11 +88,9 @@ export default class LogIn extends ValidationComponent{
     }
     axios.post('/api/users/post/userLogin',login)
       .then(response=>{
-        AsyncStorage.multiSet([
-          ['user_id',response.data.user_ID],
-          ['token',response.data.token],
-          ['userName',response.data.userName]
-        ])
+        // console.log('response',response.data)
+        AsyncStorage.setItem('user_id',response.data.user_ID)
+        AsyncStorage.setItem('token',response.data.token)
         this.props.navigation.navigate('CarouselPage')
         this.setState({btnLoading:false})
       })
