@@ -39,11 +39,11 @@ class AdminContent extends Component{
                 activeUesr: response.data.activeUesr,
               });
 
-              // console.log('this.state.subscrptionData', response.data.subscrptionData.length);
-            var subscrptionData=[{packageName: "Updated Voters", count: response.data.updatedVoters},{packageName: "Non-Updated Voters", count: response.data.totalVoters-response.data.updatedVoters}]
-            var pieArray = [["Updated", "Non-Updated"]];  
+              console.log('this.state.subscrptionData', response.data);
+            var subscrptionData=[{status: "Updated Voters", count: response.data.updatedVoters},{status: "Non-Updated Voters", count: response.data.totalVoters-response.data.updatedVoters}]
+            var pieArray = [["Updated Voters", "Non-Updated Voters"]];  
             for (var i = 0; i < subscrptionData.length; i++) {
-              var pieArr = [subscrptionData[i].packageName , subscrptionData[i].count];
+              var pieArr = [subscrptionData[i].status , subscrptionData[i].count];
               pieArray.push(pieArr)
             }
     
@@ -144,6 +144,9 @@ class AdminContent extends Component{
         },
         {
           color: "#6D78AD"
+        },
+        {
+          color: "#6D78AD"
         }
       ],
       legend: {
@@ -218,6 +221,7 @@ class AdminContent extends Component{
   }
 
   render(){
+    console.log("1",this.state.pieData)
 
     return(
       <div>

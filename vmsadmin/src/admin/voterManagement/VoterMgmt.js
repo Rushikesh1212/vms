@@ -27,7 +27,7 @@ class VoterMgmt extends Component {
         "dob"             : "2001-10-21",
         "emailId"         : "",
         "aadharCard"      : "",
-        "color"           : 3,
+        "color"           : 2,
         "cast"            : "",
         "featured"        : false,
         voter_id          : "",
@@ -259,7 +259,7 @@ class VoterMgmt extends Component {
                   "dob"             : "",
                   "emailId"         : "",
                   "aadharCard"      : "",
-                  "color"           : 1,
+                  "color"           : 2,
                   "cast"            : "",
                   "featured"        : false,
                 })
@@ -580,9 +580,27 @@ class VoterMgmt extends Component {
                                           <div className="input-group-addon remove_brdr inputIcon">
                                             <i className="fa fa-envelope-square"></i>
                                           </div>
-                                          <input type="text" className="formFloatingLabels form-control newinputbox" 
-                                          ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
-                                          placeholder="Enter Caste"/>
+                                          <select type="text" className="formFloatingLabels form-control newinputbox" 
+                                            ref="cast" name="cast" id="cast" data-text="cast" onChange={this.handleChange}  value={this.state.cast}
+                                            placeholder="Enter Caste">
+                                              <option>मराठा (Maratha)</option>
+                                              <option>ब्राम्हण (Bramhin)</option>
+                                              <option>माळी (Mali)</option>
+                                              <option>कुंभार (Kumbhar)</option>
+                                              <option>लोहार (Lohar)</option>
+                                              <option>धनगर (Dhangar)</option>
+                                              <option>नवं-बौद्ध (Nav-Baudha)</option>
+                                              <option>चांभार (Chambhar)</option>
+                                              <option>मातंग (Matang)</option>
+                                              <option>वडार (Wadar)</option>
+                                              <option>कोष्टी व कोळी (Koshti & Koli)</option>
+                                              <option>पारधी व डवरी (Paradhi & Dawari)</option>
+                                              <option>मुस्लिम (Muslim)</option>
+                                              <option>जैन (Jain)</option>
+                                              <option>गुजर - मारवाडी (Marwadi)</option>
+                                              <option>लिंगायत (Lingayat)</option>
+                                              <option>इतर (Other)</option>
+                                            </select>
                                         </div>   
                                       </span>
                                       {this.state.formerrors.cast &&(
