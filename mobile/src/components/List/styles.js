@@ -321,42 +321,55 @@ export default StyleSheet.create({
     padding: 10, 
     marginTop: 16
   },
-  box:{
+  // box:{
+  //   flex:0.48,
+  //   // borderColor:'#000',
+  //   // borderWidth:1,
+  //   paddingVertical:20,
+  //   // shadowColor: "#000",
+  //   // shadowOffset: {
+  //   //   width: 0,
+  //   //   height: 1,
+  //   // },
+  //   // shadowOpacity: 0.20,
+  //   // shadowRadius: 1.41,
+  //   // elevation: 2,
+
+
+  //   // borderWidth:1,
+  //   // borderColor:"#aaa",
+  //   borderRadius:8,
+  //   shadowColor: '#005270',
+  //   shadowOffset: { width: 5, height: 0 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  //   elevation: 3
+  // },
+    box:{
     flex:0.48,
     // borderColor:'#000',
     // borderWidth:1,
-    paddingVertical:20,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.20,
-    // shadowRadius: 1.41,
-    // elevation: 2,
-
-
-    // borderWidth:1,
-    // borderColor:"#aaa",
+    paddingVertical:25,
+    borderWidth:1,
+    borderColor:"#aaa",
     borderRadius:8,
-    shadowColor: '#005270',
-    shadowOffset: { width: 5, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 3
+    // shadowColor: '#005270',
+    // shadowOffset: { width: 5, height: 0 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // elevation: 3
   },
   boxV:{
     flex:1,
-    // borderColor:'#000',
-    // borderWidth:1,
+    borderColor:'#aaa',
+    borderWidth:1,
     borderRadius:8,
-    paddingVertical:20,
-    borderRadius:8,
-    shadowColor: '#005270',
-    shadowOffset: { width: 5, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 3
+    paddingVertical:25,
+    // shadowColor: '#005270',
+    // shadowOffset: { width: 5, height: 0 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // elevation: 3
   }
 
  });

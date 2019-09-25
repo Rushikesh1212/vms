@@ -37,17 +37,17 @@ export default  class AgeList extends Component {
     axios.get('api/voters/villagelist')
       .then(res=>{
         this.setState({gaonList:res.data})
+        var village = {
+          villageName:res.data[0]
+        }
+        axios.post('/api/voters/boothbyvillage',village)
+          .then(res=>{
+            this.setState({boothData:res.data})
+          })
+          .catch(err=>{
+            console.log(err)
+          })
       })
-      var village = {
-        villageName:res.data[0]
-      }
-      axios.post('/api/voters/boothbyvillage',village)
-        .then(res=>{
-          this.setState({boothData:res.data})
-        })
-        .catch(err=>{
-          console.log(err)
-        })
       .catch(err=>{
         console.log('err',err)
       })
@@ -268,7 +268,7 @@ export default  class AgeList extends Component {
                     this.state.data.length > 0 ?
                       this.state.data.map((voter,index)=>{
                         return(
-                          <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{paddingVertical:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
+                          <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{paddingVertical:10,marginBottom:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1}}>{index+1}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.fullName}</Text>

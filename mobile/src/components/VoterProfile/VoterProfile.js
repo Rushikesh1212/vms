@@ -44,6 +44,7 @@ export default  class VoterProfile extends Component {
   }
   componentDidMount(){
     var voter_id = this.props.navigation.getParam('user_id','No id')
+    this.setState({voter_id:voter_id})
     axios.get('api/voters/get/one/'+voter_id)
       .then(response=>{
         // console.log('response',response)
@@ -179,7 +180,7 @@ export default  class VoterProfile extends Component {
       cast              : this.state.cast,
       featured          : this.state.featured,
     }
-    // console.log('updateValues',updateValues)
+    console.log('updateValues',updateValues)
     if(updateValues.mobileNumber == "" || updateValues.areaName == "" || updateValues.dob == "" || updateValues.cast == "" ){
       Alert.alert("","Please enter all Mandatory fields")
     }else{
@@ -205,6 +206,9 @@ export default  class VoterProfile extends Component {
       .catch(err=>{
         console.log('err',err)
       })
+  }
+  family(){
+    this.props.navigation.navigate('FamilyList',{voter_id:this.state.voter_id})
   }
   sendWhatspp(){
     console.log('sendWhatspp')
@@ -239,7 +243,7 @@ export default  class VoterProfile extends Component {
                       <TouchableOpacity style={styles.topIcons} onPress={this.featuredVoter.bind(this)}>
                           <Icon name="star" type="font-awesome" size={30}  color={this.state.featured == true ? "#FFA500" : "#aaa"} />
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.topIcons} onPress={this.featuredVoter.bind(this)}>
+                      <TouchableOpacity style={styles.topIcons} onPress={this.family.bind(this)}>
                           <Icon name="users" type="font-awesome" size={25}  color="#0275D8" />
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.topIcons} onPress={this.sendSms.bind(this)}>
@@ -559,7 +563,7 @@ export default  class VoterProfile extends Component {
                       </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
-                            <Text style={styles.newLabelText}>Caste</Text>
+                            <Text style={styles.newLabelText}>Caste<Text style={{color:'red'}}>*</Text></Text>
                             <View style={{flex:0.6}}>
                             <TextInput
                               style={styles.editableInput}                          

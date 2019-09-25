@@ -195,7 +195,56 @@ export default  class AllVoterList extends Component {
   }
   boothChange(boothName){
     this.setState({boothName:boothName})
-      var searchValue = {
+    var category = this.props.navigation.getParam('category','')
+    var color     = this.props.navigation.getParam('color')
+    var searchValue;
+    if(category == 'favourite'){
+      searchValue = {
+        "featured"    :true,
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :"",
+        "aadharCard"  :"",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :boothName,
+        "idNumber"    :"",
+        "voterAgeFrom":"",
+        "voterName"   :""
+      }
+    }else if(category == 'dead'){
+      searchValue = {
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :true,
+        "aadharCard"  :"",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :boothName,
+        "idNumber"    :"",
+        "voterAgeFrom":"",
+        "voterName"   :""
+      }
+    }else if(category == 'visited'){
+      searchValue = {
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :true,
+        "dead"        :'',
+        "aadharCard"  :"",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :boothName,
+        "idNumber"    :"",
+        "voterAgeFrom":"",
+        "voterName"   :""
+      }
+    }else if(category == ""){
+      searchValue = {
         "featured"    :"",
         "mobileNumber":"",
         "voted"       :"",
@@ -209,6 +258,26 @@ export default  class AllVoterList extends Component {
         "voterAgeFrom":"",
         "voterName"   :""
       }
+    }else if(category == 'color'){
+      var boothNameColor = this.props.navigation.getParam('boothName','')
+      var color     = this.props.navigation.getParam('color','')
+      searchValue = {
+        "color"       :color,
+        "featured"    :"",
+        "mobileNumber":"",
+        "voted"       :"",
+        "visited"     :"",
+        "dead"        :'',
+        "aadharCard"  :"",
+        "cast"        :"",
+        "areaName"    :"",
+        "boothName"   :boothNameColor,
+        "idNumber"    :"",
+        "voterAgeFrom":"",
+        "voterName"   :""
+      }
+    }
+
     axios.post('/api/search/voters/',searchValue)
       .then(response=>{
         // console.log('response. for search',response)

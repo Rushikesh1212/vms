@@ -88,15 +88,16 @@ export default class LogIn extends ValidationComponent{
     }
     axios.post('/api/users/post/userLogin',login)
       .then(response=>{
-        // console.log('response',response.data)
+        console.log('response',response.data)
         AsyncStorage.setItem('user_id',response.data.user_ID)
         AsyncStorage.setItem('token',response.data.token)
+        AsyncStorage.setItem('userName',response.data.userName)
         this.props.navigation.navigate('CarouselPage')
         this.setState({btnLoading:false})
       })
       .catch(error=>{
         console.log(error)
-        Alert.alert("","Some error occured.Please try again")
+        Alert.alert("","Some error occured.Contact Admin")
         this.setState({btnLoading:false})
       })
   }

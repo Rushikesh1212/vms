@@ -22,6 +22,8 @@ import Distribution from "../Distribution/Distribution.js";
 import DisColorWise from "../Distribution/DisColorWise.js";
 import Analysis from "../Analysis/Analysis.js";
 import UserList from "../UserList/UserList.js";
+import VoterListLD from "../LastDay/VoterListLD.js";
+import FamilyList from "../FamilyList/FamilyList.js";
 
 
 const window = Dimensions.get('window');
@@ -30,7 +32,6 @@ const Dashboard = createMaterialTopTabNavigator(
   {
     "Voter Management": {screen:List1},
     "Analysis": {screen:List2},
-    // "List 3": {screen:List3}
   },
   {
     tabBarPosition: 'top',
@@ -141,6 +142,20 @@ const Dashboard1 = createStackNavigator({
 
   VoterProfile: {
     screen: VoterProfile,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  FamilyList: {
+    screen: FamilyList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
+  VoterListLD: {
+    screen: VoterListLD,
     navigationOptions: {
       header: null
     }

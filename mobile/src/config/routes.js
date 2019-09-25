@@ -26,6 +26,8 @@ import Distribution from "../components/Distribution/Distribution.js";
 import DisColorWise from "../components/Distribution/DisColorWise.js";
 import Analysis from "../components/Analysis/Analysis.js";
 import UserList from "../components/UserList/UserList.js";
+import FamilyList from "../components/FamilyList/FamilyList.js";
+import VoterListLD from "../components/LastDay/VoterListLD.js";
 
 let SlideFromRight = (index, position, width)=>{
   const translateX = position.interpolate({

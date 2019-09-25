@@ -29,6 +29,14 @@ export default  class List1 extends Component {
     };
   }
   componentDidMount(){
+    axios.get('/api/users/get/useravailable')
+      .then(res=>{
+        console.log(res)
+        if(res.data == "NOT_VALID"){
+          Alert.alert("","Contact admin for account activation")
+          this.props.navigation.navigate("LogIn")
+        }
+      })
   }
   componentWillUnmount() {
     // BackHandler.removeEventListener('hardwareBackPress',this.androidBackHandler.bind(this));
@@ -73,47 +81,34 @@ export default  class List1 extends Component {
     
     return(
       <React.Fragment>
-{/*
-            <HeaderBar navigate={navigate}
-              navigattion = {this.props.navigation}
-              headerTitle="Team Congress"
-              toggle={()=>this.toggle.bind(this)} 
-              openControlPanel={()=>this.openControlPanel.bind(this)}
-            />*/}
+
             <View style={{ flex: 1,borderWidth:0,paddingTop:0,backgroundColor:'#fff'}}>
-                <View style={{flex:1,}}>
-                    <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>
-                              
+                <View style={{flex:1,paddingVertical:15}}>
+                    <ScrollView createContainerStyle={{borderWidth:0,margin:0}}>                         
                                 <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={styles.box} onPress={()=>this.props.navigation.navigate('SearchList')}>
-{/*                                        <ImageOverlay
-                                        source={require('../../images/Morzine-Restaurants.jpg')}
-                                        height={145}
-                                        overlayColor="#333"
-                                        overlayAlpha={0.6}
-                                        containerStyle={{width:'100%'}}
-                                        contentPosition="top">*/}
-                                            <Icon name="search" type="font-awesome" size={50}  color="#0275D8" style={{}}/>
+                                  <TouchableOpacity style={styles.boxV} onPress={()=>this.props.navigation.navigate('SearchList')}>
+                                            <Icon name="search" type="font-awesome" size={70}  color="#0275D8" style={{}}/>
                                             <View style={{alignSelf:'center'}}>
                                                 <Text style={styles.title}>Search</Text>
                                             </View>
-                                        {/*</ImageOverlay>*/}
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={styles.box} onPress={()=>this.props.navigation.navigate('Voter')}>
-                                              <Icon name="address-card" type="font-awesome" size={50}  color="#0275D8" style={{}}/>
+                                </View>
+                                <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>                                
+                                  <TouchableOpacity style={styles.boxV} onPress={()=>this.props.navigation.navigate('Voter')}>
+                                              <Icon name="address-card" type="font-awesome" size={70}  color="#0275D8" style={{}}/>
                                               <View style={{alignSelf:'center'}}>
                                                   <Text style={styles.title}>Voter List</Text>
                                               </View>
                                   </TouchableOpacity>
                                 </View>
-{/*                                <View style={{flex:1,flexDirection:'row',paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>
-                                  <TouchableOpacity style={styles.boxV} onPress={()=>this.props.navigation.navigate('Distribution')}>
-                                            <Icon name="color-lens" type="material-icons" size={50}  color="#0275D8" style={{}}/>
-                                            <View style={{alignSelf:'center',}}>
-                                                <Text style={styles.title}>Color-Wise Distribution</Text>
-                                            </View>
+                                <View style={{flex:1,flexDirection:'row',paddingTop:20,paddingHorizontal:15,marginBottom:15,justifyContent:'space-between',shadowOffset:{  width: 10,  height: 10,  },shadowColor: 'black',shadowOpacity: 1.0,}}>                                
+                                  <TouchableOpacity style={styles.boxV} onPress={()=>this.props.navigation.navigate('VoterListLD')}>
+                                              <Icon name="address-card" type="font-awesome" size={70}  color="#0275D8" style={{}}/>
+                                              <View style={{alignSelf:'center'}}>
+                                                  <Text style={styles.title}>Voting Day Activity</Text>
+                                              </View>
                                   </TouchableOpacity>
-                                </View>*/}
+                                </View>
                     </ScrollView>
                 </View>
             </View>

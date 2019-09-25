@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 // import Meteor from "react-native-meteor";
+import axios from "../../config/axios.js";
 
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -25,8 +26,14 @@ export default class AuthLoadingScreen extends React.Component {
           token = data[0][1]
           user_id = data[1][1]
         })
+        axios.get('/api/users/get/useravailable')
+          .then(res=>{
+            console.log(res)
+            if(res.data == "NOT_VALID"){
+              this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+            }
+          })
         // console.log('userToken',userToken)
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   // Render any loading content that you like here

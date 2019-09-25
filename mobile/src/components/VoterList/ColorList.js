@@ -116,8 +116,8 @@ export default  class ColorList extends Component {
   }
  render(){
     const { navigate, goBack, state } = this.props.navigation;
-    console.log('gaonList',this.state.gaonList)
-    console.log('booth',this.state.boothData)
+    // console.log('gaonList',this.state.gaonList)
+    // console.log('booth',this.state.data)
     return(
         <Drawer
             ref={(ref) => this._drawer = ref}
@@ -175,13 +175,23 @@ export default  class ColorList extends Component {
 
               <View style={{padding:10}}>
               {
+                this.state.data ?
+                  this.state.data.length > 0 ?
+                    <View style={{flexDirection:'row'}}>
+                      <View style={styles.headCol1}><Text style={styles.tableHeadText}>Color Code</Text></View>
+                      <View style={styles.headCol2}><Text style={styles.tableHeadText}>Count</Text></View>
+                    </View>
+                  : <Text style={{fontFamily:"Montserrat-SemiBold"}}>No Data found</Text>
+                : null
+              }
+{/*              {
                 this.state.data && this.state.data.length > 0 ? 
                   <View style={{flexDirection:'row'}}>
                     <View style={styles.headCol1}><Text style={styles.tableHeadText}>Color Code</Text></View>
                     <View style={styles.headCol2}><Text style={styles.tableHeadText}>Count</Text></View>
                   </View>
                 : null
-              }
+              }*/}
                   {
                     this.state.data ?
                       this.state.data.map((sur,index)=>{

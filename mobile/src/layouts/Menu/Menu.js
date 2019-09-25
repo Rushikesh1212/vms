@@ -24,11 +24,11 @@ export default  class Menu extends React.Component {
     this.state={
       fullName:''
     };
-
+    this._retrieveData()
   }
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem('userId');
+      const value = await AsyncStorage.getItem('userName');
       if (value !== null) {
         // We have data!!
         console.log(value);
@@ -53,7 +53,6 @@ export default  class Menu extends React.Component {
     var name  = "";
     AsyncStorage.multiGet(['token','user_id','userName'])
       .then((data)=>{
-        // console.log('user',data)
         token = data[0][1]
         user_id = data[1][1]
         userName = data[2][1]
