@@ -37,7 +37,7 @@
   background: none;
 }
 .topmargin{
-  margin-top: 20px;
+  margin-top: 12px;
 }
 .topmargin:hover{
   background: none;
@@ -77,13 +77,13 @@ padding: 5px 5px !important;
 .headicon{
     font-size: 1.1vw;
     font-weight: bold;
-    padding-top: 20px;
+    padding-top: 15px;
     color: #fff;
     cursor: pointer;
 }
 .hover:hover{
     background-color: #367fa9;
-    height: 50px;
+    height: 46px;
 }
 .img{
     position: absolute;
@@ -160,31 +160,33 @@ padding: 5px 5px !important;
   transition: all 0.8s;
   }
 
-
 /*new css*/
 
 #sidebarLogo.active .sidebar-header h4,  #sidebarLogo.active .CTAs {
-    display: none;
+  display: none;
 }
 
 #sidebarLogo.active .sidebar-header strong {
-    display: block;
+  display: block;
 }
 
 #sidebarLogo .sidebar-header {
-    padding: 4px;
-    background: #222;
+  padding: 4px;
+  background: #222;
 }
 
 #sidebarLogo .sidebar-header strong {
-    display: none;
-    font-size: 1.8em;
+  display: none;
+  font-size: 1.8em;
 }
 
 #sidebarLogo .sidebar-header h3, #sidebarLogo .CTAs {
-        display: none;
-    }
+  display: none;
+}
 
 #sidebarLogo .sidebar-header strong {
-        display: block;
-    }
+  display: block;
+}
+.martp{
+  margin-top: 4px;
+}

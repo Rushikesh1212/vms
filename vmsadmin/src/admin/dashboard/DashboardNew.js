@@ -19,8 +19,8 @@ class AdminContent extends Component{
       totalUsers      : "",
       totalVoters     : "",
       updatedVoters   : "",
-      userUpdatedVotersList : [],
       usersData       : [],
+      userUpdatedVotersList : [],
     };
   }
 
@@ -45,7 +45,9 @@ class AdminContent extends Component{
             for (var i = 0; i < subscrptionData.length; i++) {
               var pieArr = [subscrptionData[i].status , subscrptionData[i].count];
               pieArray.push(pieArr)
+              console.log('pieArray', pieArr);
             }
+              console.log('pieArray', pieArray);
     
             this.setState({
                 pieData : pieArray,          
@@ -141,6 +143,9 @@ class AdminContent extends Component{
       slices: [
         {
           color: "#5CCDA0"
+        },
+        {
+          color: "#6D78AD"
         },
         {
           color: "#6D78AD"
@@ -344,17 +349,17 @@ class AdminContent extends Component{
                       <th> SR.No.</th>
                       <th> Name of User </th>
                       <th className="text-center"> Mobile Number </th>
-                      <th className="text-center"> Visited Count </th>
+                      {/*<th className="text-center"> Visited Count </th>*/}
                     </tr>                    
                   </thead>
                   <tbody>
                   {this.state.usersData.map((usersData,index)=>{
                     return(
-                    <tr className={index==0?"hvrPtr "+usersData.userId+" clrRow":"hvrPtr "+usersData.userId}>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{index+1}.</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{usersData.userName}</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.mobileNo}</td>
-                      <td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.visitedCount}</td>
+                    <tr className={index==0?"hvrPtr "+usersData._id+" clrRow":"hvrPtr "+usersData._id}>
+                      <td name={usersData._id} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{index+1}.</td>
+                      <td name={usersData._id} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user">{usersData.profile.fullName}</td>
+                      <td name={usersData._id} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.mobileNumber}</td>
+                      {/*<td name={usersData.userId} onClick={this.userUpdatedVotersList.bind(this)} title="Click here to see work of user" className="text-center">{usersData.visitedCount}</td>*/}
                     </tr>
                     );
                     })

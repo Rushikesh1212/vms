@@ -330,3 +330,6 @@ border-radius: 2px 0px 0px 2px;
 .clrRow{
     background: #ddd !important;
 }
+.graphWrapperTab{
+    padding: 0;
+}
