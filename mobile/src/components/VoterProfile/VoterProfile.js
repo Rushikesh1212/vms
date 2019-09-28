@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity,TouchableHighlight, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,AsyncStorage,Linking} from "react-native";
+import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity,TouchableHighlight, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,AsyncStorage,Linking,Picker} from "react-native";
 import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import ImageOverlay from "react-native-image-overlay";
@@ -43,17 +43,27 @@ export default  class VoterProfile extends Component {
 
   }
   componentDidMount(){
+    axios.get('api/lastdayvoting/get/lastdayvoting')
+      .then(res=>{
+        this.setState({lastDay:res.data[0].lastdayvoting})
+      })
+      .catch(error=>{
+        console.log('error',error)
+      })
+
+
     var voter_id = this.props.navigation.getParam('user_id','No id')
     this.setState({voter_id:voter_id})
     axios.get('api/voters/get/one/'+voter_id)
       .then(response=>{
-        // console.log('response',response)
+        console.log('response',response.data)
         this.setState({
           data              : response.data,
           fullName          : response.data.fullName,
           mFullName         : response.data.mFullName,
           mPartName         : response.data.mPartName,
           constituencyName  : response.data.constituencyName,
+          villageName       : response.data.villageName,
           boothName         : response.data.boothName,
           idNumber          : response.data.idNumber,
           mobileNumber      : response.data.mobileNumber,
@@ -73,7 +83,7 @@ export default  class VoterProfile extends Component {
         })
         this.onVisitToggle()
         this.onDeadToggle()
-        this.onVoteToggle()
+        // this.onVoteToggle()
       })
       .catch(error=>{
         console.log('error',error)
@@ -114,13 +124,17 @@ export default  class VoterProfile extends Component {
     this.setState({visited:!this.state.visited});
   }
   onVoteToggle=()=>{
-    let {voted} = this.state;
-    if(voted){
-      this.setState({votedText:'Yes'})
+    if(this.state.lastDay){    
+      let {voted} = this.state;
+      if(voted){
+        this.setState({votedText:'Yes'})
+      }else{
+        this.setState({votedText:'No'})
+      }
+      this.setState({voted:!this.state.voted});
     }else{
-      this.setState({votedText:'No'})
+      Alert.alert("","This option will be activated on voting day")
     }
-    this.setState({voted:!this.state.voted});
   }
   onMenuItemSelected = item =>
     this.setState({
@@ -211,10 +225,17 @@ export default  class VoterProfile extends Component {
     this.props.navigation.navigate('FamilyList',{voter_id:this.state.voter_id})
   }
   sendWhatspp(){
-    console.log('sendWhatspp')
-    var message = "मतदाराचे नाव :"+this.state.mFullName+"\n"+"ओळख पत्र क्रमांक :"+"\n"+this.state.idNumber+"\n"+"बुथचे नाव :"+this.state.boothName+"\n"+"बुथचा पत्ता :" +this.state.mPartName+"\n"+
-                  "मतदानाची तारीख :21 ऑक्टोबर"+"\n"+"नमस्कार,"+"\n"+"आपल्या माढा विधानसभा मतदारसंघाचा लोकप्रतिनिधी म्हणून आपल्या विश्वासाला पात्र ठरण्याचा मी प्रामाणिक प्रयत्न केला आहे. यावर्षी मी महायुतीकडून निवडणूक लढवत असून मला पुन्हा एकदा आपली साथ हवी आहे. येत्या 21 ऑक्टोबर रोजी आपण सर्वांनी मतदान यंत्रावरील बबनराव शिंदे या नावासमोरील कमळ चिन्हाचे बटन दाबून आपली सेवा करण्याची संधी द्यावी ही विनंती."+"\n"+"धन्यवाद,"+"\n"+"बबनराव शिंदे"
-    Linking.openURL('whatsapp://send?text='+message+'&phone=91' + this.state.whatsAppNumber)
+    // console.log('sendWhatspp',this.state.whatsAppNumber)
+    if(this.state.whatsAppNumber == ''){
+      Alert.alert("","Please enter Whatsapp Number")
+    }else{
+      var message = "मतदाराचे नाव :"+this.state.mFullName+"\n"+"ओळख पत्र क्रमांक :"+"\n"+this.state.idNumber+"\n"+"बुथचे नाव :"+this.state.boothName+"\n"+"बुथचा पत्ता :" +this.state.mPartName+"\n"+
+                    "मतदानाची तारीख :21 ऑक्टोबर"+"\n"+"नमस्कार,"+"\n"+"आपल्या माढा विधानसभा मतदारसंघाचा लोकप्रतिनिधी म्हणून आपल्या विश्वासाला पात्र ठरण्याचा मी प्रामाणिक प्रयत्न केला आहे. यावर्षी मी महायुतीकडून निवडणूक लढवत असून मला पुन्हा एकदा आपली साथ हवी आहे. येत्या 21 ऑक्टोबर रोजी आपण सर्वांनी मतदान यंत्रावरील बबनराव शिंदे या नावासमोरील कमळ चिन्हाचे बटन दाबून आपली सेवा करण्याची संधी द्यावी ही विनंती."+"\n"+"धन्यवाद,"+"\n"+"बबनराव शिंदे"
+      Linking.openURL('whatsapp://send?text='+message+'&phone=91' + this.state.whatsAppNumber)
+    }
+  }
+  casteChange(cast){
+    this.setState({cast:cast})
   }
   render(){
 
@@ -250,23 +271,23 @@ export default  class VoterProfile extends Component {
                           <Icon name="message" type="entypo" size={30}  color="#DC7500" />
                       </TouchableOpacity>
                     </View>
-                      <View style={{ flexDirection:'row'/*,backgroundColor:"#d3d"*/,paddingTop:8}}>
+                      <View style={{ flexDirection:'row',/*backgroundColor:"#d3d",*/paddingTop:0}}>
 
-                          <View style={{flex:1,}}>
+                          <View style={{flex:0.8/*,backgroundColor:'yellow'*/,borderBottomWidth:1,borderColor:"#111"}}>
                             <View style={styles.newLabelRow}>
                               <Text style={styles.newLabelText}>Const</Text>
-                              <Text style={{fontFamily:"Montserrat-Bold",paddingVertical:5}}>{this.state.data.constituencyName}</Text>
+                              <Text style={{fontFamily:"Montserrat-Bold",paddingTop:10,fontSize:12}}>{this.state.data.constituencyName}</Text>
                             </View>
-                            <View style={{flexDirection:'row',borderBottomWidth:1,paddingLeft:10,borderColor:"#111",paddingVertical:5}}>
+                            <View style={{flexDirection:'row',paddingLeft:10}}>
+                              <Text style={{fontFamily: "Montserrat-Bold",flex:0.2,color:"#111",marginTop:15}}>Booth</Text>
+                              <Text style={{fontFamily:"Montserrat-Bold",paddingVertical:5,flex:0.8,fontSize:12}}>{this.state.data.boothName}</Text>
+                            </View>
+{/*                            <View style={styles.newLabelRow}>
                               <Text style={styles.newLabelText}>Booth</Text>
                               <Text style={{fontFamily:"Montserrat-SemiBold",paddingTop:8}}>{this.state.data.boothName}</Text>
-                            </View>
-                            <View style={{flexDirection:'row',borderBottomWidth:1,paddingLeft:10,borderColor:"#111",paddingVertical:5}}>
-                              <Text style={styles.newLabelText}>Sr. No.</Text>
-                              <Text style={{fontFamily:"Montserrat-Bold",paddingVertical:5}}>1</Text>
-                            </View>
+                            </View>*/}
                           </View>
-                          <View style={{alignSelf:'flex-end',borderWidth:1,borderColor:"#111",padding:8}}>             
+                          <View style={{flex:0.2,/*backgroundColor:"red",*/alignSelf:'flex-end',borderWidth:1,borderColor:"#111",padding:8}}>             
                             <Avatar
                               width={80}
                               height={80}
@@ -274,8 +295,8 @@ export default  class VoterProfile extends Component {
                               source={require("../../images/userIcon.png")}
                               activeOpacity={0.9}
                             />                   
-                        </View>           
-                      </View>
+                          </View>           
+                        </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
                             <Text style={styles.newLabelText}>Name </Text>
@@ -284,14 +305,8 @@ export default  class VoterProfile extends Component {
                       </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
-                            <Text  style={styles.newLabelText}>Address <Text style={{color:'red'}}>*</Text></Text>
-                            <View style={{flex:0.6}}>
-                              <TextInput
-                              style={styles.editableInput}                           
-                              onChangeText={(address) => this.setState({address})}
-                              value={this.state.address}
-                              />
-                            </View>
+                            <Text  style={styles.newLabelText}>Village</Text>
+                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.villageName}</Text>
                           </View>
                       </View>
                       <View style={{paddingVertical:0}}>
@@ -439,12 +454,6 @@ export default  class VoterProfile extends Component {
                       </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
-                            <Text style={styles.newLabelText}>House No</Text>
-                            <Text style={{flex:0.6,fontFamily:"Montserrat-SemiBold"}}>1</Text>
-                          </View>
-                      </View>
-                      <View style={{paddingVertical:0}}>
-                          <View style={styles.newLabelRow}>
                             <Text style={styles.newLabelText}>Card No </Text>
                             <Text style={{flex:0.6,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.idNumber}</Text>
                           </View>
@@ -565,12 +574,31 @@ export default  class VoterProfile extends Component {
                           <View style={styles.newLabelRow}>
                             <Text style={styles.newLabelText}>Caste<Text style={{color:'red'}}>*</Text></Text>
                             <View style={{flex:0.6}}>
-                            <TextInput
-                              style={styles.editableInput}                          
-                              onChangeText={(cast) => this.setState({cast})}
-                              value={this.state.cast}
-                              placeholder={"Add caste"}
-                            />
+                            <Picker
+                              selectedValue={this.state.cast}
+                              style={{height: 25,fontFamily:"Montserrat-Regular"}}
+                              onValueChange={(itemValue, itemIndex) =>
+                                this.casteChange(itemValue)
+                              }
+                              >
+                                <Picker.Item label={"मराठा (Maratha)"} value={"मराठा (Maratha)"} />
+                                <Picker.Item label={"ब्राम्हण (Bramhin)"} value={"ब्राम्हण (Bramhin)"} />
+                                <Picker.Item label={"माळी (Mali)"} value={"माळी (Mali)"} />
+                                <Picker.Item label={"कुंभार (Kumbhar)"} value={"कुंभार (Kumbhar)"} />
+                                <Picker.Item label={"लोहार (Lohar)"} value={"लोहार (Lohar)"} />
+                                <Picker.Item label={"धनगर (Dhangar)"} value={"धनगर (Dhangar)"} />
+                                <Picker.Item label={"नवं-बौद्ध (Nav-Baudha)"} value={"नवं-बौद्ध (Nav-Baudha)"} />
+                                <Picker.Item label={"चांभार (Chambhar)"} value={"चांभार (Chambhar)"} />
+                                <Picker.Item label={"मातंग (Matang)"} value={"मातंग (Matang)"} />
+                                <Picker.Item label={"वडार (Wadar)"} value={"वडार (Wadar)"} />
+                                <Picker.Item label={"कोष्टी व कोळी (Koshti & Koli)"} value={"कोष्टी व कोळी (Koshti & Koli)"} />
+                                <Picker.Item label={"पारधी व डवरी (Paradhi & Dawari)"} value={"पारधी व डवरी (Paradhi & Dawari)"} />
+                                <Picker.Item label={"मुस्लिम (Muslim)"} value={"मुस्लिम (Muslim)"} />
+                                <Picker.Item label={"जैन (Jain)"} value={"जैन (Jain)"} />
+                                <Picker.Item label={"गुजर - मारवाडी (Marwadi)"} value={"गुजर - मारवाडी (Marwadi)"} />
+                                <Picker.Item label={"लिंगायत (Lingayat)"} value={"लिंगायत (Lingayat)"} />
+                                <Picker.Item label={"इतर (Other)"} value={"इतर (Other)"} />
+                            </Picker>
                             </View>
                           </View>
                       </View>

@@ -143,7 +143,6 @@ export default class LogIn extends ValidationComponent{
   }
   
   render(){
-    console.log('test',this.state.test)
     const messages = {
       en: {
         email: "Please enter a valid Email / Mobile number.",

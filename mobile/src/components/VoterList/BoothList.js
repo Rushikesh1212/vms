@@ -123,7 +123,7 @@ export default  class BoothList extends Component {
               </View>*/}
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
                 <View style={{flex:0.3,paddingTop:5}}>
-                  <Text style={{color:"#f1f1f1"}}>Search Booth</Text>
+                  <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-SemiBold"}}>Search Booth</Text>
                 </View>
                 <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
                         <TextInput

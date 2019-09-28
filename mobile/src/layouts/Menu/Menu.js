@@ -16,9 +16,21 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Dropdown } from 'react-native-material-dropdown';
 import styles from './styles.js';
 import {colors} from '../../config/styles.js';
+import { NavigationActions, StackActions } from 'react-navigation'
 
 
 export default  class Menu extends React.Component {
+
+navigateScreen=(route)=>{
+const navigateAction = StackActions.reset({
+             index: 0,
+            actions: [
+            NavigationActions.navigate({ routeName: route}),
+            ],
+        });
+        this.props.navigation.dispatch(navigateAction);
+}
+
   constructor(props){
     super(props);
     this.state={
@@ -101,7 +113,7 @@ export default  class Menu extends React.Component {
             </View>
         {/*</LinearGradient>*/}
           <View style={styles.menuWrapper}>
-            <TouchableOpacity onPress={()=>this.handleNavigation('WorkspaceMap')}>
+            <TouchableOpacity onPress={()=>this.navigateScreen('CarouselPage')}>
               <View style={styles.menu}>
                 <Icon 
                   size={22} 

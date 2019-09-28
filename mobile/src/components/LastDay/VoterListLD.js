@@ -312,7 +312,7 @@ export default  class AllVoterList extends Component {
                                 this.state.lastDay ?
                                   <TouchableOpacity onPress={()=>{this.votedUser(voter._id)}}><Icon name="hand-o-up" style={{marginTop:5,flex:0.2}} type="font-awesome" size={30}  color={voter.voted ? "#FFA500" : "#999"}/></TouchableOpacity>
                                 :
-                                  <TouchableOpacity onPress={()=>{Alert.alert("","Option will be activated on Voting Day")}}><Icon name="hand-o-up" style={{marginTop:5,flex:0.2}} type="font-awesome" size={30}  color={"#999"}/></TouchableOpacity>                              
+                                  <TouchableOpacity onPress={()=>{Alert.alert("","Option will be activated on Voting Day")}}><Icon name="hand-o-up" style={{marginTop:5,flex:0.2}} type="font-awesome" size={30}  color={voter.voted ? "#FFA500" : "#999"}/></TouchableOpacity>                              
                               }
                             </View>
                             <View style={{flexDirection:'row'}}>

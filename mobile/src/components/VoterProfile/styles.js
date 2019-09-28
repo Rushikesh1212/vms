@@ -220,7 +220,7 @@ export default StyleSheet.create({
     fontFamily: "Montserrat-Bold",
     flex:0.6,
     color:"#111",
-    marginTop:10
+    marginTop:8
   },
   newLabelRow:{
     flexDirection:'row',
