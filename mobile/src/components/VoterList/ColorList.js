@@ -40,9 +40,9 @@ export default  class ColorList extends Component {
         }
         axios.post('api/voters/boothbyvillage',village)
           .then(response=>{
-              this.setState({boothData:response.data,boothName:response.data[0]._id})
+              this.setState({boothData:response.data,boothName:response.data[0]._id.mBoothName})
               var booth = {
-                "boothName":res.data[0]._id
+                "boothName":response.data[0]._id.mBoothName
               }
               axios.post('api/voters/colorList',booth)
                 .then(result=>{
@@ -50,15 +50,15 @@ export default  class ColorList extends Component {
                   this.setState({data:result.data})
                 })
                 .catch(err=>{
-                  console.log('err',err)
+                  console.log('err of colorList',err)
                 })
           })
           .catch(error=>{
-            console.log('error',error)
+            console.log('error of boothlist',error)
           })
       })
       .catch(err=>{
-        console.log('err',err)
+        console.log('err of villagelist',err)
       })
       // var village = {
   };
@@ -164,7 +164,7 @@ export default  class ColorList extends Component {
                                 >
                                     {
                                       this.state.boothData.map(booth=>{
-                                        return <Picker.Item label={booth._id} value={booth._id} />
+                                        return <Picker.Item label={booth._id.mBoothName} value={booth._id.mBoothName} />
                                       })
                                     }
                               </Picker>
@@ -184,20 +184,16 @@ export default  class ColorList extends Component {
                   : <Text style={{fontFamily:"Montserrat-SemiBold"}}>No Data found</Text>
                 : null
               }
-{/*              {
-                this.state.data && this.state.data.length > 0 ? 
-                  <View style={{flexDirection:'row'}}>
-                    <View style={styles.headCol1}><Text style={styles.tableHeadText}>Color Code</Text></View>
-                    <View style={styles.headCol2}><Text style={styles.tableHeadText}>Count</Text></View>
-                  </View>
-                : null
-              }*/}
+
                   {
                     this.state.data ?
                       this.state.data.map((sur,index)=>{
                         return(
                             <TouchableOpacity style={{flexDirection:'row'}} key={index} onPress={()=>this.props.navigation.navigate("AllVoterList",{color:sur._id,category:"color",boothName:this.state.boothName})}>
-                              <View style={{height:50,flex:0.5,borderWidth:1,borderColor:"#333",justifyContent:"center"}}><Text style={styles.tableBodyText}>{sur._id}</Text></View>
+                              <View style={{height:50,flex:0.5,borderWidth:1,borderColor:"#333",justifyContent:"center"}}>
+                                {/*<Text style={styles.tableBodyText}>{sur._id}</Text>*/}
+                                <View style={(sur.id == 1 ? styles.colorTable1 : sur._id == 2 ? styles.colorTable2 : sur._id == 3 ? styles.colorTable3 : sur._id == 4 ? styles.colorTable4 : styles.colorTable5)}><Text style={{color:"#fff",fontFamily:"Montserrat-Bold"}}>{sur._id}</Text></View>
+                              </View>
                               <View style={{height:50,flex:0.5,borderWidth:1,borderColor:"#333",justifyContent:"center"}}><Text style={styles.tableBodyText}>{sur.count}</Text></View>
                             </TouchableOpacity>
                         )

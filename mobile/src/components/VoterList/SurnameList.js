@@ -41,8 +41,8 @@ export default  class SurnameList extends Component {
         }
         axios.post('/api/voters/boothbyvillage',village)
           .then(res=>{
-            this.setState({boothData:res.data,boothName:res.data[0]._id})
-            var booth = {boothName:res.data[0]._id}
+            this.setState({boothData:res.data,boothName:res.data[0]._id.mBoothName})
+            var booth = {boothName:res.data[0]._id.mBoothName}
             axios.post('api/voters/surnameList',booth)
               .then(res=>{
                 this.setState({data:res.data})
@@ -185,7 +185,7 @@ export default  class SurnameList extends Component {
                             >
                               {
                                 this.state.boothData.map(booth=>{
-                                  return <Picker.Item label={booth._id} value={booth._id} />
+                                  return <Picker.Item label={booth._id.mBoothName} value={booth._id.mBoothName} />
                                 })
                               }
                           </Picker>

@@ -67,7 +67,6 @@ export default  class AllVoterList extends Component {
   }
   
   render(){
-
     const { navigate, goBack, state } = this.props.navigation;
     return(
         <Drawer
@@ -78,8 +77,8 @@ export default  class AllVoterList extends Component {
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'center',borderColor:'#337ab7'}}>
-                  <View style={{alignSelf:'center',paddingTop:15}}>
-                    <Text style={{color:"#f1f1f1"}}>Family List</Text>
+                  <View style={{alignSelf:'center',padding:15}}>
+                    <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-Bold",fontSize:15}}>Family List</Text>
                   </View>
               </View>
               <View style={{paddingVertical:5, backgroundColor:"#eee",paddingHorizontal:5}}>
@@ -87,16 +86,17 @@ export default  class AllVoterList extends Component {
                   this.state.data ? 
                     this.state.data.length > 0 ?
                       this.state.data.map((voter,index)=>{
+                      // console.log('fa,il,y',voter._id)
                         return(
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{marginBottom:10,paddingVertical:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1,fontFamily:"Montserrat-Regular"}}>{index+1}</Text>
-                              <Text style={{fontSize:18, color:"#111",flex:0.6,fontFamily:"Montserrat-Regular"}}>{voter.fullName}</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.6,fontFamily:"Montserrat-Regular"}}>{voter.mFullName}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.2,fontFamily:"Montserrat-Regular"}}>{voter.gender}{voter.age}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{color:"#111",flex:0.15,fontFamily:"Montserrat-Regular"}}>Booth: </Text>
-                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline",fontFamily:"Montserrat-Regular"}}>{voter.boothName}</Text>
+                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline",fontFamily:"Montserrat-Regular"}}>{voter.mBoothName}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}><Icon name="phone" style={{marginTop:5}} type="font-awesome" size={15}  color="#333" /><Text style={{color:"#111",marginLeft:5}}>{voter.mobileNumber == "" ? "No phone number": voter.mobileNumber}</Text></View>             
                           </TouchableOpacity>

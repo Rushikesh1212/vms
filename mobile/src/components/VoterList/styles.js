@@ -164,6 +164,10 @@ export default StyleSheet.create({
   tableHeadText:{alignSelf:"center",fontFamily:"Montserrat-Bold",color:"#000"},
   tableBodyText:{alignSelf:"center",fontFamily:"Montserrat-Regular",color:"#000"},
   headCol1:{height:50,flex:0.5,borderWidth:1,borderBottomWidth:0,borderRightWidth:0,borderColor:"black",justifyContent:"center"},
-  headCol2:{height:50,flex:0.5,borderWidth:1,borderBottomWidth:0,borderColor:"black",justifyContent:'center'}
-  
+  headCol2:{height:50,flex:0.5,borderWidth:1,borderBottomWidth:0,borderColor:"black",justifyContent:'center'},
+  colorTable1:{alignSelf:"center",width:30,height:30,borderRadius:15,paddingTop:5,paddingHorizontal:10,backgroundColor:"#5cb85c"},
+  colorTable2:{alignSelf:"center",width:30,height:30,borderRadius:15,paddingTop:5,paddingHorizontal:10,backgroundColor:"#337ab7"},
+  colorTable3:{alignSelf:"center",width:30,height:30,borderRadius:15,paddingTop:5,paddingHorizontal:10,backgroundColor:"#5bc0de"},
+  colorTable4:{alignSelf:"center",width:30,height:30,borderRadius:15,paddingTop:5,paddingHorizontal:10,backgroundColor:"#f0ad4e"},
+  colorTable5:{alignSelf:"center",width:30,height:30,borderRadius:15,paddingTop:5,paddingHorizontal:10,backgroundColor:"#d9534f"}
 });

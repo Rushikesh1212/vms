@@ -50,7 +50,7 @@ export default  class AllVoterList extends Component {
         }
         axios.post('/api/voters/boothbyvillage',village)
           .then(res=>{
-            this.setState({boothData:res.data,boothName:res.data[0]._id})
+            this.setState({boothData:res.data,boothName:res.data[0]._id.mBoothName})
             var searchCategory = {
               "featured"    :"",
               "mobileNumber":"",
@@ -60,14 +60,15 @@ export default  class AllVoterList extends Component {
               "aadharCard"  :"",
               "cast"        :"",
               "areaName"    :"",
-              "boothName"   :res.data[0]._id,
+              "mBoothName"   :res.data[0]._id.mBoothName,
               "idNumber"    :"",
               "voterAgeFrom":"",
               "voterName"   :""
             }
+            console.log('searchCategory',searchCategory)
             axios.post('/api/search/voters/',searchCategory)
               .then(response=>{
-                // console.log('response. for search',response)
+                console.log('response. for search',response)
                 this.setState({data:response.data})
               })
               .catch(error=>{
@@ -112,7 +113,7 @@ export default  class AllVoterList extends Component {
     this._drawer.open()
   }
   gaonChange(gaonName){
-    this.setState({gaonName:gaonName})
+    this.setState({gaonName:gaonName,data:""})
     var village = {
       villageName:gaonName
     }
@@ -122,7 +123,7 @@ export default  class AllVoterList extends Component {
       })
   }
   boothChange(boothName){
-    this.setState({boothName:boothName})
+    this.setState({boothName:boothName,data:''})
     var searchValue = {
         "featured"    :"",
         "mobileNumber":"",
@@ -132,7 +133,7 @@ export default  class AllVoterList extends Component {
         "aadharCard"  :"",
         "cast"        :"",
         "areaName"    :"",
-        "boothName"   :boothName,
+        "boothName"  :boothName,
         "idNumber"    :"",
         "voterAgeFrom":"",
         "voterName"   :""
@@ -164,7 +165,7 @@ export default  class AllVoterList extends Component {
       }
     axios.post('/api/search/voters/',searchValue)
       .then(response=>{
-        // console.log('response. for search',response)
+        console.log('response. for search',response)
         this.setState({data:response.data})
       })
       .catch(error=>{
@@ -260,7 +261,7 @@ export default  class AllVoterList extends Component {
                             >
                               {
                                 this.state.boothData.map(booth=>{
-                                  return <Picker.Item label={booth._id} value={booth._id} />
+                                  return <Picker.Item label={booth._id.mBoothName} value={booth._id.boothName} />
                                 })
                               }
                           </Picker>
@@ -307,7 +308,7 @@ export default  class AllVoterList extends Component {
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{marginBottom:10,paddingVertical:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1,fontFamily:"Montserrat-Regular"}}>{index+1}</Text>
-                              <Text style={{fontSize:18, color:"#111",flex:0.8,fontFamily:"Montserrat-Regular"}}>{voter.fullName}</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.8,fontFamily:"Montserrat-Regular"}}>{voter.mFullName}</Text>
                               {
                                 this.state.lastDay ?
                                   <TouchableOpacity onPress={()=>{this.votedUser(voter._id)}}><Icon name="hand-o-up" style={{marginTop:5,flex:0.2}} type="font-awesome" size={30}  color={voter.voted ? "#FFA500" : "#999"}/></TouchableOpacity>
@@ -317,7 +318,7 @@ export default  class AllVoterList extends Component {
                             </View>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{color:"#111",flex:0.15,fontFamily:"Montserrat-Regular"}}>Booth: </Text>
-                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline",fontFamily:"Montserrat-Regular"}}>{voter.boothName}</Text>
+                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline",fontFamily:"Montserrat-Regular"}}>{voter.mBoothName}</Text>
                             </View>
                             <View style={{flexDirection:'row',marginTop:10,justifyContent:"flex-end"}}><Text style={{color:"#111",marginLeft:10,alignSelf:"flex-end",fontFamily:"Montserrat-Regular"}}>{voter.voted == true ? "Voted": "Not Voted"}</Text></View>             
                           </TouchableOpacity>

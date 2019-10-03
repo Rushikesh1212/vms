@@ -128,7 +128,7 @@ export default class List2 extends Component {
           })
           return pieData
         })
-      console.log('pieData',pieData)
+      // console.log('pieData',pieData)
         this.setState({chartData:pieData})
       })
       .catch(err=>{
@@ -220,7 +220,7 @@ handleCollapse=(state)=>{
             count:0
           },
         ];
-        console.log('render')
+        // console.log('render')
     const menu = <Menu navigate={navigate} isOpen={this.state.isOpen}/>;
       return (
 

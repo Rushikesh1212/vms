@@ -42,7 +42,7 @@ export default  class AgeList extends Component {
         }
         axios.post('/api/voters/boothbyvillage',village)
           .then(res=>{
-            this.setState({boothData:res.data})
+            this.setState({boothData:res.data,boothName:res.data[0]._id.mBoothName})
           })
           .catch(err=>{
             console.log(err)
@@ -58,7 +58,7 @@ export default  class AgeList extends Component {
       }
       axios.post('api/search/voters/',ageCategory)
         .then(response=>{
-          // console.log('response',response.data)
+          console.log('response',response.data)
           this.setState({data:response.data})
         })
         .catch(error=>{
@@ -99,6 +99,7 @@ export default  class AgeList extends Component {
     this._drawer.open()
   }
   gaonChange(gaonName){
+      this.setState({data:""})
     this.setState({gaonName:gaonName})
     var village = {
       villageName:gaonName
@@ -109,6 +110,7 @@ export default  class AgeList extends Component {
       })
   }
   boothChange(boothName){
+      this.setState({data:""})
     this.setState({boothName:boothName})
       var searchValue = {
         "featured"    :"",
@@ -119,7 +121,7 @@ export default  class AgeList extends Component {
         "aadharCard"  :"",
         "cast"        :"",
         "areaName"    :"",
-        "boothName"   :boothName,
+        "mBoothName"   :boothName,
         "idNumber"    :"",
         "voterAgeFrom": this.state.fromAge,
         "voterAgeTo"  : this.state.toAge,
@@ -127,7 +129,7 @@ export default  class AgeList extends Component {
       }
     axios.post('/api/search/voters/',searchValue)
       .then(response=>{
-        // console.log('response. for search',response)
+        console.log('response. for search',response)
         this.setState({data:response.data})
       })
       .catch(error=>{
@@ -141,6 +143,7 @@ export default  class AgeList extends Component {
     }else if(this.state.fromAge > this.state.toAge){
       Alert.alert("","From Age cannot be greater than To Age")
     }else{
+      this.setState({data:""})
       var search={
         "featured"    :"",
         "mobileNumber":"",
@@ -150,14 +153,14 @@ export default  class AgeList extends Component {
         "aadharCard"  :"",
         "cast"        :"",
         "areaName"    :"",
-        "boothName"   :this.state.boothName,
+        "mBoothName"   :this.state.boothName,
         "idNumber"    :"",
         "voterAgeFrom": this.state.fromAge,
         "voterAgeTo"  : this.state.toAge
       }
       axios.post('api/search/voters',search)
         .then(res=>{
-          // console.log('res',res.data)
+          console.log('res',res.data)
           this.setState({data:res.data})
         })
         .catch(err=>{
@@ -183,7 +186,7 @@ export default  class AgeList extends Component {
             <ScrollView  keyboardShouldPersistTaps="handled" >
                <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7'}}>
                   <View style={{flex:0.3,paddingTop:15}}>
-                    <Text style={{color:"#f1f1f1"}}>Pin Code</Text>
+                    <Text style={{color:"#f1f1f1"}}>Select Gaon</Text>
                   </View>
                   <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
                     <Picker
@@ -218,7 +221,7 @@ export default  class AgeList extends Component {
                             {
                               this.state.boothData.length > 0 ?
                                 this.state.boothData.map(booth=>{
-                                  return <Picker.Item label={booth._id} value={booth._id} />
+                                  return <Picker.Item label={booth._id.mBoothName} value={booth._id.mBoothName} />
                                 })
                               : null
                             }
@@ -271,18 +274,18 @@ export default  class AgeList extends Component {
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{paddingVertical:10,marginBottom:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{fontSize:18, color:"#111",flex:0.1}}>{index+1}</Text>
-                              <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.fullName}</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.mFullName}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.2}}>{voter.gender}-{voter.age}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
                               <Text style={{color:"#111",flex:0.15}}>Booth: </Text>
-                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline"}}>{voter.boothName}</Text>
+                              <Text style={{color:"#111",flex:0.8,textDecorationStyle:"underline"}}>{voter.mBoothName}</Text>
                             </View>
                             <View style={{flexDirection:'row'}}><Icon name="phone" style={{marginTop:5}} type="font-awesome" size={15}  color="#333" /><Text style={{color:"#111",marginLeft:5}}>{voter.mobileNumber == "" ? "No phone number": voter.mobileNumber}</Text></View>             
                           </TouchableOpacity>
                         )
                       })
-                    : null
+                    : <Text> No Voter Found </Text>
                   : <Loading />
                 }
               </View>

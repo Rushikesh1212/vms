@@ -28,9 +28,10 @@ export default  class VoterProfile extends Component {
       user: '',
       dob:"15-05-2018",
       votedText: 'No',
-      visitText: 'No',
+      visitText: 'Yes',
       deadText:'Alive',
-      data:''
+      data:'',
+      cast:"मराठा (Maratha)"
     };
   }
   componentWillMount(){
@@ -56,15 +57,18 @@ export default  class VoterProfile extends Component {
     this.setState({voter_id:voter_id})
     axios.get('api/voters/get/one/'+voter_id)
       .then(response=>{
-        console.log('response',response.data)
+        // console.log('response of vvoter profile',response.data)
         this.setState({
           data              : response.data,
           fullName          : response.data.fullName,
           mFullName         : response.data.mFullName,
           mPartName         : response.data.mPartName,
           constituencyName  : response.data.constituencyName,
+          mConstituencyName : response.data.mConstituencyName,
           villageName       : response.data.villageName,
+          mVillageName      : response.data.mVillageName,
           boothName         : response.data.boothName,
+          mBoothName        : response.data.mBoothName,
           idNumber          : response.data.idNumber,
           mobileNumber      : response.data.mobileNumber,
           whatsAppNumber    : response.data.whatsAppNumber,
@@ -78,12 +82,10 @@ export default  class VoterProfile extends Component {
           dob               : response.data.dob,
           emailId           : response.data.emailId,
           aadharCard        : response.data.aadharCard,
-          cast              : response.data.cast,
+          cast              : response.data.cast == "" ? "मराठा (Maratha)" : response.data.cast,
           featured          : response.data.featured
         })
-        this.onVisitToggle()
-        this.onDeadToggle()
-        // this.onVoteToggle()
+        this.checkToggle()
       })
       .catch(error=>{
         console.log('error',error)
@@ -105,33 +107,57 @@ export default  class VoterProfile extends Component {
   updateMenuState(isOpen) {
     this.setState({ isOpen });
   }
-  onDeadToggle=()=>{
-    let {dead} = this.state;
-    if(dead){
-      this.setState({deadText:'Dead'})
+  checkToggle(){
+    let {dead,voted,visited} = this.state;
+    console.log('visited',visited)
+    if(voted){
+      this.setState({votedText:'Yes'})
     }else{
-      this.setState({deadText:'Alive'})
+      this.setState({votedText:'No'})
     }
-    this.setState({dead:!this.state.dead});
-  }
-  onVisitToggle=()=>{
-    let {visited} = this.state;
+
     if(visited){
       this.setState({visitText:'Yes'})
     }else{
       this.setState({visitText:'No'})
     }
+
+    if(dead){
+      this.setState({deadText:'Dead'})
+    }else{
+      this.setState({deadText:'Alive'})
+    }    
+  }
+  onDeadToggle=()=>{
+    this.setState({dead:!this.state.dead});
+    var check = !this.state.dead
+    // let {dead} = this.state;
+    // console.log('check',check)
+    if(check){
+      this.setState({deadText:'Dead'})
+    }else{
+      this.setState({deadText:'Alive'})
+    }
+  }
+  onVisitToggle=()=>{
     this.setState({visited:!this.state.visited});
+    var check = !this.state.visited
+    // let {visited} = this.state;
+    if(check){
+      this.setState({visitText:'Yes'})
+    }else{
+      this.setState({visitText:'No'})
+    }
   }
   onVoteToggle=()=>{
     if(this.state.lastDay){    
-      let {voted} = this.state;
-      if(voted){
+      this.setState({voted:!this.state.voted});
+      var check = !this.state.visited
+      if(check){
         this.setState({votedText:'Yes'})
       }else{
         this.setState({votedText:'No'})
       }
-      this.setState({voted:!this.state.voted});
     }else{
       Alert.alert("","This option will be activated on voting day")
     }
@@ -161,7 +187,7 @@ export default  class VoterProfile extends Component {
         userId  : this.state.user_id,
         featured: !this.state.featured
     }
-    console.log('featured',featured)
+    // console.log('featured',featured)
     axios.post('/api/voters/updateFeatured',featured)
       .then(res=>{
         // console.log('res',res)
@@ -194,7 +220,9 @@ export default  class VoterProfile extends Component {
       cast              : this.state.cast,
       featured          : this.state.featured,
     }
-    console.log('updateValues',updateValues)
+    // console.log('updateValues.dead',updateValues.dead)
+    // console.log('updateValues.voted',updateValues.voted)
+    // console.log('updateValues.visited',updateValues.visited)
     if(updateValues.mobileNumber == "" || updateValues.areaName == "" || updateValues.dob == "" || updateValues.cast == "" ){
       Alert.alert("","Please enter all Mandatory fields")
     }else{
@@ -213,13 +241,17 @@ export default  class VoterProfile extends Component {
     var voterId = {
       voterId:this.state.voter_id
     }
-    axios.post('/api/voters/sendmsg/',voterId)
-      .then(res=>{
-        Alert.alert("","SMS send to Voter")
-      })
-      .catch(err=>{
-        console.log('err',err)
-      })
+    if(this.state.mobileNumber == ''){
+      Alert.alert("","Please enter Mobile Number")
+    }else{
+      axios.post('/api/voters/sendmsg/',voterId)
+        .then(res=>{
+          Alert.alert("","SMS send to Voter")
+        })
+        .catch(err=>{
+          console.log('err',err)
+        })
+    }
   }
   family(){
     this.props.navigation.navigate('FamilyList',{voter_id:this.state.voter_id})
@@ -276,16 +308,12 @@ export default  class VoterProfile extends Component {
                           <View style={{flex:0.8/*,backgroundColor:'yellow'*/,borderBottomWidth:1,borderColor:"#111"}}>
                             <View style={styles.newLabelRow}>
                               <Text style={styles.newLabelText}>Const</Text>
-                              <Text style={{fontFamily:"Montserrat-Bold",paddingTop:10,fontSize:12}}>{this.state.data.constituencyName}</Text>
+                              <Text style={{fontFamily:"Montserrat-Bold",paddingTop:10,fontSize:12}}>{this.state.data.mConstituencyName}</Text>
                             </View>
                             <View style={{flexDirection:'row',paddingLeft:10}}>
                               <Text style={{fontFamily: "Montserrat-Bold",flex:0.2,color:"#111",marginTop:15}}>Booth</Text>
-                              <Text style={{fontFamily:"Montserrat-Bold",paddingVertical:5,flex:0.8,fontSize:12}}>{this.state.data.boothName}</Text>
+                              <Text style={{fontFamily:"Montserrat-Bold",paddingVertical:5,flex:0.8,fontSize:12}}>{this.state.data.mBoothName}</Text>
                             </View>
-{/*                            <View style={styles.newLabelRow}>
-                              <Text style={styles.newLabelText}>Booth</Text>
-                              <Text style={{fontFamily:"Montserrat-SemiBold",paddingTop:8}}>{this.state.data.boothName}</Text>
-                            </View>*/}
                           </View>
                           <View style={{flex:0.2,/*backgroundColor:"red",*/alignSelf:'flex-end',borderWidth:1,borderColor:"#111",padding:8}}>             
                             <Avatar
@@ -300,13 +328,13 @@ export default  class VoterProfile extends Component {
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
                             <Text style={styles.newLabelText}>Name </Text>
-                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.fullName}</Text>
+                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.mFullName}</Text>
                           </View>
                       </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
                             <Text  style={styles.newLabelText}>Village</Text>
-                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.villageName}</Text>
+                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}>{this.state.data.mVillageName}</Text>
                           </View>
                       </View>
                       <View style={{paddingVertical:0}}>

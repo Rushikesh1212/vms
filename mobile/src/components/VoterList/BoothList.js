@@ -24,18 +24,38 @@ export default  class BoothList extends Component {
   constructor(props){
     super(props);
     this.state = {
-      gaon: 'Select Gaon'
+      gaon: 'Select Gaon',
+      gaonName:'Select Gaon'
     };
   }
   componentDidMount(){
-    axios.get('/api/voters/distinctBooth')
+    axios.get('api/voters/villagelist')
       .then(res=>{
-        // console.log('res',res.data)
-        this.setState({data:res.data})
+        this.setState({gaonList:res.data})
+        var village = {
+          mVillageName:res.data[0]
+        }
+        axios.post('/api/booth/post/searchBooth',village)
+          .then(response=>{
+            console.log('Booth',response.data)
+            this.setState({data:response.data})
+          })
+          .catch(err=>{
+            console.log(err)
+          })
       })
       .catch(err=>{
         console.log('err',err)
       })
+    
+    // axios.get('/api/voters/distinctBooth')
+    //   .then(res=>{
+    //     // console.log('res',res.data)
+    //     this.setState({data:res.data})
+    //   })
+    //   .catch(err=>{
+    //     console.log('err',err)
+    //   })
   };
   componentWillUnmount() {
     // BackHandler.removeEventListener('hardwareBackPress',this.androidBackHandler.bind(this));
@@ -87,15 +107,23 @@ export default  class BoothList extends Component {
         // console.log('error',error)
       })
   }
-  
+  gaonChange(gaonName){
+    this.setState({gaonName:gaonName})
+    var village = {
+      mVillageName:gaonName
+    }
+    // console.log('village',village)
+    axios.post('api/booth/post/searchBooth',village)
+      .then(response=>{
+        this.setState({data:response.data})
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  }
   render(){
 
     const { navigate, goBack, state } = this.props.navigation;
-    // console.log('subscriptionList in render',this.state.subscriptionList)
-    // const menu = <MenuBar navigate={navigate} />;
-   
-    // var navigationView = <NotificationCommon closeDrawer={this.closeDrawer} notificationData={[]} navigation={this.props.navigation}/>
-
     return(
         <Drawer
             ref={(ref) => this._drawer = ref}
@@ -104,39 +132,31 @@ export default  class BoothList extends Component {
             >
             
             <ScrollView  keyboardShouldPersistTaps="handled" >
-{/*              <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
-                <View style={{flex:0.3,paddingTop:5}}>
-                  <Text style={{color:"#f1f1f1"}}>Select Gaon</Text>
-                </View>
-                <View style={{flex:0.7,height: 25,paddingBottom:10, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
-                        <Picker
-                          selectedValue={this.state.gaon}
-                          style={{height: 25}}
-                          onValueChange={(itemValue, itemIndex) =>
-                            this.setState({gaon: itemValue})
-                          }
-                          >
-                          <Picker.Item label="Gaon" value="java" />
-                          <Picker.Item label="JavaScript" value="js" />
-                        </Picker>
-                </View>
-              </View>*/}
               <View style={{ flexDirection:'row',backgroundColor:'#337ab7',paddingHorizontal:10,paddingVertical:10,justifyContent:'space-between',borderColor:'#337ab7',borderBottomWidth:2,shadowOffset:{  width: 10,  height: 10,  },shadowColor: '#337ab7',shadowOpacity: 1.0,}}>
                 <View style={{flex:0.3,paddingTop:5}}>
-                  <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-SemiBold"}}>Search Booth</Text>
+                  <Text style={{color:"#f1f1f1",fontFamily:"Montserrat-SemiBold"}}>Select Gaon</Text>
                 </View>
                 <View style={{flex:0.7,paddingTop:5, width: '100%', backgroundColor:"transparent",borderBottomWidth:1, borderColor:"#000"}}>
-                        <TextInput
-                          style={{height: 35,borderColor: this.state.borderColor,borderBottomWidth: 1,paddingLeft:10}}
-                          placeholder="Search Booth"
-                          onChangeText = {this.updateNameSearch}
-                          value={this.state.boothName}
-                          onBlur={ () => this.setState({borderColor:'#666'}) }
-                          onFocus={ () => this.setState({borderColor:'#337ab7'}) }
-                        />
+                  <Picker
+                    selectedValue={this.state.gaonName}
+                    placeholder={"Select Gaon"}
+                    style={{height: 25,fontFamily:"Montserrat-Regular"}}
+                    onValueChange={(itemValue, itemIndex) =>
+                      this.gaonChange(itemValue)
+                    }
+                    >
+                      {
+                        this.state.gaonList ?
+                          this.state.gaonList.length > 0 ?
+                            this.state.gaonList.map((gaon,i)=>{
+                              return <Picker.Item label={gaon} key={i} value={gaon} />
+                            })
+                          : null
+                        :null
+                      }
+                  </Picker>
                 </View>
               </View>
-
               <View style={{paddingVertical:10, backgroundColor:"#eee",paddingHorizontal:15}}>
                 {
                   this.state.data ? 
@@ -144,7 +164,7 @@ export default  class BoothList extends Component {
                       this.state.data.map((booth,index)=>{
                         return(
                           <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('AllVoterList',{category:'boothName',boothName:booth.boothName})} style={{paddingVertical:20,paddingHorizontal:15,marginBottom:10,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
-                            <Text style={{fontSize:20, color:"#111",fontFamily:'Montserrat-Bold'}}>{index+1}- {booth.boothName}</Text>
+                            <Text style={{fontSize:20, color:"#111",fontFamily:'Montserrat-Bold'}}>{booth.boothName}</Text>
                             <Text style={styles.statText}>Total Female: {booth.female}</Text>
                             <Text style={styles.statText}>Total Male: {booth.male}</Text>
                             <Text style={styles.statText}>Total: {booth.total}</Text>

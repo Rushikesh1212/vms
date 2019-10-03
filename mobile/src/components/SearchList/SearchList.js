@@ -192,18 +192,13 @@ export default  class SearchList extends Component {
                 </View>
               </View>
               <View style={{width:'100%'}}>
-{/*                  <View style={{flexDirection:'row'}}>
-                    <View style={styles.headCol1}><Text style={styles.tableHeadText}>Sr.</Text></View>
-                    <View style={styles.headCol2}><Text style={styles.tableHeadText}>Name</Text></View>
-                    <View style={styles.headCol3}><Text style={styles.tableHeadText}>Card</Text></View>
-                  </View>*/}
                   { this.state.data ? 
                       this.state.data.length > 0 ? 
                         this.state.data.map((data,index)=>{
                           return(
                             <TouchableOpacity style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:1,borderColor:'#333', blurRadius:90,}} onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:data._id})} key={index}>
                                 <Text style={{flex:0.1,fontFamily:'Montserrat-Regular',fontSize:10}}> {data.partNo}/{index+1}</Text>
-                                <Text style={{flex:0.6,fontFamily:'Montserrat-SemiBold',paddingLeft:30,backgroundColor:'transparent'}}>{data.fullName}</Text>
+                                <Text style={{flex:0.6,fontFamily:'Montserrat-SemiBold',paddingLeft:30,backgroundColor:'transparent'}}>{data.mFullName}</Text>
                                 <Text style={{flex:0.3,fontFamily:'Montserrat-SemiBold'}}>{data.idNumber}</Text>
                             </TouchableOpacity>
                           )
