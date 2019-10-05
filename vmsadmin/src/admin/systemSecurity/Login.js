@@ -124,10 +124,10 @@ class Login extends Component {
 */}     
 
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 signUpWrapper">
-        <div className="col-lg-4 col-lg-offset-7 col-md-4 col-md-offset-7 col-sm-12 signupPadding signUpFormWrap " style={{"height": divHeight}}>
+        <div className="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 signupPadding signUpFormWrap " style={{"height": divHeight}}>
           <div className="divLoginInWrap">
 
-            <div className="col-lg-4 col-lg-offset-4 marbtm10 text-center">
+            <div className="col-lg-4 col-lg-offset-4  text-center">
               <img src="images/voterlogo.png" height="70px"/>
               </div>
 
@@ -145,7 +145,7 @@ class Login extends Component {
                   </span>
                 </div>
               </div>
-              <div className="col-lg-12 col-md-12 col-sm-12 marBtm30">
+              <div className="col-lg-12 col-md-12 col-sm-12 marBtm10">
                 <div className="form-group form-group1 fltlft input-group col-lg-12 col-md-12 col-sm-12 inputContent ">     
                   <span className="blocking-span noIb">
                     <input type="password" className="form-control border3 pass oesSignUpForm confirmbtm inputTextPass tmsLoginTextBox" onChange={this.handleChange.bind(this)} ref="loginpassword" name="loginpassword" required/>
