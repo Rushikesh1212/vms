@@ -220,7 +220,7 @@ class SignUp extends Component {
 
 		<div className={backImage} style={{"height": winHeight}}> 
 			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 signUpWrapper">
-        		<div className="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-12 margintop20 formbg1 bg-success signupPadding signUpFormWrap loginOesWrap loginforms1" style={{"height": boxHeight}}>
+        		<div className="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-12 margintop20 formbg1 bg-success signupPadding signUpFormWrap1 loginOesWrap loginforms1" style={{"height": boxHeight}}>
 					<div className="divLoginInWrap">
 						<form id="signUpUser" onSubmit={this.usersignup.bind(this)}>
 	                    	<h3 className="signUpNameTitle2 margintop0"><span className="bordbt">SIGN UP</span></h3>
