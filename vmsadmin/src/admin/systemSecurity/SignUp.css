@@ -27,13 +27,7 @@
 .signupPadding{
   padding-top:2%;
 }
-.signUpFormWrap, .forgetpassFormWrap, .confirmModalFormWrap{
-  border-radius: 10px;
-  height: 650px;
-  position: absolute;
-  box-shadow: 0px 0px 0px;
 
-}
 .divLoginInWrap{
   z-index: 111;
   padding-left: 0px;
@@ -1225,11 +1219,11 @@ input[type="radio"]:checked:before {
 }*/
 .signUpFormWrap, .forgetpassFormWrap, .confirmModalFormWrap{
   border-radius: 10px;
-  height: 360px !important;
+  height: 340px !important;
   position: absolute;
   box-shadow: 0px 0px 0px;
   border: 1px solid #ccc;
-  margin-top: 250px;
+  margin-top: 230px;
   /*background-color: #C2D2EA;*/
   background-image: linear-gradient(#EF6537, #FFF, #245627);
   float: right;
