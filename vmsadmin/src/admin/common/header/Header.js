@@ -46,7 +46,7 @@ export default class Header extends Component{
         loggedIn : false
       })
       // browserHistory.push("/login");
-      this.props.history.push("/");
+      this.props.history.push("/login");
     }
   }
 
