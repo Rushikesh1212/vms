@@ -107,7 +107,7 @@ export default class Header extends Component{
                                     <div>                                     
                                       <span className="pull-left"></span>
                                       <span className="pull-right">
-                                        <a  className="profileTitle btnpadd" href="/login">
+                                        <a  className="profileTitle btnpadd" href="/">
                                           <button type="button" className="btn  profilebtn" onClick={this.logout.bind(this)}>Logout</button>
                                         </a>
                                       </span>  

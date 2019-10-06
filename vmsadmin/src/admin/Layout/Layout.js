@@ -124,7 +124,6 @@ componentDidMount(){
           <Router>
             <Switch>
               <Route path="/"               exact strict component={ Login } />
-              <Route path="/login"          exact strict component={ Login } />
               <Route path="/signup"         exact strict component={ SignUp } />
             </Switch>        
           </Router>
