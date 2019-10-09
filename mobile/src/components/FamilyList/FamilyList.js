@@ -14,7 +14,7 @@ import styles from "./styles.js";
 import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
 
  const window = Dimensions.get('window');
-export default  class AllVoterList extends Component {
+export default  class FamilyList extends Component {
 
   constructor(props){
     super(props);
@@ -68,6 +68,7 @@ export default  class AllVoterList extends Component {
   
   render(){
     const { navigate, goBack, state } = this.props.navigation;
+    console.log('data',this.state.data)
     return(
         <Drawer
             ref={(ref) => this._drawer = ref}

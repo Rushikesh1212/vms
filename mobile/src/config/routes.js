@@ -162,6 +162,13 @@ const HomeStack = createStackNavigator({
     }
   },
 
+  FamilyList: {
+    screen: FamilyList,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   ColorList: {
     screen: ColorList,
     navigationOptions: {
