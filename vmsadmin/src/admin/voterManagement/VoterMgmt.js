@@ -5,8 +5,9 @@ import InputMask            from 'react-input-mask';
 import _                    from 'underscore';
 import swal                 from 'sweetalert';
 import $ 					          from 'jquery';
-import ReactTable           from 'react-table'
-import 'react-table/react-table.css'
+import ReactTable           from 'react-table';
+import moment               from 'moment';
+import 'react-table/react-table.css';
 import './VoterManagement.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -24,7 +25,7 @@ class VoterMgmt extends Component {
         "changeAddress"   : "",
         "areaName"        : "",
         "otherInfo"       : "",
-        "dob"             : "2001-10-21",
+        "dob"             : "21-10-2001",
         "emailId"         : "",
         "aadharCard"      : "",
         "color"           : 2,
@@ -232,7 +233,7 @@ class VoterMgmt extends Component {
         "changeAddress"   : this.state.changeAddress,
         "areaName"        : this.state.areaName,
         "otherInfo"       : this.state.otherInfo,
-        "dob"             : this.state.dob,
+        "dob"             : this.state.dob?moment(this.state.dob).format('DD-MM-YYYY'):this.state.dob,
         "emailId"         : this.state.emailId,
         "aadharCard"      : this.state.aadharCard,
         "color"           : this.state.color,
@@ -304,7 +305,7 @@ class VoterMgmt extends Component {
       "changeAddress"   : row.changeAddress,
       "areaName"        : row.areaName,
       "otherInfo"       : row.otherInfo,
-      "dob"             : row.dob,
+      "dob"             : moment(row.dob).format('YYYY-MM-DD'),
       "emailId"         : row.emailId,
       "aadharCard"      : row.aadharCard,
       "color"           : row.color,
@@ -546,7 +547,7 @@ class VoterMgmt extends Component {
                                             <i className="fa fa-envelope-square"></i>
                                           </div> 
                                           <input type="date" className="formFloatingLabels form-control newinputbox" 
-                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="2001-06-01" onKeyDown={e=>{e.preventDefault()}} value={this.state.dob}
+                                          ref="dob" name="dob" id="dob" data-text="dob" onChange={this.handleChange} max="01-06-2001" onKeyDown={e=>{e.preventDefault()}} value={moment(this.state.dob).format('YYYY-MM-DD')}
                                           placeholder="Enter Date of Birth"/>
                                         </div>   
                                       </span>
