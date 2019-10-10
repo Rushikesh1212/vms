@@ -358,17 +358,7 @@ class VoterMgmt extends Component {
 						<button type="button" className="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" data-toggle="modal" data-target="#voterModal">Add New Voter</button>
 						<CreateVoter voterList={this.voterList.bind(this)}/>
 					</div>
-				</div>        
-        {/*<div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 box-header with-border nopaddingum2">
-          <div className="col-lg-offset-1 col-lg-7 col-md-6 col-sm-6 col-xs-12 paddingright">
-            <h4 className="usrmgnttitle weighttitle">Click to add multiple voters:&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></h4>
-          </div>
-          <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 "  id="createmodalcl">
-            <input type="file" name="file-6[]" id="file-6" className="inputfile inputfile-5" data-multiple-caption="{count} files selected" multiple=""/>
-            <label for="file-6"><h4><span class="glyphicon glyphicon-cloud-upload"></span></h4>
-            </label>
-          </div>
-        </div>*/}
+				</div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 inputContent">
               <label className="formLable col-lg-12 col-md-12">Search By Name</label>

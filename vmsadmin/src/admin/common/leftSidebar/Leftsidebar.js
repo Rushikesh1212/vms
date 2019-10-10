@@ -101,8 +101,19 @@ export default class Leftsidebar extends Component{
                       Voter Management
                     </Link>
                   </li>
+                  <li className="active">
+                    <Link to="/csvUpload">
+                      <i className="glyphicon glyphicon-user"></i>
+                      Upload Voter File
+                    </Link>
+                  </li>
+                  <li className="active">
+                    <Link to="/contactList">
+                      <i className="glyphicon glyphicon-send"></i>
+                      Contact List
+                    </Link>
+                  </li>
               </ul>
-
             </nav>
           </div>
         </aside>

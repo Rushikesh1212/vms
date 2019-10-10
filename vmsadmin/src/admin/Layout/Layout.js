@@ -12,6 +12,7 @@ import Footer             from '../common/footer/Footer.js'
 import Dashboard          from '../dashboard/Dashboard.js'
 import AdminContent       from '../dashboard/DashboardNew.js'
 import Leftsidebar        from '../common/leftSidebar/Leftsidebar.js'
+import ContactList        from '../contactList/ContactList.js';
 import UserMgmt           from '../userManagement/UserMgmt.js';
 import VoterMgmt          from '../voterManagement/VoterMgmt.js';
 import csvUpload          from '../csvUpload/csvUpload.js';
@@ -100,6 +101,7 @@ componentDidMount(){
                       <Route path="/userManagement" component={UserMgmt} exact />
                       <Route path="/userManagement/:id" component={UserMgmt} exact />
                       <Route path="/voterManagement" component={VoterMgmt} exact />
+                      <Route path="/contactList" component={ContactList} exact />
                       <Route path="/csvUpload" component={csvUpload} exact />
                       {/*<Route path="/dashboard" component={Dashboard} exact />*/}
                       <Route path="/dashboard" component={AdminContent} exact />
