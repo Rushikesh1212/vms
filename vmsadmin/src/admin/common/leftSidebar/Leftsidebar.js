@@ -89,12 +89,12 @@ export default class Leftsidebar extends Component{
                       Dashboard
                     </Link>
                   </li>                    
-                  <li className="active">
+                  {/*<li className="active">
                     <Link to="/userManagement">
                       <i className="glyphicon glyphicon-user"></i>
                       User Management
                     </Link>
-                  </li>                  
+                  </li>*/}                  
                   <li className="active">
                     <Link to="/voterManagement">
                       <i className="glyphicon glyphicon-send"></i>
@@ -109,7 +109,7 @@ export default class Leftsidebar extends Component{
                   </li>
                   <li className="active">
                     <Link to="/contactList">
-                      <i className="glyphicon glyphicon-send"></i>
+                      <i className="glyphicon glyphicon-file"></i>
                       Contact List
                     </Link>
                   </li>
