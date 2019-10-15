@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,Picker/*AsyncStorage*/} from "react-native";
-import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
-import AsyncStorage from '@react-native-community/async-storage'
-import { NavigationActions } from "react-navigation";
-import ImageOverlay from "react-native-image-overlay";
-
-import SideMenu from 'react-native-side-menu';
-import PropTypes from "prop-types";
+import { Dimensions, Picker /*AsyncStorage*/, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Drawer from 'react-native-drawer';
+import { Icon } from "react-native-elements";
 import axios from "../../config/axios.js";
 import Loading from '../../layouts/Loading/Loading.js';
-import styles from "./styles.js";
-import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
+
 
  const window = Dimensions.get('window');
 export default  class AllVoterList extends Component {
@@ -64,7 +57,6 @@ export default  class AllVoterList extends Component {
                   }
                   axios.post('/api/search/voters/',searchValue)
                     .then(response=>{
-                      // console.log(response.data.length)
                       this.setState({data:response.data})
                     })
                     .catch(error=>{
@@ -569,8 +561,8 @@ export default  class AllVoterList extends Component {
                                 }
                                 >
                                   {
-                                    this.state.gaonList.map(gaon=>{
-                                      return <Picker.Item label={gaon} value={gaon} />
+                                    this.state.gaonList.map((gaon,i)=>{
+                                      return <Picker.Item label={gaon} key={i} value={gaon} />
                                     })
                                   }
                               </Picker>
@@ -596,8 +588,8 @@ export default  class AllVoterList extends Component {
                             }
                             >
                               {
-                                this.state.boothData.map(booth=>{
-                                  return <Picker.Item label={booth._id.mBoothName} value={booth._id.boothName} />
+                                this.state.boothData.map((booth,i)=>{
+                                  return <Picker.Item label={booth._id.mBoothName} key={i} value={booth._id.boothName} />
                                 })
                               }
                           </Picker>
@@ -662,7 +654,7 @@ export default  class AllVoterList extends Component {
                         return(
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{marginBottom:10,paddingVertical:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
-                              <Text style={{fontSize:18, color:"#111",flex:0.1,fontFamily:"Montserrat-Regular"}}>{index+1}</Text>
+                              <Text style={ { fontSize: 18, color: "#111", flex: 0.2, fontFamily: "Montserrat-Regular" } }>{ voter.serialNo}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.6,fontFamily:"Montserrat-Regular"}}>{voter.mFullName}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.2,fontFamily:"Montserrat-Regular"}}>{voter.gender}{voter.age}</Text>
                             </View>

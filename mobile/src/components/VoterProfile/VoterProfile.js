@@ -1,21 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity,TouchableHighlight, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,AsyncStorage,Linking,Picker} from "react-native";
-import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
-import { NavigationActions } from "react-navigation";
-import ImageOverlay from "react-native-image-overlay";
-import { TextField } from "react-native-material-textfield";
-
-import SideMenu from 'react-native-side-menu';
-import PropTypes from "prop-types";
-import Drawer from 'react-native-drawer';
-import {colors,sizes} from '../../config/styles.js';
-
-import styles from "./styles.js";
-import SwitchToggle from 'react-native-switch-toggle';
+import { Alert, AsyncStorage, Dimensions, Linking, Picker, ScrollView, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import DatePicker from 'react-native-datepicker';
-// import MenuBar from '../Menu/Menu.js';
-import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
-import axios from '../../config/axios.js'
+import Drawer from 'react-native-drawer';
+import { Avatar, Icon } from "react-native-elements";
+import SwitchToggle from 'react-native-switch-toggle';
+import axios from '../../config/axios.js';
+import { colors } from '../../config/styles.js';
+import styles from "./styles.js";
+
+
 
 
  const window = Dimensions.get('window');
@@ -83,7 +76,8 @@ export default  class VoterProfile extends Component {
           emailId           : response.data.emailId,
           aadharCard        : response.data.aadharCard,
           cast              : response.data.cast == "" ? "मराठा (Maratha)" : response.data.cast,
-          featured          : response.data.featured
+          featured          : response.data.featured,
+          serialNo          : response.data.serialNo
         })
         this.checkToggle()
       })
@@ -339,8 +333,8 @@ export default  class VoterProfile extends Component {
                       </View>
                       <View style={{paddingVertical:0}}>
                           <View style={styles.newLabelRow}>
-                            <Text style={styles.newLabelText}>Part No </Text>
-                            <Text style={{flex:0.6,marginTop:10,fontFamily:"Montserrat-SemiBold"}}> {this.state.data.partNo} </Text>
+                            <Text style={styles.newLabelText}>Serial No </Text>
+                      <Text style={ { flex: 0.6, marginTop: 10, fontFamily: "Montserrat-SemiBold" } }> { this.state.data.serialNo} </Text>
                           </View>
                       </View>
                       <View style={{paddingVertical:0}}>

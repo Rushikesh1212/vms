@@ -1,21 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,Picker/*AsyncStorage*/} from "react-native";
-import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
-import AsyncStorage from '@react-native-community/async-storage'
-import { NavigationActions } from "react-navigation";
-import ImageOverlay from "react-native-image-overlay";
-
-import SideMenu from 'react-native-side-menu';
-import PropTypes from "prop-types";
+import { Alert, Dimensions, Picker /*AsyncStorage*/, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Drawer from 'react-native-drawer';
+import { Icon } from "react-native-elements";
 import axios from "../../config/axios.js";
 import Loading from '../../layouts/Loading/Loading.js';
 
 
-import styles from "./styles.js";
 
-// import MenuBar from '../Menu/Menu.js';
-import HeaderDy from "../../layouts/HeaderDy/HeaderDy.js";
+
 
 
  const window = Dimensions.get('window');
@@ -58,7 +50,7 @@ export default  class AgeList extends Component {
       }
       axios.post('api/search/voters/',ageCategory)
         .then(response=>{
-          console.log('response',response.data)
+          // console.log('response',response.data)
           this.setState({data:response.data})
         })
         .catch(error=>{
@@ -160,7 +152,7 @@ export default  class AgeList extends Component {
       }
       axios.post('api/search/voters',search)
         .then(res=>{
-          console.log('res',res.data)
+          // console.log('res',res.data)
           this.setState({data:res.data})
         })
         .catch(err=>{
@@ -273,7 +265,7 @@ export default  class AgeList extends Component {
                         return(
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:voter._id})} key={index} style={{paddingVertical:10,marginBottom:10,paddingHorizontal:5,backgroundColor:"#fff",borderWidth:1,borderColor:"999",borderRadius:5}}>
                             <View style={{flexDirection:'row'}}>
-                              <Text style={{fontSize:18, color:"#111",flex:0.1}}>{index+1}</Text>
+                              <Text style={{fontSize:18, color:"#111",flex:0.2}}>{voter.serialNo}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.6}}>{voter.mFullName}</Text>
                               <Text style={{fontSize:18, color:"#111",flex:0.2}}>{voter.gender}-{voter.age}</Text>
                             </View>

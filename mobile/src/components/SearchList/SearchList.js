@@ -1,21 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet,Text,View,TextInput,BackHandler,TouchableOpacity, ScrollView,Platform,Dimensions, Image,ImageBackground,Alert,Keyboard} from "react-native";
-import { Header, Button, Icon,Card,Avatar} from "react-native-elements";
-import { NavigationActions } from "react-navigation";
-import ImageOverlay from "react-native-image-overlay";
-import { TextField } from "react-native-material-textfield";
-
-import SideMenu from 'react-native-side-menu';
-import PropTypes from "prop-types";
-import Drawer from 'react-native-drawer';
-
-import styles from "./styles.js";
+import { Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import axios from '../../config/axios.js';
 import Loading from '../../layouts/Loading/Loading.js';
 
-// import MenuBar from '../Menu/Menu.js';
-import HeaderBar from "../../layouts/HeaderBar/HeaderBar.js";
-import {colors, sizes} from '../../config/styles.js';
-import axios from '../../config/axios.js'
+
+
 
 
  const window = Dimensions.get('window');
@@ -36,7 +25,7 @@ export default  class SearchList extends Component {
     if(category==''){
       axios.get('api/voters/get')
         .then(response=>{
-          // console.log(response.data.length)
+          // console.log(response.data)
           this.setState({data:response.data})
         })
         .catch(error=>{
@@ -197,7 +186,7 @@ export default  class SearchList extends Component {
                         this.state.data.map((data,index)=>{
                           return(
                             <TouchableOpacity style={{flexDirection:'row',paddingVertical:10,paddingHorizontal:10,borderWidth:1,borderColor:'#333', blurRadius:90,}} onPress={()=> this.props.navigation.navigate('VoterProfile',{user_id:data._id})} key={index}>
-                                <Text style={{flex:0.1,fontFamily:'Montserrat-Regular',fontSize:10}}> {data.partNo}/{index+1}</Text>
+                              <Text style={ { flex: 0.1, fontFamily: 'Montserrat-Regular', fontSize: 10 } }> { data.serialNo}</Text>
                                 <Text style={{flex:0.6,fontFamily:'Montserrat-SemiBold',paddingLeft:30,backgroundColor:'transparent'}}>{data.mFullName}</Text>
                                 <Text style={{flex:0.3,fontFamily:'Montserrat-SemiBold'}}>{data.idNumber}</Text>
                             </TouchableOpacity>
